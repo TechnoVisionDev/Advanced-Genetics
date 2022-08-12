@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " d/",
+    " /d",
+    "/  "
+  ],
+  "key": {
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "advancedgenetics:metal_scraper"
+  }
+}

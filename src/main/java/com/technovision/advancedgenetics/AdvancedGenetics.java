@@ -15,7 +15,7 @@ public class AdvancedGenetics implements ModInitializer {
 
     public static final ItemGroup TAB = FabricItemGroupBuilder.build(
             new Identifier(MOD_ID, "tab"),
-            () -> new ItemStack(Items.EGG)
+            () -> new ItemStack(ItemRegistry.COW_MATTER)
     );
 
     @Override
