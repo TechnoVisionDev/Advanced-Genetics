@@ -1,5 +1,7 @@
 {
   "itemGroup.advancedgenetics.tab": "Advanced Genetics",
   "item.advancedgenetics.metal_scalpel": "Metal Scalpel",
-  "item.advancedgenetics.cow_matter": "Cow Matter"
+  "item.advancedgenetics.diamond_scalpel": "Diamond Scalpel",
+  "item.advancedgenetics.cow_matter": "Cow Matter",
+  "item.advancedgenetics.pig_matter": "Pig Matter"
 }

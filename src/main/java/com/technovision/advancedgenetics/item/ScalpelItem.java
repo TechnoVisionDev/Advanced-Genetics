@@ -24,14 +24,21 @@ public class ScalpelItem extends Item {
             scrapeEntity(stack, user, entity);
             return ActionResult.SUCCESS;
         }
-        return ActionResult.FAIL;
+        return ActionResult.PASS;
     }
 
     private void scrapeEntity(ItemStack stack, PlayerEntity user, LivingEntity entity) {
+        Item item = null;
         if (EntityType.COW == entity.getType()) {
-            user.giveItemStack(new ItemStack(ItemRegistry.COW_MATTER));
+            item = ItemRegistry.COW_MATTER;
+        } else if (EntityType.PIG == entity.getType()) {
+            item = ItemRegistry.PIG_MATTER;
         }
-        entity.damage(DamageSource.player(user), 1.0f);
-        stack.damage(1, user, (e) -> user.sendToolBreakStatus(user.getActiveHand()));
+
+        if (item != null) {
+            user.giveItemStack(new ItemStack(item));
+            entity.damage(DamageSource.player(user), 1.0f);
+            stack.damage(1, user, (e) -> user.sendToolBreakStatus(user.getActiveHand()));
+        }
     }
 }
