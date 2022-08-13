@@ -11,17 +11,17 @@ public class CellItem extends Item {
     private final EntityType entityType;
     private final int color;
 
-    public CellItem(EntityType entityType, String color) {
+    public CellItem(EntityType entityType, int color) {
         super(new FabricItemSettings().group(AdvancedGenetics.TAB));
         this.entityType = entityType;
-        this.color = (int) Long.parseLong(color, 16);
+        this.color = color;
     }
 
     public EntityType getEntityType() {
         return entityType;
     }
 
-    public int getColor(ItemStack pItemStack, int tintIndex) {
+    public int getColor(ItemStack itemStack, int tintIndex) {
         return tintIndex > 0 ? -1 : color;
     }
 }

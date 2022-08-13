@@ -15,10 +15,6 @@ public class AdvancedGeneticsClient implements ClientModInitializer {
         HandledScreens.register(ScreenRegistry.CELL_ANALYZER_SCREEN_HANDLER, CellAnalyzerScreen::new);
 
         // Dynamically dolor cells
-        ColorProviderRegistry.ITEM.register(ItemRegistry.COW_CELL::getColor, ItemRegistry.COW_CELL);
-        ColorProviderRegistry.ITEM.register(ItemRegistry.PIG_CELL::getColor, ItemRegistry.PIG_CELL);
-        ColorProviderRegistry.ITEM.register(ItemRegistry.CHICKEN_CELL::getColor, ItemRegistry.CHICKEN_CELL);
-        ColorProviderRegistry.ITEM.register(ItemRegistry.SHEEP_CELL::getColor, ItemRegistry.SHEEP_CELL);
-        ColorProviderRegistry.ITEM.register(ItemRegistry.SQUID_CELL::getColor, ItemRegistry.SQUID_CELL);
+        ItemRegistry.CELLS.forEach(item -> ColorProviderRegistry.ITEM.register(item::getColor, item));
     }
 }

@@ -3,7 +3,6 @@ package com.technovision.advancedgenetics.common.item;
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.registry.ItemRegistry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,19 +27,7 @@ public class ScalpelItem extends Item {
     }
 
     private void scrapeEntity(ItemStack stack, PlayerEntity user, LivingEntity entity) {
-        Item item = null;
-        if (EntityType.COW == entity.getType()) {
-            item = ItemRegistry.COW_MATTER;
-        } else if (EntityType.PIG == entity.getType()) {
-            item = ItemRegistry.PIG_MATTER;
-        } else if (EntityType.SHEEP == entity.getType()) {
-            item = ItemRegistry.SHEEP_MATTER;
-        } else if (EntityType.CHICKEN == entity.getType()) {
-            item = ItemRegistry.CHICKEN_MATTER;
-        } else if (EntityType.SQUID == entity.getType()) {
-            item = ItemRegistry.SQUID_MATTER;
-        }
-
+        OrganicMatterItem item = ItemRegistry.MATTER.get(entity.getType().getName().getString());
         if (item != null) {
             user.giveItemStack(new ItemStack(item));
             entity.damage(DamageSource.player(user), 1.0f);
