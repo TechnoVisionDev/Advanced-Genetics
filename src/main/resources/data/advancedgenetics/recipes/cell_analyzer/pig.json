@@ -1,9 +1,9 @@
 {
   "type": "advancedgenetics:cell_analyzer",
   "input": {
-    "item": "advancedgenetics:cow_matter"
+    "item": "advancedgenetics:pig_matter"
   },
   "result": {
-    "item": "advancedgenetics:cow_cell"
+    "item": "advancedgenetics:pig_cell"
   }
 }

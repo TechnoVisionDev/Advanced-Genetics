@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:sheep_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:sheep_cell"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:chicken_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:chicken_cell"
+  }
+}
