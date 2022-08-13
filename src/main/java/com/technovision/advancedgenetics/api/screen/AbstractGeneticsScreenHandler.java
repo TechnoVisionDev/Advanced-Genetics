@@ -102,4 +102,20 @@ public abstract class AbstractGeneticsScreenHandler extends ScreenHandler {
         // player hotbar
         addSlots(Slot::new, pInventory, 1, 9, 0, 9,8, 144);
     }
+
+    public PropertyDelegate getPropertyDelegate() {
+        return delegate;
+    }
+
+    public AbstractProcessingBlockEntity getBlockEntity() {
+        return blockEntity;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public Inventory getClientInventory() {
+        return inventory;
+    }
 }
