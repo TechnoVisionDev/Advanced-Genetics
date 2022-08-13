@@ -1,4 +1,4 @@
-package com.technovision.advancedgenetics.item;
+package com.technovision.advancedgenetics.common.item;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.registry.ItemRegistry;

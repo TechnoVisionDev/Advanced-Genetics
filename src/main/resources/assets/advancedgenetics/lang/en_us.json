@@ -3,5 +3,8 @@
   "item.advancedgenetics.metal_scalpel": "Metal Scalpel",
   "item.advancedgenetics.diamond_scalpel": "Diamond Scalpel",
   "item.advancedgenetics.cow_matter": "Cow Matter",
-  "item.advancedgenetics.pig_matter": "Pig Matter"
+  "item.advancedgenetics.pig_matter": "Pig Matter",
+  "block.advancedgenetics.cell_analyzer": "Cell Analyzer",
+  "advancedgenetics.container.cell_analyzer_block_entity": "Cell Analyzer",
+  "tooltip.advancedgenetics.energy_requirement": "Requires %d E/t"
 }

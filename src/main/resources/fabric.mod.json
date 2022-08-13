@@ -6,7 +6,8 @@
   "name": "Advanced Genetics",
   "description": "Play god by collecting, analyzing, and modifying the genetics of living creatures and yourself.",
   "authors": [
-    "TechnoVision"
+    "TechnoVision",
+    "Kirbocabana"
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/advanced-genetics",
@@ -20,6 +21,9 @@
   "entrypoints": {
     "main": [
       "com.technovision.advancedgenetics.AdvancedGenetics"
+    ],
+    "client": [
+      "com.technovision.advancedgenetics.AdvancedGeneticsClient"
     ]
   },
   "mixins": [
