@@ -1,9 +1,6 @@
 package com.technovision.advancedgenetics;
 
-import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
-import com.technovision.advancedgenetics.registry.BlockRegistry;
-import com.technovision.advancedgenetics.registry.ItemRegistry;
-import com.technovision.advancedgenetics.registry.ScreenRegistry;
+import com.technovision.advancedgenetics.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -32,5 +29,6 @@ public class AdvancedGenetics implements ModInitializer {
         ItemRegistry.registerItems();
         BlockEntityRegistry.registerBlockEntities();
         ScreenRegistry.registerScreens();
+        RecipeRegistry.registerRecipes();
     }
 }

@@ -62,8 +62,12 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     @Override
     public void tick() {
         if (world != null && !world.isClient()) {
+            updateRecipe();
             if (canProcessRecipe()) {
                 processRecipe();
+            } else if (progress > 0) {
+                setProgress(0);
+                setRecipe(null);
             }
         }
     }

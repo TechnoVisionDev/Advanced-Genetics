@@ -22,7 +22,7 @@ public class CellAnalyzerScreen extends AbstractGeneticsScreen<CellAnalyzerScree
         super(handler, inventory, title);
         this.backgroundWidth = 176;
         this.backgroundHeight = 166;
-        displayData.add(new ProgressDisplayData(handler.getPropertyDelegate(), 0, 1, 75, 39, 60, 9, Direction2D.RIGHT));
+        displayData.add(new ProgressDisplayData(handler.getPropertyDelegate(), 0, 1, 83, 37, 60, 9, Direction2D.RIGHT));
         displayData.add(new EnergyDisplayData(handler.getPropertyDelegate(), 2, 3, 10, 23, 12, 40));
     }
 

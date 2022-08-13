@@ -2,6 +2,7 @@ package com.technovision.advancedgenetics.common.block.cellanalyzer;
 
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
+import com.technovision.advancedgenetics.common.recipe.cellanalyzer.CellAnalyzerRecipe;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,6 +22,7 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
     public static final int INPUT_SLOT_INDEX = 0;
     public static final int OUTPUT_SLOT_INDEX = 1;
 
+    private CellAnalyzerRecipe recipe;
     protected final PropertyDelegate propertyDelegate;
     private final int maxProgress;
 
@@ -51,29 +53,52 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
 
     @Override
     public void updateRecipe() {
-        // TODO: Implement
+        if (world == null || world.isClient()) return;
+        if (!getStackInSlot(INPUT_SLOT_INDEX).isEmpty()) {
+             world.getRecipeManager().getAllMatches(CellAnalyzerRecipe.Type.INSTANCE, new SimpleInventory(1), world)
+                    .stream()
+                    .filter(recipe -> ItemStack.canCombine(getStackInSlot(0), recipe.getInput()))
+                    .findFirst()
+                    .ifPresent(recipe -> {
+                        this.recipe = recipe;
+                    });
+        }
     }
 
     @Override
     public boolean canProcessRecipe() {
-        // TODO: Implement
+        if (recipe != null) {
+            ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
+            ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
+            return getEnergyStorage().getAmount() >= Config.Common.cellAnalyzerEnergyPerTick.get()
+                    && (ItemStack.canCombine(input, recipe.getInput()) && input.getCount() >= recipe.getInput().getCount())
+                    && (recipe.getOutput().getCount() + output.getCount()) <= recipe.getOutput().getMaxCount()
+                    && (ItemStack.canCombine(output, recipe.getOutput()) || output.isEmpty());
+        }
         return false;
     }
 
     @Override
     public void processRecipe() {
-        // TODO: Implement
+        if (getProgress() < maxProgress) {
+            incrementProgress();
+        } else {
+            setProgress(0);
+            decrementSlot(INPUT_SLOT_INDEX, recipe.getInput().getCount());
+            setOrIncrement(OUTPUT_SLOT_INDEX, recipe.getOutput().copy());
+        }
+        extractEnergy(Config.Common.cellAnalyzerEnergyPerTick.get());
+        markDirty();
     }
 
     @Override
-    public <T extends Recipe<SimpleInventory>> void setRecipe(@Nullable T pRecipe) {
-        // TODO: Implement
+    public <T extends Recipe<SimpleInventory>> void setRecipe(@Nullable T recipe) {
+        this.recipe = (CellAnalyzerRecipe) recipe;
     }
 
     @Override
     public Recipe<SimpleInventory> getRecipe() {
-        // TODO: Implement
-        return null;
+        return recipe;
     }
 
     @Nullable

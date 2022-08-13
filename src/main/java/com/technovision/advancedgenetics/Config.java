@@ -35,8 +35,8 @@ public class Config {
                     .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
             cellAnalyzerTicksPerOperation = builder
                     .comment("Ticks per operation when using the Cell Analyzer.")
-                    .comment("Default: 50 ticks")
-                    .defineInRange("ticksPerOperation", 50, 1, Integer.MAX_VALUE);
+                    .comment("Default: 200 ticks")
+                    .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
             builder.pop();
         }
     }
