@@ -16,6 +16,7 @@ public class ItemRegistry {
     // Items
     public static final ScalpelItem METAL_SCALPEL = new ScalpelItem(25);
     public static final ScalpelItem DIAMOND_SCALPEL = new ScalpelItem(150);
+    public static final ScalpelItem NETHERITE_SCALPEL = new ScalpelItem(300);
     public static final OrganicMatterItem COW_MATTER = new OrganicMatterItem(EntityType.COW);
     public static final OrganicMatterItem PIG_MATTER = new OrganicMatterItem(EntityType.PIG);
     public static final OrganicMatterItem CHICKEN_MATTER = new OrganicMatterItem(EntityType.CHICKEN);
@@ -29,6 +30,7 @@ public class ItemRegistry {
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "cell_analyzer"), CELL_ANALYZER);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "metal_scalpel"), METAL_SCALPEL);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "diamond_scalpel"), DIAMOND_SCALPEL);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "netherite_scalpel"), NETHERITE_SCALPEL);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "cow_matter"), COW_MATTER);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "pig_matter"), PIG_MATTER);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "chicken_matter"), CHICKEN_MATTER);

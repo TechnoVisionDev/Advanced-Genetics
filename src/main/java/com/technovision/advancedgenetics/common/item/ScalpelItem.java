@@ -33,6 +33,12 @@ public class ScalpelItem extends Item {
             item = ItemRegistry.COW_MATTER;
         } else if (EntityType.PIG == entity.getType()) {
             item = ItemRegistry.PIG_MATTER;
+        } else if (EntityType.SHEEP == entity.getType()) {
+            item = ItemRegistry.SHEEP_MATTER;
+        } else if (EntityType.CHICKEN == entity.getType()) {
+            item = ItemRegistry.CHICKEN_MATTER;
+        } else if (EntityType.SQUID == entity.getType()) {
+            item = ItemRegistry.SQUID_MATTER;
         }
 
         if (item != null) {
