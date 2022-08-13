@@ -16,6 +16,8 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
 
     public static final int SLOT_COUNT = 2;
@@ -85,7 +87,9 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
         } else {
             setProgress(0);
             decrementSlot(INPUT_SLOT_INDEX, recipe.getInput().getCount());
-            setOrIncrement(OUTPUT_SLOT_INDEX, recipe.getOutput().copy());
+            if (ThreadLocalRandom.current().nextDouble() <= Config.Common.cellAnalyzerSuccessRate.get()) {
+                setOrIncrement(OUTPUT_SLOT_INDEX, recipe.getOutput().copy());
+            }
         }
         extractEnergy(Config.Common.cellAnalyzerEnergyPerTick.get());
         markDirty();

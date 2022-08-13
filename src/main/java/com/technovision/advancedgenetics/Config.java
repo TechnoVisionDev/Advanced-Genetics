@@ -21,6 +21,7 @@ public class Config {
         public static ForgeConfigSpec.IntValue cellAnalyzerEnergyCapacity;
         public static ForgeConfigSpec.IntValue cellAnalyzerEnergyPerTick;
         public static ForgeConfigSpec.IntValue cellAnalyzerTicksPerOperation;
+        public static ForgeConfigSpec.DoubleValue cellAnalyzerSuccessRate;
 
         public Common(ForgeConfigSpec.Builder builder) {
 
@@ -37,6 +38,10 @@ public class Config {
                     .comment("Ticks per operation when using the Cell Analyzer.")
                     .comment("Default: 200 ticks")
                     .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
+            cellAnalyzerSuccessRate = builder
+                    .comment("Percent chance for the Cell Analyzer to successfully create a cell.")
+                    .comment("Default: 25% success rate")
+                    .defineInRange("successRate", 0.25, 1.0, Double.MAX_VALUE);
             builder.pop();
         }
     }
