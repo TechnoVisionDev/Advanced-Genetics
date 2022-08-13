@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "GPG",
+    "GAG"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:piston"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "item": "minecraft:glass_bottle"
+    },
+    "A": {
+      "item": "minecraft:arrow"
+    }
+  },
+  "result": {
+    "item": "advancedgenetics:glass_syringe"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " d/",
+    " /d",
+    "/  "
+  ],
+  "key": {
+    "d": {
+      "item": "minecraft:netherite"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "advancedgenetics:netherite_scalpel"
+  }
+}
