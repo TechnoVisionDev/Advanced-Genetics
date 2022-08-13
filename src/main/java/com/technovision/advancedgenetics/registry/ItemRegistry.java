@@ -18,6 +18,9 @@ public class ItemRegistry {
     public static final ScalpelItem DIAMOND_SCALPEL = new ScalpelItem(150);
     public static final OrganicMatterItem COW_MATTER = new OrganicMatterItem(EntityType.COW);
     public static final OrganicMatterItem PIG_MATTER = new OrganicMatterItem(EntityType.PIG);
+    public static final OrganicMatterItem CHICKEN_MATTER = new OrganicMatterItem(EntityType.CHICKEN);
+    public static final OrganicMatterItem SHEEP_MATTER = new OrganicMatterItem(EntityType.SHEEP);
+    public static final OrganicMatterItem SQUID_MATTER = new OrganicMatterItem(EntityType.SQUID);
 
     // Block Items
     public static final BlockItem CELL_ANALYZER = new BlockItem(BlockRegistry.CELL_ANALYZER, ITEM_SETTINGS);
@@ -28,5 +31,8 @@ public class ItemRegistry {
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "diamond_scalpel"), DIAMOND_SCALPEL);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "cow_matter"), COW_MATTER);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "pig_matter"), PIG_MATTER);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "chicken_matter"), CHICKEN_MATTER);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "sheep_matter"), SHEEP_MATTER);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "squid_matter"), SQUID_MATTER);
     }
 }
