@@ -36,6 +36,7 @@ public class CellAnalyzerBlock extends AbstractGeneticsBlock {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient()) {
+            if (super.onUse(state, world, pos, player, hand, hit) == ActionResult.SUCCESS) return ActionResult.SUCCESS;
             NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
             if (screenHandlerFactory != null) {
                 player.openHandledScreen(screenHandlerFactory);

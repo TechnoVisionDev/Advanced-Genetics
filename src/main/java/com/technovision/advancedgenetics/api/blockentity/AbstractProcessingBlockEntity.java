@@ -24,9 +24,11 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
 
     private final Text name;
     private int progress = 0;
+    private int overclock = 0;
     private final SimpleEnergyStorage energyStorage;
+    private int maxProgress;
 
-    public AbstractProcessingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, long energyCapacity) {
+    public AbstractProcessingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, long energyCapacity, int maxProgress) {
         super(type, pos, state);
         String blockEntityName = Objects.requireNonNull(Registry.BLOCK_ENTITY_TYPE.getId(getType())).getPath();
         this.name = Text.translatable(String.format("%s.container.%s", AdvancedGenetics.MOD_ID, blockEntityName));
@@ -36,6 +38,7 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
                 markDirty();
             }
         };
+        this.maxProgress = maxProgress;
     }
 
     @Override
@@ -96,6 +99,7 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     protected void writeNbt(NbtCompound nbt) {
         nbt.putInt("progress", progress);
         nbt.putLong("energy", energyStorage.amount);
+        nbt.putInt("overclock", overclock);
         super.writeNbt(nbt);
     }
 
@@ -104,6 +108,7 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
         super.readNbt(nbt);
         setProgress(nbt.getInt("progress"));
         insertEnergy(nbt.getLong("energy"));
+        setOverclock(nbt.getInt("overclock"));
     }
 
     @Override
@@ -136,5 +141,27 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     public void forceSync() {
         this.markDirty();
         world.updateListeners(this.pos, this.getCachedState(), this.getCachedState(), 3);
+    }
+
+    public boolean canOverclock() {
+        return overclock < 8 && getMaxProgress() >= 20;
+    }
+
+    public void setOverclock(int overclock) {
+        this.overclock = overclock;
+    }
+
+    public void incrementOverclock() {
+        this.overclock++;
+    }
+
+    public int getOverclock() {
+        return overclock;
+    }
+
+    public int getMaxProgress() {
+        int realMaxProgress = (maxProgress - (20 * getOverclock()));
+        if (realMaxProgress < 0) realMaxProgress = 1;
+        return realMaxProgress;
     }
 }

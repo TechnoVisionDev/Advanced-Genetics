@@ -20,7 +20,7 @@ public class CellAnalyzerScreenHandler extends AbstractGeneticsScreenHandler {
     protected final PropertyDelegate propertyDelegate;
 
     public CellAnalyzerScreenHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buffer) {
-        this(syncId, playerInventory, Objects.requireNonNull(playerInventory.player.getWorld().getBlockEntity(buffer.readBlockPos())), new SimpleInventory(CellAnalyzerBlockEntity.SLOT_COUNT), new ArrayPropertyDelegate(4));
+        this(syncId, playerInventory, Objects.requireNonNull(playerInventory.player.getWorld().getBlockEntity(buffer.readBlockPos())), new SimpleInventory(CellAnalyzerBlockEntity.SLOT_COUNT), new ArrayPropertyDelegate(5));
     }
 
     protected CellAnalyzerScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, Inventory inventory, PropertyDelegate delegate) {

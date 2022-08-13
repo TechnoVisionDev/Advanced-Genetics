@@ -20,6 +20,7 @@ public class ItemRegistry {
     public static final ScalpelItem DIAMOND_SCALPEL = new ScalpelItem(150);
     public static final ScalpelItem NETHERITE_SCALPEL = new ScalpelItem(300);
     public static final Item GLASS_SYRINGE = new Item(ITEM_SETTINGS);
+    public static final Item OVERCLOCKER = new Item(ITEM_SETTINGS);
 
     // Organic Matter
     public static final OrganicMatterItem COW_MATTER = new OrganicMatterItem(EntityType.COW);
@@ -47,6 +48,7 @@ public class ItemRegistry {
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "diamond_scalpel"), DIAMOND_SCALPEL);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "netherite_scalpel"), NETHERITE_SCALPEL);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "glass_syringe"), GLASS_SYRINGE);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "overclocker"), OVERCLOCKER);
 
         // Matter
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "cow_matter"), COW_MATTER);

@@ -41,4 +41,15 @@ public class CellAnalyzerScreen extends AbstractGeneticsScreen<CellAnalyzerScree
         renderDisplayTooltip(displayData, matrices, this.x, this.y, mouseX, mouseY);
         drawMouseoverTooltip(matrices, mouseX, mouseY);
     }
+
+    @Override
+    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
+        super.drawForeground(matrices, mouseX, mouseY);
+        int overclock = handler.propertyDelegate.get(4);
+        if (overclock > 0) {
+            String text = "x"+overclock;
+            textRenderer.draw(matrices, text, backgroundWidth - textRenderer.getWidth(text) - 8, 6, 0x3f3f3f);
+        }
+    }
+
 }

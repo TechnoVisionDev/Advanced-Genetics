@@ -26,18 +26,17 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
 
     private CellAnalyzerRecipe recipe;
     protected final PropertyDelegate propertyDelegate;
-    private final int maxProgress;
 
     public CellAnalyzerBlockEntity(BlockPos pos, BlockState state) {
-        super(DefaultedList.ofSize(SLOT_COUNT, ItemStack.EMPTY), BlockEntityRegistry.CELL_ANALYZER_BLOCK_ENTITY, pos, state, Config.Common.cellAnalyzerEnergyCapacity.get());
-        this.maxProgress = Config.Common.cellAnalyzerTicksPerOperation.get();
+        super(DefaultedList.ofSize(SLOT_COUNT, ItemStack.EMPTY), BlockEntityRegistry.CELL_ANALYZER_BLOCK_ENTITY, pos, state, Config.Common.cellAnalyzerEnergyCapacity.get(), Config.Common.cellAnalyzerTicksPerOperation.get());
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
                 return switch (index) {
                     case 0 -> getProgress();
-                    case 1 -> maxProgress;
+                    case 1 -> getMaxProgress();
                     case 2 -> (int) getEnergyStorage().getAmount();
                     case 3 -> (int) getEnergyStorage().getCapacity();
+                    case 4 -> getOverclock();
                     default -> 0;
                 };
             }
@@ -45,10 +44,11 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
                 switch (index) {
                     case 0 -> setProgress(value);
                     case 2 -> insertEnergy(value);
+                    case 4 -> setOverclock(value);
                 }
             }
             public int size() {
-                return 4;
+                return 5;
             }
         };
     }
@@ -82,7 +82,7 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
 
     @Override
     public void processRecipe() {
-        if (getProgress() < maxProgress) {
+        if (getProgress() < getMaxProgress()) {
             incrementProgress();
         } else {
             setProgress(0);
