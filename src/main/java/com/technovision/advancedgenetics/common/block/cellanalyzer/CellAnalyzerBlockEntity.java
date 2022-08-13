@@ -1,5 +1,6 @@
 package com.technovision.advancedgenetics.common.block.cellanalyzer;
 
+import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
 import net.minecraft.block.BlockState;
@@ -24,8 +25,8 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
     private final int maxProgress;
 
     public CellAnalyzerBlockEntity(BlockPos pos, BlockState state) {
-        super(DefaultedList.ofSize(SLOT_COUNT, ItemStack.EMPTY), BlockEntityRegistry.CELL_ANALYZER_BLOCK_ENTITY, pos, state, 20000);
-        this.maxProgress = 5000;
+        super(DefaultedList.ofSize(SLOT_COUNT, ItemStack.EMPTY), BlockEntityRegistry.CELL_ANALYZER_BLOCK_ENTITY, pos, state, Config.Common.cellAnalyzerEnergyCapacity.get());
+        this.maxProgress = Config.Common.cellAnalyzerTicksPerOperation.get();
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
                 return switch (index) {

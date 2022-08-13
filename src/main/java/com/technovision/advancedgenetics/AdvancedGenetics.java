@@ -10,6 +10,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
+import net.minecraftforge.api.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 
 public class AdvancedGenetics implements ModInitializer {
 
@@ -22,6 +24,10 @@ public class AdvancedGenetics implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        // Register and load config
+        ModLoadingContext.registerConfig(MOD_ID, ModConfig.Type.COMMON, Config.COMMON_SPEC);
+
+        // Register in-game items, blocks, entities, and GUIs
         BlockRegistry.registerBlocks();
         ItemRegistry.registerItems();
         BlockEntityRegistry.registerBlockEntities();

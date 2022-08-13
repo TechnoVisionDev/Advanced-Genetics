@@ -1,5 +1,6 @@
 package com.technovision.advancedgenetics.common.block.cellanalyzer;
 
+import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.block.AbstractGeneticsBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -29,7 +30,7 @@ public class CellAnalyzerBlock extends AbstractGeneticsBlock {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
-        tooltip.add(Text.translatable("tooltip.advancedgenetics.energy_requirement", 20).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("tooltip.advancedgenetics.energy_requirement",  Config.Common.cellAnalyzerEnergyPerTick.get()).formatted(Formatting.GRAY));
     }
 
     @Override
