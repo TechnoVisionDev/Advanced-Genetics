@@ -27,21 +27,21 @@ public class Config {
 
             builder.comment("Cell Analyzer").push(categoryCellAnalyzer);
             cellAnalyzerEnergyCapacity = builder
-                    .comment("Maximum energy capacity for the Cell Analyzer.")
-                    .comment("Default: 20,000 (20k E)")
+                    .comment("Maximum energy capacity for the Cell Analyzer.",
+                            "Default: 20,000 (20k E)")
                     .defineInRange("energyCapacity", 20000, 0, Integer.MAX_VALUE);
             cellAnalyzerEnergyPerTick = builder
-                    .comment("Energy consumed per tick when Cell Analyzer is processing.")
-                    .comment("Default: 20 E")
+                    .comment("Energy consumed per tick when Cell Analyzer is processing.",
+                            "Default: 20 E")
                     .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
             cellAnalyzerTicksPerOperation = builder
-                    .comment("Ticks per operation when using the Cell Analyzer.")
-                    .comment("Default: 200 ticks")
+                    .comment("Ticks per operation when using the Cell Analyzer.",
+                            "Default: 200 ticks")
                     .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
             cellAnalyzerSuccessRate = builder
-                    .comment("Percent chance for the Cell Analyzer to successfully create a cell.")
-                    .comment("Default: 25% success rate")
-                    .defineInRange("successRate", 0.25, 1.0, Double.MAX_VALUE);
+                    .comment("Percent chance for the Cell Analyzer to successfully create a cell.",
+                            "Default: 25% success rate")
+                    .defineInRange("successRate", 0.25, 0.00, 1.00);
             builder.pop();
         }
     }
