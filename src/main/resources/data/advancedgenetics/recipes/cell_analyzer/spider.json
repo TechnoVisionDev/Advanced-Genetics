@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:spider_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:spider_cell"
+  }
+}

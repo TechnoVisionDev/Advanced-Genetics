@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:drowned_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:drowned_cell"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:skeleton_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:skeleton_cell"
+  }
+}
