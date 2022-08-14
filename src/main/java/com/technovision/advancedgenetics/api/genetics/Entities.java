@@ -3,26 +3,26 @@ package com.technovision.advancedgenetics.api.genetics;
 import net.minecraft.entity.EntityType;
 
 public enum Entities {
-    COW("cow", EntityType.COW, "d0bb94"),
-    PIG("pig", EntityType.PIG, "F9A195"),
-    CHICKEN("chicken", EntityType.CHICKEN, "c9c5c5"),
-    SHEEP("sheep", EntityType.SHEEP, "FFFFFF"),
-    SQUID("squid", EntityType.SQUID, "3581cc"),
-    HORSE("horse", EntityType.HORSE, "8c885e"),
-    MOOSHROOM("mooshroom", EntityType.MOOSHROOM, "f5626e"),
-    SPIDER("spider", EntityType.SPIDER, "4f5154"),
+    COW("cow", EntityType.COW, "443626"),
+    PIG("pig", EntityType.PIG, "f19e98"),
+    CHICKEN("chicken", EntityType.CHICKEN, "e2e2e2"),
+    SHEEP("sheep", EntityType.SHEEP, "dedede"),
+    SQUID("squid", EntityType.SQUID, "546d80"),
+    HORSE("horse", EntityType.HORSE, "b98968"),
+    MOOSHROOM("mooshroom", EntityType.MOOSHROOM, "a81012"),
+    SPIDER("spider", EntityType.SPIDER, "4f453c"),
     CAVE_SPIDER("cave_spider", EntityType.CAVE_SPIDER, "546870"),
-    CREEPER("creeper", EntityType.CREEPER, "8FE38F"),
-    ZOMBIE("zombie", EntityType.ZOMBIE, "648c6a"),
-    DROWNED("drowned", EntityType.DROWNED, "4d6487"),
-    HUSK("husk", EntityType.HUSK, "9a9e8b"),
-    SKELETON("skeleton", EntityType.SKELETON, "FFFFFF"),
-    WITHER_SKELETON("wither_skeleton", EntityType.WITHER_SKELETON, "494a46"),
-    STRAY("stray", EntityType.STRAY, "7e97a6");
+    CREEPER("creeper", EntityType.CREEPER, "65d152"),
+    ZOMBIE("zombie", EntityType.ZOMBIE, "3e692d"),
+    DROWNED("drowned", EntityType.DROWNED, "4d9280"),
+    HUSK("husk", EntityType.HUSK, "7a6849"),
+    SKELETON("skeleton", EntityType.SKELETON, "bcbcbc"),
+    WITHER_SKELETON("wither_skeleton", EntityType.WITHER_SKELETON, "343434"),
+    STRAY("stray", EntityType.STRAY, "9caeac");
 
-    private String name;
-    private EntityType type;
-    private int color;
+    private final String name;
+    private final EntityType type;
+    private final int color;
 
     Entities(String name, EntityType type, String color) {
         this.name = name;
