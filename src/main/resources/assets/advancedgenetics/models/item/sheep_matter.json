@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "advancedgenetics:items/sheep_matter"
+        "layer0": "advancedgenetics:items/organic_matter/sheep_matter"
     }
 }
 

@@ -3,6 +3,7 @@ package com.technovision.advancedgenetics.common.item;
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.registry.ItemRegistry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,7 +28,23 @@ public class ScalpelItem extends Item {
     }
 
     private void scrapeEntity(ItemStack stack, PlayerEntity user, LivingEntity entity) {
-        OrganicMatterItem item = ItemRegistry.MATTER.get(entity.getType().getName().getString());
+        EntityType type = entity.getType();
+        OrganicMatterItem item = ItemRegistry.MATTER.get(type.getName().getString());
+
+        if (item == null) {
+            if (type == EntityType.SKELETON_HORSE) {
+                item = ItemRegistry.MATTER.get(EntityType.SKELETON.getName().getString());
+            }
+            else if (type == EntityType.ZOMBIE_HORSE || type == EntityType.ZOMBIFIED_PIGLIN) {
+                item = ItemRegistry.MATTER.get(EntityType.ZOMBIE.getName().getString());
+            }
+            else if (type == EntityType.MULE) {
+                item = ItemRegistry.MATTER.get(EntityType.HORSE.getName().getString());
+            }
+            else if (type == EntityType.PIGLIN || type == EntityType.PIGLIN_BRUTE) {
+                item = ItemRegistry.MATTER.get(EntityType.PIG.getName().getString());
+            }
+        }
         if (item != null) {
             user.giveItemStack(new ItemStack(item));
             entity.damage(DamageSource.player(user), 1.0f);
