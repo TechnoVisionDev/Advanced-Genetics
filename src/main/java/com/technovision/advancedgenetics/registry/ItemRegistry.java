@@ -3,6 +3,7 @@ package com.technovision.advancedgenetics.registry;
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.api.genetics.Entities;
 import com.technovision.advancedgenetics.common.item.CellItem;
+import com.technovision.advancedgenetics.common.item.DnaItem;
 import com.technovision.advancedgenetics.common.item.OrganicMatterItem;
 import com.technovision.advancedgenetics.common.item.ScalpelItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -21,6 +22,7 @@ public class ItemRegistry {
 
     public static final Map<EntityType, OrganicMatterItem> MATTER = new HashMap<>();
     public static final Map<EntityType, CellItem> CELLS = new HashMap<>();
+    public static final DnaItem DNA_HELIX = new DnaItem();
 
     // Tools
     public static final ScalpelItem METAL_SCALPEL = new ScalpelItem(25);
@@ -46,7 +48,7 @@ public class ItemRegistry {
         // Organic Matter
         for (Entities entity : Entities.values()) {
             String key = entity.getName() + "_matter";
-            OrganicMatterItem matterItem = new OrganicMatterItem(EntityType.COW);
+            OrganicMatterItem matterItem = new OrganicMatterItem(entity.getType());
             Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, key), matterItem);
             MATTER.put(entity.getType(), matterItem);
         }
@@ -54,9 +56,12 @@ public class ItemRegistry {
         // Cells
         for (Entities entity : Entities.values()) {
             String key = entity.getName() + "_cell";
-            CellItem cellItem = new CellItem(EntityType.COW, entity.getColor());
+            CellItem cellItem = new CellItem(entity.getType(), entity.getColor());
             Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, key), cellItem);
             CELLS.put(entity.getType(), cellItem);
         }
+
+        // DNA
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "dna_helix"), DNA_HELIX);
     }
 }

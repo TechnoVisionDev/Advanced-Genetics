@@ -37,7 +37,9 @@
   "item.advancedgenetics.skeleton_cell": "Skeleton Cell",
   "item.advancedgenetics.wither_skeleton_cell": "Wither Skeleton Cell",
   "item.advancedgenetics.stray_cell": "Stray Cell",
+  "item.advancedgenetics.dna_helix": "DNA Helix",
   "block.advancedgenetics.cell_analyzer": "Cell Analyzer",
   "advancedgenetics.container.cell_analyzer_block_entity": "Cell Analyzer",
-  "tooltip.advancedgenetics.energy_requirement": "Requires %d E/t"
+  "tooltip.advancedgenetics.energy_requirement": "Requires %d E/t",
+  "tooltip.advancedgenetics.dna.default": "Encrypted"
 }
