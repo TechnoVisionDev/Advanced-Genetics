@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:dna_extractor",
+  "input": {
+    "item": "advancedgenetics:cow_cell"
+  },
+  "result": {
+    "item": "advancedgenetics:dna_helix"
+  }
+}

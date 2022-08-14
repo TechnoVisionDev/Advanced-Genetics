@@ -2,7 +2,7 @@ package com.technovision.advancedgenetics.common.block.dnaextractor;
 
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
-import com.technovision.advancedgenetics.common.recipe.cellanalyzer.CellAnalyzerRecipe;
+import com.technovision.advancedgenetics.common.recipe.dnaextractor.DnaExtractorRecipe;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,7 +24,7 @@ public class DnaExtractorBlockEntity extends AbstractInventoryBlockEntity {
     public static final int INPUT_SLOT_INDEX = 0;
     public static final int OUTPUT_SLOT_INDEX = 1;
 
-    private CellAnalyzerRecipe recipe;
+    private DnaExtractorRecipe recipe;
     protected final PropertyDelegate propertyDelegate;
 
     public DnaExtractorBlockEntity(BlockPos pos, BlockState state) {
@@ -57,7 +57,7 @@ public class DnaExtractorBlockEntity extends AbstractInventoryBlockEntity {
     public void updateRecipe() {
         if (world == null || world.isClient()) return;
         if (!getStackInSlot(INPUT_SLOT_INDEX).isEmpty()) {
-             world.getRecipeManager().getAllMatches(CellAnalyzerRecipe.Type.INSTANCE, new SimpleInventory(1), world)
+             world.getRecipeManager().getAllMatches(DnaExtractorRecipe.Type.INSTANCE, new SimpleInventory(1), world)
                     .stream()
                     .filter(recipe -> ItemStack.canCombine(getStackInSlot(0), recipe.getInput()))
                     .findFirst()
@@ -97,7 +97,7 @@ public class DnaExtractorBlockEntity extends AbstractInventoryBlockEntity {
 
     @Override
     public <T extends Recipe<SimpleInventory>> void setRecipe(@Nullable T recipe) {
-        this.recipe = (CellAnalyzerRecipe) recipe;
+        this.recipe = (DnaExtractorRecipe) recipe;
     }
 
     @Override
