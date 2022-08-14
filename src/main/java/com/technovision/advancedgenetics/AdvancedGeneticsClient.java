@@ -15,6 +15,6 @@ public class AdvancedGeneticsClient implements ClientModInitializer {
         HandledScreens.register(ScreenRegistry.CELL_ANALYZER_SCREEN_HANDLER, CellAnalyzerScreen::new);
 
         // Dynamically dolor cells
-        ItemRegistry.CELLS.forEach(item -> ColorProviderRegistry.ITEM.register(item::getColor, item));
+        ItemRegistry.CELLS.values().forEach(item -> ColorProviderRegistry.ITEM.register(item::getColor, item));
     }
 }

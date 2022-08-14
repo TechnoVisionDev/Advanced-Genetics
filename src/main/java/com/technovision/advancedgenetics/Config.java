@@ -40,8 +40,8 @@ public class Config {
                     .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
             cellAnalyzerSuccessRate = builder
                     .comment("Percent chance for the Cell Analyzer to successfully create a cell.",
-                            "Default: 25% success rate")
-                    .defineInRange("successRate", 0.25, 0.00, 1.00);
+                            "Default: 100% success rate")
+                    .defineInRange("successRate", 1.00, 0.00, 1.00);
             builder.pop();
         }
     }

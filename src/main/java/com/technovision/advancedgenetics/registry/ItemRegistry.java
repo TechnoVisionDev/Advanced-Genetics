@@ -12,17 +12,15 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ItemRegistry {
 
     private static final FabricItemSettings ITEM_SETTINGS = new FabricItemSettings().group(AdvancedGenetics.TAB);
 
-    public static final Map<String, OrganicMatterItem> MATTER = new HashMap<>();
-    public static final List<CellItem> CELLS = new ArrayList<>();
+    public static final Map<EntityType, OrganicMatterItem> MATTER = new HashMap<>();
+    public static final Map<EntityType, CellItem> CELLS = new HashMap<>();
 
     // Tools
     public static final ScalpelItem METAL_SCALPEL = new ScalpelItem(25);
@@ -50,7 +48,7 @@ public class ItemRegistry {
             String key = entity.getName() + "_matter";
             OrganicMatterItem matterItem = new OrganicMatterItem(EntityType.COW);
             Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, key), matterItem);
-            MATTER.put(entity.getType().getName().getString(), matterItem);
+            MATTER.put(entity.getType(), matterItem);
         }
 
         // Cells
@@ -58,7 +56,7 @@ public class ItemRegistry {
             String key = entity.getName() + "_cell";
             CellItem cellItem = new CellItem(EntityType.COW, entity.getColor());
             Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, key), cellItem);
-            CELLS.add(cellItem);
+            CELLS.put(entity.getType(), cellItem);
         }
     }
 }

@@ -29,20 +29,20 @@ public class ScalpelItem extends Item {
 
     private void scrapeEntity(ItemStack stack, PlayerEntity user, LivingEntity entity) {
         EntityType type = entity.getType();
-        OrganicMatterItem item = ItemRegistry.MATTER.get(type.getName().getString());
+        OrganicMatterItem item = ItemRegistry.MATTER.get(type);
 
         if (item == null) {
             if (type == EntityType.SKELETON_HORSE) {
-                item = ItemRegistry.MATTER.get(EntityType.SKELETON.getName().getString());
+                item = ItemRegistry.MATTER.get(EntityType.SKELETON);
             }
             else if (type == EntityType.ZOMBIE_HORSE || type == EntityType.ZOMBIFIED_PIGLIN) {
-                item = ItemRegistry.MATTER.get(EntityType.ZOMBIE.getName().getString());
+                item = ItemRegistry.MATTER.get(EntityType.ZOMBIE);
             }
             else if (type == EntityType.MULE) {
-                item = ItemRegistry.MATTER.get(EntityType.HORSE.getName().getString());
+                item = ItemRegistry.MATTER.get(EntityType.HORSE);
             }
             else if (type == EntityType.PIGLIN || type == EntityType.PIGLIN_BRUTE) {
-                item = ItemRegistry.MATTER.get(EntityType.PIG.getName().getString());
+                item = ItemRegistry.MATTER.get(EntityType.PIG);
             }
         }
         if (item != null) {
