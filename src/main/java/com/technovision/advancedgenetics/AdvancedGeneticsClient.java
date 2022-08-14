@@ -1,6 +1,7 @@
 package com.technovision.advancedgenetics;
 
 import com.technovision.advancedgenetics.common.block.cellanalyzer.CellAnalyzerScreen;
+import com.technovision.advancedgenetics.common.block.dnaextractor.DnaExtractorScreen;
 import com.technovision.advancedgenetics.registry.ItemRegistry;
 import com.technovision.advancedgenetics.registry.ScreenRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -13,6 +14,7 @@ public class AdvancedGeneticsClient implements ClientModInitializer {
     public void onInitializeClient() {
         // Register screens
         HandledScreens.register(ScreenRegistry.CELL_ANALYZER_SCREEN_HANDLER, CellAnalyzerScreen::new);
+        HandledScreens.register(ScreenRegistry.DNA_EXTRACTOR_SCREEN_HANDLER, DnaExtractorScreen::new);
 
         // Dynamically dolor cells
         ItemRegistry.CELLS.values().forEach(item -> ColorProviderRegistry.ITEM.register(item::getColor, item));

@@ -17,11 +17,17 @@ public class Config {
     public static class Common {
 
         private static final String categoryCellAnalyzer = "cell_analyzer";
+        private static final String categoryDnaExtractor = "dna_extractor";
 
         public static ForgeConfigSpec.IntValue cellAnalyzerEnergyCapacity;
         public static ForgeConfigSpec.IntValue cellAnalyzerEnergyPerTick;
         public static ForgeConfigSpec.IntValue cellAnalyzerTicksPerOperation;
         public static ForgeConfigSpec.DoubleValue cellAnalyzerSuccessRate;
+
+        public static ForgeConfigSpec.IntValue dnaExtractorEnergyCapacity;
+        public static ForgeConfigSpec.IntValue dnaExtractorEnergyPerTick;
+        public static ForgeConfigSpec.IntValue dnaExtractorTicksPerOperation;
+        public static ForgeConfigSpec.DoubleValue dnaExtractorSuccessRate;
 
         public Common(ForgeConfigSpec.Builder builder) {
 
@@ -40,6 +46,25 @@ public class Config {
                     .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
             cellAnalyzerSuccessRate = builder
                     .comment("Percent chance for the Cell Analyzer to successfully create a cell.",
+                            "Default: 100% success rate")
+                    .defineInRange("successRate", 1.00, 0.00, 1.00);
+            builder.pop();
+
+            builder.comment("DNA Extractor").push(categoryDnaExtractor);
+            dnaExtractorEnergyCapacity = builder
+                    .comment("Maximum energy capacity for the DNA Extractor.",
+                            "Default: 20,000 (20k E)")
+                    .defineInRange("energyCapacity", 20000, 0, Integer.MAX_VALUE);
+            dnaExtractorEnergyPerTick = builder
+                    .comment("Energy consumed per tick when DNA Extractor is processing.",
+                            "Default: 20 E")
+                    .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
+            dnaExtractorTicksPerOperation = builder
+                    .comment("Ticks per operation when using the DNA Extractor.",
+                            "Default: 200 ticks")
+                    .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
+            dnaExtractorSuccessRate = builder
+                    .comment("Percent chance for the DNA Extractor to successfully extract a DNA helix.",
                             "Default: 100% success rate")
                     .defineInRange("successRate", 1.00, 0.00, 1.00);
             builder.pop();

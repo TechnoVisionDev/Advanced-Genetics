@@ -1,8 +1,9 @@
-package com.technovision.advancedgenetics.common.block.cellanalyzer;
+package com.technovision.advancedgenetics.common.block.dnaextractor;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.api.screen.*;
+import com.technovision.advancedgenetics.common.block.cellanalyzer.CellAnalyzerScreenHandler;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,13 +13,13 @@ import net.minecraft.util.Identifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CellAnalyzerScreen extends AbstractGeneticsScreen<CellAnalyzerScreenHandler> {
+public class DnaExtractorScreen extends AbstractGeneticsScreen<DnaExtractorScreenHandler> {
 
-    private static final Identifier TEXTURE = new Identifier(AdvancedGenetics.MOD_ID, "textures/gui/cell_analyzer_gui.png");
+    private static final Identifier TEXTURE = new Identifier(AdvancedGenetics.MOD_ID, "textures/gui/dna_extractor_gui.png");
 
     protected final List<DisplayData> displayData = new ArrayList<>();
 
-    public CellAnalyzerScreen(CellAnalyzerScreenHandler handler, PlayerInventory inventory, Text title) {
+    public DnaExtractorScreen(DnaExtractorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
         this.backgroundWidth = 176;
         this.backgroundHeight = 166;

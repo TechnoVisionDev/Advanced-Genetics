@@ -33,10 +33,12 @@ public class ItemRegistry {
 
     // Block Items
     public static final BlockItem CELL_ANALYZER = new BlockItem(BlockRegistry.CELL_ANALYZER, ITEM_SETTINGS);
+    public static final BlockItem DNA_EXTRACTOR = new BlockItem(BlockRegistry.DNA_EXTRACTOR, ITEM_SETTINGS);
 
     public static void registerItems() {
         // Block Items
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "cell_analyzer"), CELL_ANALYZER);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "dna_extractor"), DNA_EXTRACTOR);
 
         // Tools
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "metal_scalpel"), METAL_SCALPEL);
