@@ -1,6 +1,6 @@
 package com.technovision.advancedgenetics.components;
 
-import com.technovision.advancedgenetics.api.components.GeneticsComponent;
+import com.technovision.advancedgenetics.api.components.EntityGeneticsComponent;
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import net.minecraft.nbt.NbtCompound;
 
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PlayerGenetics implements GeneticsComponent {
+public class PlayerGeneticsComponent implements EntityGeneticsComponent {
 
     private final Map<String, Genes> genes = new HashMap<>();
 

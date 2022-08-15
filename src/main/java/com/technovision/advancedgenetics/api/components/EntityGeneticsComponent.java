@@ -7,7 +7,7 @@ import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
 import java.util.List;
 import java.util.Map;
 
-public interface GeneticsComponent extends Component, ServerTickingComponent {
+public interface EntityGeneticsComponent extends Component, ServerTickingComponent {
 
     int geneCount();
 
