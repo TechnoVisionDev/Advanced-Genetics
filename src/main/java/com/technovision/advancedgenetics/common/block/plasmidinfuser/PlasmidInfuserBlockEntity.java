@@ -3,6 +3,7 @@ package com.technovision.advancedgenetics.common.block.plasmidinfuser;
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
 import com.technovision.advancedgenetics.api.genetics.DnaHandler;
+import com.technovision.advancedgenetics.common.item.PlasmidItem;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -40,11 +41,10 @@ public class PlasmidInfuserBlockEntity extends AbstractInventoryBlockEntity {
     public boolean canProcessRecipe() {
         ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
         ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
-        return !input.isEmpty() && input.hasNbt()
+        return !input.isEmpty() && !output.isEmpty() && input.hasNbt()
                 && getEnergyStorage().getAmount() >= getEnergyRequirement()
-                && !input.getNbt().getBoolean("decoded")
-                && 1 + output.getCount() <= output.getMaxCount()
-                && (output.isEmpty() || output.getNbt().getString("gene").equals(input.getNbt().getString("gene")));
+                && input.getNbt().getBoolean("decoded")
+                && PlasmidItem.canCombine(input, output);
     }
 
     @Override
@@ -55,10 +55,8 @@ public class PlasmidInfuserBlockEntity extends AbstractInventoryBlockEntity {
             setProgress(0);
             ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
             if (ThreadLocalRandom.current().nextDouble() <= Config.Common.plasmidInfuserSuccessRate.get()) {
-                ItemStack output = input.copy();
-                output.setCount(1);
-                DnaHandler.decode(output);
-                setOrIncrement(OUTPUT_SLOT_INDEX, output);
+                ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
+                PlasmidItem.combine(input, output);
             }
             decrementSlot(INPUT_SLOT_INDEX, 1);
         }

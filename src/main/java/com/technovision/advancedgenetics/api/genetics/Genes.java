@@ -1,5 +1,7 @@
 package com.technovision.advancedgenetics.api.genetics;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Formatting;
 
 public enum Genes {
@@ -33,5 +35,11 @@ public enum Genes {
 
     public int getColor() {
         return color;
+    }
+
+    public static Genes getGeneByItem(ItemStack stack) {
+        final NbtCompound tag = stack.getOrCreateNbt();
+        String geneName = tag.getString("gene");
+        return Genes.valueOf(geneName);
     }
 }

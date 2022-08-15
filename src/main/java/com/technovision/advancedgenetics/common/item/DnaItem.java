@@ -26,7 +26,7 @@ public class DnaItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         if (!stack.hasNbt()) return;
-        Genes gene = getGene(stack);
+        Genes gene = Genes.getGeneByItem(stack);
         MutableText geneName;
         int color;
         if (isDecoded(stack)) {

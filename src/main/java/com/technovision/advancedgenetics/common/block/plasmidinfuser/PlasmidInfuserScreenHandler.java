@@ -2,7 +2,7 @@ package com.technovision.advancedgenetics.common.block.plasmidinfuser;
 
 import com.technovision.advancedgenetics.api.screen.AbstractGeneticsScreenHandler;
 import com.technovision.advancedgenetics.api.screen.slot.DnaSlot;
-import com.technovision.advancedgenetics.api.screen.slot.OutputSlot;
+import com.technovision.advancedgenetics.api.screen.slot.PlasmidSlot;
 import com.technovision.advancedgenetics.registry.ScreenRegistry;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -25,7 +25,7 @@ public class PlasmidInfuserScreenHandler extends AbstractGeneticsScreenHandler {
     protected PlasmidInfuserScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, Inventory inventory, PropertyDelegate delegate) {
         super(ScreenRegistry.PLASMID_INFUSER_SCREEN_HANDLER, syncId, playerInventory, blockEntity, inventory, delegate, 1, 1);
         addSlots(DnaSlot::new, inventory, 0, 1, 63, 36);
-        addSlots(OutputSlot::new, inventory, 1, 1, 110, 36);
+        addSlots(PlasmidSlot::new, inventory, 1, 1, 110, 36);
 
         this.propertyDelegate = delegate;
         addProperties(delegate);

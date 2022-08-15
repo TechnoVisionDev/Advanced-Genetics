@@ -7,12 +7,6 @@ import net.minecraft.nbt.NbtCompound;
 
 public class DnaHandler {
 
-    public static Genes getGene(ItemStack stack) {
-        final NbtCompound tag = stack.getOrCreateNbt();
-        String geneName = tag.getString("gene");
-        return Genes.valueOf(geneName);
-    }
-
     public static boolean isDecoded(ItemStack stack) {
         final NbtCompound tag = stack.getOrCreateNbt();
         return tag.getBoolean("decoded");
