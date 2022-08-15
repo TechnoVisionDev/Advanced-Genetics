@@ -2,7 +2,6 @@ package com.technovision.advancedgenetics.common.block.plasmidinfuser;
 
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
-import com.technovision.advancedgenetics.api.genetics.DnaHandler;
 import com.technovision.advancedgenetics.common.item.PlasmidItem;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
 import net.minecraft.block.BlockState;

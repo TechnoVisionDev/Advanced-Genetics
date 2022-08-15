@@ -23,6 +23,7 @@ public class Config {
         private static final String categoryPlasmidInfuser = "plasmid_infuser";
 
         public static ForgeConfigSpec.DoubleValue basicGeneChance;
+        public static ForgeConfigSpec.IntValue plasmidRequiredGenes;
         public static ForgeConfigSpec.IntValue overclockSpeed;
         public static ForgeConfigSpec.IntValue overclockEnergy;
 
@@ -58,12 +59,16 @@ public class Config {
                     .comment("Percent chance to receive a basic gene upon DNA decryption.",
                             "Default: 50% chance")
                     .defineInRange("basicGeneChance", 0.50, 0.00, 1.00);
+            plasmidRequiredGenes = builder
+                    .comment("The number of genes needed to fill a plasmid.",
+                            "Default: 24 genes")
+                    .defineInRange("plasmidRequiredGenes", 24, 1, Integer.MAX_VALUE);
             overclockSpeed = builder
                     .comment("The number of seconds that an overclock item speeds up a machine.",
                             "Default: 2 seconds faster")
                     .defineInRange("overclockSpeed", 2, 0, Integer.MAX_VALUE);
             overclockEnergy = builder
-                    .comment("The amount of energy per tick that an overclock item uses.",
+                    .comment("The amount of extra energy per tick that an overclock item uses.",
                             "Default: 5 E/t")
                     .defineInRange("overclockEnergy", 5, 0, Integer.MAX_VALUE);
             builder.pop();

@@ -21,7 +21,7 @@ public class AdvancedGenetics implements ModInitializer {
     @Override
     public void onInitialize() {
         // Register and load config
-        ModLoadingContext.registerConfig(MOD_ID, ModConfig.Type.COMMON, Config.COMMON_SPEC);
+        ModLoadingContext.registerConfig(MOD_ID, ModConfig.Type.COMMON, Config.COMMON_SPEC, "AdvancedGenetics.toml");
 
         // Register in-game items, blocks, entities, and GUIs
         BlockRegistry.registerBlocks();

@@ -4,9 +4,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.api.screen.*;
 import com.technovision.advancedgenetics.common.block.dnadecrypter.DnaDecrypterScreenHandler;
+import com.technovision.advancedgenetics.common.item.PlasmidItem;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -50,6 +52,11 @@ public class PlasmidInfuserScreen extends AbstractGeneticsScreen<PlasmidInfuserS
         if (overclock > 0) {
             String text = "x"+overclock;
             textRenderer.draw(matrices, text, backgroundWidth - textRenderer.getWidth(text) - 8, 6, 0x3f3f3f);
+        }
+        ItemStack plasmid = handler.getClientInventory().getStack(PlasmidInfuserBlockEntity.OUTPUT_SLOT_INDEX);
+        if (!plasmid.isEmpty() && plasmid.hasNbt()) {
+            String text = String.format("%d/%d", plasmid.getNbt().getInt("count"), PlasmidItem.MAX_GENES);
+            textRenderer.draw(matrices, text, backgroundWidth - textRenderer.getWidth(text) - 12, (backgroundHeight/4.0f)-1, 0x3f3f3f);
         }
     }
 
