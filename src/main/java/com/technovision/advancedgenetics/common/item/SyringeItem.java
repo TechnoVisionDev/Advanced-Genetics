@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -46,7 +48,9 @@ public class SyringeItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if (!user.getStackInHand(hand).getOrCreateNbt().getBoolean("filled")) {
+        if (hand != Hand.MAIN_HAND) return TypedActionResult.pass(user.getStackInHand(hand));
+        NbtCompound tag = user.getStackInHand(hand).getOrCreateNbt();
+        if (!tag.getBoolean("filled") || (tag.getBoolean("purified") && tag.contains("genes"))) {
             return ItemUsage.consumeHeldItem(world, user, hand);
         }
         return TypedActionResult.pass(user.getStackInHand(hand));
@@ -54,9 +58,20 @@ public class SyringeItem extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        if (!world.isClient()) {
-            fill(stack);
-            user.damage(DamageSource.GENERIC, 1.0f);
+        NbtCompound tag = user.getMainHandStack().getOrCreateNbt();
+        if (!tag.getBoolean("filled")) {
+            // Draw blood
+            if (!world.isClient()) {
+                fill(stack);
+                user.damage(DamageSource.GENERIC, 1.0f);
+            }
+        } else if (tag.getBoolean("purified") && tag.contains("genes")) {
+            // Inject genes into bloodstream
+            if (!user.getWorld().isClient()) {
+                inject(user.getMainHandStack());
+                user.damage(DamageSource.GENERIC, 1.0f);
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 20*10));
+            }
         }
         return stack;
     }
@@ -99,5 +114,12 @@ public class SyringeItem extends Item {
         genes.putString(gene, gene);
         syringeTag.put("genes", genes);
         syringeTag.putBoolean("purified", false);
+    }
+
+    public static void inject(ItemStack stack) {
+        final NbtCompound tag = stack.getOrCreateNbt();
+        tag.remove("filled");
+        tag.remove("purified");
+        tag.remove("genes");
     }
 }
