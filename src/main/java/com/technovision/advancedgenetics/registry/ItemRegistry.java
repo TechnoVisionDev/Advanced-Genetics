@@ -2,10 +2,7 @@ package com.technovision.advancedgenetics.registry;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.api.genetics.Entities;
-import com.technovision.advancedgenetics.common.item.CellItem;
-import com.technovision.advancedgenetics.common.item.DnaItem;
-import com.technovision.advancedgenetics.common.item.OrganicMatterItem;
-import com.technovision.advancedgenetics.common.item.ScalpelItem;
+import com.technovision.advancedgenetics.common.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
@@ -38,6 +35,8 @@ public class ItemRegistry {
 
     // Other Items
     public static final DnaItem DNA_HELIX = new DnaItem();
+    public static final PlasmidItem PLASMID = new PlasmidItem();
+    public static final PlasmidItem ANTIPLASMID = new PlasmidItem();
 
     public static void registerItems() {
         // Block Items
@@ -70,5 +69,7 @@ public class ItemRegistry {
 
         // Other Items
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "dna_helix"), DNA_HELIX);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "plasmid"), PLASMID);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "antiplasmid"), ANTIPLASMID);
     }
 }

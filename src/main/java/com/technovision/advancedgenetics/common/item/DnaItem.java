@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static com.technovision.advancedgenetics.api.genetics.GeneHandler.*;
+import static com.technovision.advancedgenetics.api.genetics.DnaHandler.*;
 
 public class DnaItem extends Item {
 

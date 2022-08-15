@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ZZZ",
+    "Z Z",
+    "ZZZ"
+  ],
+  "key": {
+    "Z": {
+      "item": "advancedgenetics:dna_helix"
+    }
+  },
+  "result": {
+    "item": "advancedgenetics:plasmid"
+  }
+}

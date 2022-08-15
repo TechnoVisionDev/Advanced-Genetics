@@ -38,6 +38,8 @@
   "item.advancedgenetics.wither_skeleton_cell": "Wither Skeleton Cell",
   "item.advancedgenetics.stray_cell": "Stray Cell",
   "item.advancedgenetics.dna_helix": "DNA Helix",
+  "item.advancedgenetics.plasmid": "Plasmid",
+  "item.advancedgenetics.antiplasmid": "Anti-Plasmid",
   "block.advancedgenetics.cell_analyzer": "Cell Analyzer",
   "block.advancedgenetics.dna_extractor": "DNA Extractor",
   "block.advancedgenetics.dna_decrypter": "DNA Decrypter",

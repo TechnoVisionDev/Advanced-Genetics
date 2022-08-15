@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 
-public class GeneHandler {
+public class DnaHandler {
 
     public static Genes getGene(ItemStack stack) {
         final NbtCompound tag = stack.getOrCreateNbt();

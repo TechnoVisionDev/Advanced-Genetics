@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ZZZ",
+    "ZFZ",
+    "ZZZ"
+  ],
+  "key": {
+    "Z": {
+      "item": "advancedgenetics:dna_helix"
+    },
+    "F": {
+      "item": "minecraft:fermented_spider_eye"
+    }
+  },
+  "result": {
+    "item": "advancedgenetics:antiplasmid"
+  }
+}

@@ -2,7 +2,7 @@ package com.technovision.advancedgenetics.common.block.dnaextractor;
 
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
-import com.technovision.advancedgenetics.api.genetics.GeneHandler;
+import com.technovision.advancedgenetics.api.genetics.DnaHandler;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
 import com.technovision.advancedgenetics.registry.ItemRegistry;
 import net.minecraft.block.BlockState;
@@ -53,7 +53,7 @@ public class DnaExtractorBlockEntity extends AbstractInventoryBlockEntity {
             ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
             if (ThreadLocalRandom.current().nextDouble() <= Config.Common.dnaExtractorSuccessRate.get()) {
                 ItemStack output = new ItemStack(ItemRegistry.DNA_HELIX);
-                GeneHandler.setGene(input, output);
+                DnaHandler.setGene(input, output);
                 setOrIncrement(OUTPUT_SLOT_INDEX, output);
             }
             decrementSlot(INPUT_SLOT_INDEX, 1);
