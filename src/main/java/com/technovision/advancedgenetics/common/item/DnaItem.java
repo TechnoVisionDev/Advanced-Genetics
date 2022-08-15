@@ -7,6 +7,7 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
@@ -27,14 +28,14 @@ public class DnaItem extends Item {
         if (!stack.hasNbt()) return;
         Genes gene = getGene(stack);
         MutableText geneName;
-        Formatting color;
+        int color;
         if (isDecoded(stack)) {
             geneName = Text.literal(gene.getName());
             color = gene.getColor();
         } else {
             geneName = Text.literal(gene.getEncryptedName());
-            color = Formatting.GRAY;
+            color = Formatting.GRAY.getColorValue();
         }
-        tooltip.add(geneName.formatted(color));
+        tooltip.add(geneName.setStyle(Style.EMPTY.withColor(color)));
     }
 }

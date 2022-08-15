@@ -50,6 +50,7 @@ public class DnaDecrypterBlockEntity extends AbstractInventoryBlockEntity {
             ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
             if (ThreadLocalRandom.current().nextDouble() <= Config.Common.dnaDecrypterSuccessRate.get()) {
                 ItemStack output = input.copy();
+                output.setCount(1);
                 GeneHandler.decode(output);
                 setOrIncrement(OUTPUT_SLOT_INDEX, output);
             }
