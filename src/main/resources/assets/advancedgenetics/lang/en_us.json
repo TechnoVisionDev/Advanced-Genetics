@@ -44,9 +44,11 @@
   "block.advancedgenetics.dna_extractor": "DNA Extractor",
   "block.advancedgenetics.dna_decrypter": "DNA Decrypter",
   "block.advancedgenetics.plasmid_infuser": "Plasmid Infuser",
+  "block.advancedgenetics.blood_purifier": "Blood Purifier",
   "advancedgenetics.container.cell_analyzer_block_entity": "Cell Analyzer",
   "advancedgenetics.container.dna_extractor_block_entity": "DNA Extractor",
   "advancedgenetics.container.dna_decrypter_block_entity": "DNA Decrypter",
   "advancedgenetics.container.plasmid_infuser_block_entity": "Plasmid Infuser",
+  "advancedgenetics.container.blood_purifier_block_entity": "Blood Purifier",
   "tooltip.advancedgenetics.energy_requirement": "Requires %d E/t"
 }

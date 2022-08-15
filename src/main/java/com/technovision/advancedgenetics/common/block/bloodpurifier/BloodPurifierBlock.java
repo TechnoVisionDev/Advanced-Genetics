@@ -1,8 +1,7 @@
-package com.technovision.advancedgenetics.common.block.plasmidinfuser;
+package com.technovision.advancedgenetics.common.block.bloodpurifier;
 
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.block.AbstractGeneticsBlock;
-import com.technovision.advancedgenetics.common.block.dnadecrypter.DnaDecrypterBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -23,15 +22,15 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class PlasmidInfuserBlock extends AbstractGeneticsBlock {
+public class BloodPurifierBlock extends AbstractGeneticsBlock {
 
-    public PlasmidInfuserBlock() {
-        super(PlasmidInfuserBlockEntity::new);
+    public BloodPurifierBlock() {
+        super(BloodPurifierBlockEntity::new);
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
-        tooltip.add(Text.translatable("tooltip.advancedgenetics.energy_requirement",  Config.Common.plasmidInfuserEnergyPerTick.get()).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("tooltip.advancedgenetics.energy_requirement",  Config.Common.bloodPurifierEnergyPerTick.get()).formatted(Formatting.GRAY));
     }
 
     @Override
@@ -51,8 +50,8 @@ public class PlasmidInfuserBlock extends AbstractGeneticsBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         if (!world.isClient()) {
             return (level, pos, blockState, blockEntity) -> {
-                if (blockEntity instanceof PlasmidInfuserBlockEntity infuserBlockEntity) {
-                    infuserBlockEntity.tick();
+                if (blockEntity instanceof BloodPurifierBlockEntity purifierBlockEntity) {
+                    purifierBlockEntity.tick();
                 }
             };
         }

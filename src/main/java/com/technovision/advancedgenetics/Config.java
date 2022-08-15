@@ -21,6 +21,7 @@ public class Config {
         private static final String categoryDnaExtractor = "dna_extractor";
         private static final String categoryDnaDecrypter = "dna_decrypter";
         private static final String categoryPlasmidInfuser = "plasmid_infuser";
+        private static final String categoryBloodPurifier = "blood_purifier";
 
         public static ForgeConfigSpec.DoubleValue basicGeneChance;
         public static ForgeConfigSpec.IntValue plasmidRequiredGenes;
@@ -50,6 +51,12 @@ public class Config {
         public static ForgeConfigSpec.IntValue plasmidInfuserTicksPerOperation;
         public static ForgeConfigSpec.IntValue plasmidInfuserMaxOverclock;
         public static ForgeConfigSpec.DoubleValue plasmidInfuserSuccessRate;
+
+        public static ForgeConfigSpec.IntValue bloodPurifierEnergyCapacity;
+        public static ForgeConfigSpec.IntValue bloodPurifierEnergyPerTick;
+        public static ForgeConfigSpec.IntValue bloodPurifierTicksPerOperation;
+        public static ForgeConfigSpec.IntValue bloodPurifierMaxOverclock;
+        public static ForgeConfigSpec.DoubleValue bloodPurifierSuccessRate;
 
         public Common(ForgeConfigSpec.Builder builder) {
 
@@ -157,7 +164,7 @@ public class Config {
                     .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
             plasmidInfuserTicksPerOperation = builder
                     .comment("Ticks per operation when using the Plasmid Infuser.",
-                            "Default: 200 ticks")
+                            "Default: 400 ticks")
                     .defineInRange("ticksPerOperation", 400, 20, Integer.MAX_VALUE);
             plasmidInfuserMaxOverclock = builder
                     .comment("The max amount of overclock items that can be used on the Plasmid Infuser.",
@@ -165,6 +172,30 @@ public class Config {
                     .defineInRange("maxOverclock", 10, 0, Integer.MAX_VALUE);
             plasmidInfuserSuccessRate = builder
                     .comment("Percent chance for the Plasmid Infuser to successfully decode a DNA helix.",
+                            "Default: 100% success rate")
+                    .defineInRange("successRate", 1.00, 0.00, 1.00);
+            builder.pop();
+
+            // Blood Purifier
+            builder.comment("Blood Purifier").push(categoryBloodPurifier);
+            bloodPurifierEnergyCapacity = builder
+                    .comment("Maximum energy capacity for the Blood Purifier.",
+                            "Default: 20,000 (20k E)")
+                    .defineInRange("energyCapacity", 20000, 0, Integer.MAX_VALUE);
+            bloodPurifierEnergyPerTick = builder
+                    .comment("Energy consumed per tick when Blood Purifier is processing.",
+                            "Default: 20 E")
+                    .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
+            bloodPurifierTicksPerOperation = builder
+                    .comment("Ticks per operation when using the Blood Purifier.",
+                            "Default: 200 ticks")
+                    .defineInRange("ticksPerOperation", 200, 20, Integer.MAX_VALUE);
+            bloodPurifierMaxOverclock = builder
+                    .comment("The max amount of overclock items that can be used on the Blood Purifier.",
+                            "Default: 5x overclock")
+                    .defineInRange("maxOverclock", 5, 0, Integer.MAX_VALUE);
+            bloodPurifierSuccessRate = builder
+                    .comment("Percent chance for the Blood Purifier to successfully purify blood.",
                             "Default: 100% success rate")
                     .defineInRange("successRate", 1.00, 0.00, 1.00);
             builder.pop();

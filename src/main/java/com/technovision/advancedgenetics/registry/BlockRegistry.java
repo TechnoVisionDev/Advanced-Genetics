@@ -1,6 +1,7 @@
 package com.technovision.advancedgenetics.registry;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
+import com.technovision.advancedgenetics.common.block.bloodpurifier.BloodPurifierBlock;
 import com.technovision.advancedgenetics.common.block.cellanalyzer.CellAnalyzerBlock;
 import com.technovision.advancedgenetics.common.block.dnadecrypter.DnaDecrypterBlock;
 import com.technovision.advancedgenetics.common.block.dnaextractor.DnaExtractorBlock;
@@ -14,11 +15,13 @@ public class BlockRegistry {
     public static final DnaExtractorBlock DNA_EXTRACTOR = new DnaExtractorBlock();
     public static final DnaDecrypterBlock DNA_DECRYPTER = new DnaDecrypterBlock();
     public static final PlasmidInfuserBlock PLASMID_INFUSER = new PlasmidInfuserBlock();
+    public static final BloodPurifierBlock BLOOD_PURIFIER = new BloodPurifierBlock();
 
     public static void registerBlocks() {
         Registry.register(Registry.BLOCK, new Identifier(AdvancedGenetics.MOD_ID, "cell_analyzer"), CELL_ANALYZER);
         Registry.register(Registry.BLOCK, new Identifier(AdvancedGenetics.MOD_ID, "dna_extractor"), DNA_EXTRACTOR);
         Registry.register(Registry.BLOCK, new Identifier(AdvancedGenetics.MOD_ID, "dna_decrypter"), DNA_DECRYPTER);
         Registry.register(Registry.BLOCK, new Identifier(AdvancedGenetics.MOD_ID, "plasmid_infuser"), PLASMID_INFUSER);
+        Registry.register(Registry.BLOCK, new Identifier(AdvancedGenetics.MOD_ID, "blood_purifier"), BLOOD_PURIFIER);
     }
 }
