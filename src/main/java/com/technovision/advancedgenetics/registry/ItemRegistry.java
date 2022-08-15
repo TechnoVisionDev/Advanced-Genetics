@@ -25,7 +25,7 @@ public class ItemRegistry {
     public static final ScalpelItem METAL_SCALPEL = new ScalpelItem(25);
     public static final ScalpelItem DIAMOND_SCALPEL = new ScalpelItem(150);
     public static final ScalpelItem NETHERITE_SCALPEL = new ScalpelItem(300);
-    public static final Item GLASS_SYRINGE = new Item(ITEM_SETTINGS);
+    public static final GlassSyringeItem GLASS_SYRINGE = new GlassSyringeItem();
     public static final Item OVERCLOCKER = new Item(ITEM_SETTINGS);
 
     // Block Items

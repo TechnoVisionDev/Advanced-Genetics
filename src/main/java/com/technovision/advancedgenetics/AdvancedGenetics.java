@@ -1,5 +1,6 @@
 package com.technovision.advancedgenetics;
 
+import com.technovision.advancedgenetics.client.ClientEvents;
 import com.technovision.advancedgenetics.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -29,5 +30,6 @@ public class AdvancedGenetics implements ModInitializer {
         BlockEntityRegistry.registerBlockEntities();
         ScreenRegistry.registerScreens();
         RecipeRegistry.registerRecipes();
+        ClientEvents.propertyOverrideRegistry();
     }
 }

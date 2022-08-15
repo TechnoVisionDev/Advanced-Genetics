@@ -85,7 +85,7 @@ public abstract class AbstractGeneticsBlock extends BlockWithEntity implements B
             if (world.getBlockEntity(pos) instanceof AbstractProcessingBlockEntity processingBlockEntity) {
                 if (processingBlockEntity.canOverclock()) {
                     processingBlockEntity.incrementOverclock();
-                    player.getStackInHand(hand).decrement(1);
+                    if (!player.isCreative()) player.getStackInHand(hand).decrement(1);
                     return ActionResult.SUCCESS;
                 }
             }
