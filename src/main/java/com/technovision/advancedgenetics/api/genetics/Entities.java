@@ -3,7 +3,6 @@ package com.technovision.advancedgenetics.api.genetics;
 import com.technovision.advancedgenetics.Config;
 import net.minecraft.entity.EntityType;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

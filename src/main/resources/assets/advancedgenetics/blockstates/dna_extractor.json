@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "advancedgenetics:block/dna_extractor",
+      "y": 90
+    },
+    "facing=north": {
       "model": "advancedgenetics:block/dna_extractor"
+    },
+    "facing=south": {
+      "model": "advancedgenetics:block/dna_extractor",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "advancedgenetics:block/dna_extractor",
+      "y": 270
     }
   }
 }

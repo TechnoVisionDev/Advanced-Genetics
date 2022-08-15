@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "advancedgenetics:block/cell_analyzer",
+      "y": 90
+    },
+    "facing=north": {
       "model": "advancedgenetics:block/cell_analyzer"
+    },
+    "facing=south": {
+      "model": "advancedgenetics:block/cell_analyzer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "advancedgenetics:block/cell_analyzer",
+      "y": 270
     }
   }
 }
