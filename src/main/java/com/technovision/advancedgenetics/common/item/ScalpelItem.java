@@ -46,7 +46,7 @@ public class ScalpelItem extends Item {
             }
         }
         if (item != null) {
-            user.giveItemStack(new ItemStack(item));
+            entity.dropItem(item);
             entity.damage(DamageSource.player(user), 1.0f);
             stack.damage(1, user, (e) -> user.sendToolBreakStatus(user.getActiveHand()));
         }
