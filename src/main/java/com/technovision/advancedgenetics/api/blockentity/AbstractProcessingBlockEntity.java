@@ -26,11 +26,12 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     private final Text name;
     private int progress = 0;
     private int overclock = 0;
+    private int maxOverclock;
     private final SimpleEnergyStorage energyStorage;
     private int maxProgress;
     private final PropertyDelegate propertyDelegate;
 
-    public AbstractProcessingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, long energyCapacity, int maxProgress) {
+    public AbstractProcessingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, long energyCapacity, int maxProgress, int maxOverclock) {
         super(type, pos, state);
         String blockEntityName = Objects.requireNonNull(Registry.BLOCK_ENTITY_TYPE.getId(getType())).getPath();
         this.name = Text.translatable(String.format("%s.container.%s", AdvancedGenetics.MOD_ID, blockEntityName));
@@ -40,6 +41,7 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
                 markDirty();
             }
         };
+        this.maxOverclock = maxOverclock;
         this.maxProgress = maxProgress;
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
@@ -132,7 +134,9 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
         super.readNbt(nbt);
         setProgress(nbt.getInt("progress"));
         insertEnergy(nbt.getLong("energy"));
-        setOverclock(nbt.getInt("overclock"));
+        int oc = nbt.getInt("overclock");
+        if (oc > maxOverclock) oc = maxOverclock;
+        setOverclock(oc);
     }
 
     @Override
@@ -168,7 +172,7 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     }
 
     public boolean canOverclock() {
-        return overclock < 8 && getMaxProgress() >= 20;
+        return overclock < maxOverclock && getMaxProgress() >= 20;
     }
 
     public void setOverclock(int overclock) {

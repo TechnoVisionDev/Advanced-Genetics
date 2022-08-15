@@ -26,7 +26,13 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
     private CellAnalyzerRecipe recipe;
 
     public CellAnalyzerBlockEntity(BlockPos pos, BlockState state) {
-        super(DefaultedList.ofSize(SLOT_COUNT, ItemStack.EMPTY), BlockEntityRegistry.CELL_ANALYZER_BLOCK_ENTITY, pos, state, Config.Common.cellAnalyzerEnergyCapacity.get(), Config.Common.cellAnalyzerTicksPerOperation.get());
+        super(DefaultedList.ofSize(SLOT_COUNT, ItemStack.EMPTY),
+                BlockEntityRegistry.CELL_ANALYZER_BLOCK_ENTITY,
+                pos, state,
+                Config.Common.cellAnalyzerEnergyCapacity.get(),
+                Config.Common.cellAnalyzerTicksPerOperation.get(),
+                Config.Common.cellAnalyzerMaxOverclock.get()
+        );
     }
 
     @Override

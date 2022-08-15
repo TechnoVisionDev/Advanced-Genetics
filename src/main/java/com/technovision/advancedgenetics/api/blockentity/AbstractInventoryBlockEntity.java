@@ -16,8 +16,8 @@ public abstract class AbstractInventoryBlockEntity extends AbstractProcessingBlo
 
     private final DefaultedList<ItemStack> inventory;
 
-    public AbstractInventoryBlockEntity(DefaultedList<ItemStack> inventory, BlockEntityType<?> type, BlockPos pos, BlockState state, long energyCapacity, int maxProgress) {
-        super(type, pos, state, energyCapacity, maxProgress);
+    public AbstractInventoryBlockEntity(DefaultedList<ItemStack> inventory, BlockEntityType<?> type, BlockPos pos, BlockState state, long energyCapacity, int maxProgress, int maxOverclock) {
+        super(type, pos, state, energyCapacity, maxProgress, maxOverclock);
         this.inventory = inventory;
     }
 

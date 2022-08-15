@@ -24,7 +24,13 @@ public class DnaDecrypterBlockEntity extends AbstractInventoryBlockEntity {
     public static final int OUTPUT_SLOT_INDEX = 1;
 
     public DnaDecrypterBlockEntity(BlockPos pos, BlockState state) {
-        super(DefaultedList.ofSize(SLOT_COUNT, ItemStack.EMPTY), BlockEntityRegistry.DNA_DECRYPTER_BLOCK_ENTITY, pos, state, Config.Common.dnaDecrypterEnergyCapacity.get(), Config.Common.dnaDecrypterTicksPerOperation.get());
+        super(DefaultedList.ofSize(SLOT_COUNT, ItemStack.EMPTY),
+                BlockEntityRegistry.DNA_DECRYPTER_BLOCK_ENTITY,
+                pos, state,
+                Config.Common.dnaDecrypterEnergyCapacity.get(),
+                Config.Common.dnaDecrypterTicksPerOperation.get(),
+                Config.Common.dnaDecrypterMaxOverclock.get()
+        );
     }
 
     @Override
