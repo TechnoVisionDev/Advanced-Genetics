@@ -19,6 +19,7 @@ public class Config {
         private static final String categorySettings = "settings";
         private static final String categoryCellAnalyzer = "cell_analyzer";
         private static final String categoryDnaExtractor = "dna_extractor";
+        private static final String categoryDnaDecrypter = "dna_decrypter";
 
         public static ForgeConfigSpec.DoubleValue basicGeneChance;
 
@@ -32,8 +33,14 @@ public class Config {
         public static ForgeConfigSpec.IntValue dnaExtractorTicksPerOperation;
         public static ForgeConfigSpec.DoubleValue dnaExtractorSuccessRate;
 
+        public static ForgeConfigSpec.IntValue dnaDecrypterEnergyCapacity;
+        public static ForgeConfigSpec.IntValue dnaDecrypterEnergyPerTick;
+        public static ForgeConfigSpec.IntValue dnaDecrypterTicksPerOperation;
+        public static ForgeConfigSpec.DoubleValue dnaDecrypterSuccessRate;
+
         public Common(ForgeConfigSpec.Builder builder) {
 
+            // General Settings
             builder.comment("Settings").push(categorySettings);
             basicGeneChance = builder
                     .comment("Percent chance to receive a basic gene upon DNA decryption.",
@@ -41,6 +48,7 @@ public class Config {
                     .defineInRange("basicGeneChance", 0.50, 0.00, 1.00);
             builder.pop();
 
+            // Cell Analyzer
             builder.comment("Cell Analyzer").push(categoryCellAnalyzer);
             cellAnalyzerEnergyCapacity = builder
                     .comment("Maximum energy capacity for the Cell Analyzer.",
@@ -60,6 +68,7 @@ public class Config {
                     .defineInRange("successRate", 1.00, 0.00, 1.00);
             builder.pop();
 
+            // DNA Extractor
             builder.comment("DNA Extractor").push(categoryDnaExtractor);
             dnaExtractorEnergyCapacity = builder
                     .comment("Maximum energy capacity for the DNA Extractor.",
@@ -75,6 +84,26 @@ public class Config {
                     .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
             dnaExtractorSuccessRate = builder
                     .comment("Percent chance for the DNA Extractor to successfully extract a DNA helix.",
+                            "Default: 100% success rate")
+                    .defineInRange("successRate", 1.00, 0.00, 1.00);
+            builder.pop();
+
+            // DNA Decrypter
+            builder.comment("DNA Decrypter").push(categoryDnaDecrypter);
+            dnaDecrypterEnergyCapacity = builder
+                    .comment("Maximum energy capacity for the DNA Decrypter.",
+                            "Default: 20,000 (20k E)")
+                    .defineInRange("energyCapacity", 20000, 0, Integer.MAX_VALUE);
+            dnaDecrypterEnergyPerTick = builder
+                    .comment("Energy consumed per tick when DNA Decrypter is processing.",
+                            "Default: 20 E")
+                    .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
+            dnaDecrypterTicksPerOperation = builder
+                    .comment("Ticks per operation when using the DNA Decrypter.",
+                            "Default: 200 ticks")
+                    .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
+            dnaDecrypterSuccessRate = builder
+                    .comment("Percent chance for the DNA Decrypter to successfully decode a DNA helix.",
                             "Default: 100% success rate")
                     .defineInRange("successRate", 1.00, 0.00, 1.00);
             builder.pop();

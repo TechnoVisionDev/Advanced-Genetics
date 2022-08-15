@@ -96,11 +96,9 @@ public abstract class AbstractGeneticsScreenHandler extends ScreenHandler {
         }
     }
 
-    public void addPlayerInventorySlots(Inventory pInventory) {
-        // player main inventory
-        addSlots(Slot::new, pInventory, 3, 9, 9, 27,8, 86);
-        // player hotbar
-        addSlots(Slot::new, pInventory, 1, 9, 0, 9,8, 144);
+    public void addPlayerInventorySlots(Inventory inventory) {
+        addSlots(Slot::new, inventory, 3, 9, 9, 27, 8, 84);
+        addSlots(Slot::new, inventory, 1, 9, 0, 9, 8, 142);
     }
 
     public PropertyDelegate getPropertyDelegate() {

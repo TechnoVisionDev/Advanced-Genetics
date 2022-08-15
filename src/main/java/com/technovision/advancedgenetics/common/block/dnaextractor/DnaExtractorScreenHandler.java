@@ -21,7 +21,7 @@ public class DnaExtractorScreenHandler extends AbstractGeneticsScreenHandler {
     protected final PropertyDelegate propertyDelegate;
 
     public DnaExtractorScreenHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buffer) {
-        this(syncId, playerInventory, Objects.requireNonNull(playerInventory.player.getWorld().getBlockEntity(buffer.readBlockPos())), new SimpleInventory(CellAnalyzerBlockEntity.SLOT_COUNT), new ArrayPropertyDelegate(5));
+        this(syncId, playerInventory, Objects.requireNonNull(playerInventory.player.getWorld().getBlockEntity(buffer.readBlockPos())), new SimpleInventory(DnaExtractorBlockEntity.SLOT_COUNT), new ArrayPropertyDelegate(5));
     }
 
     protected DnaExtractorScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, Inventory inventory, PropertyDelegate delegate) {
@@ -31,11 +31,5 @@ public class DnaExtractorScreenHandler extends AbstractGeneticsScreenHandler {
 
         this.propertyDelegate = delegate;
         addProperties(delegate);
-    }
-
-    @Override
-    public void addPlayerInventorySlots(Inventory inventory) {
-        addSlots(Slot::new, inventory, 3, 9, 9, 27, 8, 84);
-        addSlots(Slot::new, inventory, 1, 9, 0, 9, 8, 142);
     }
 }

@@ -31,10 +31,4 @@ public class CellAnalyzerScreenHandler extends AbstractGeneticsScreenHandler {
         this.propertyDelegate = delegate;
         addProperties(delegate);
     }
-
-    @Override
-    public void addPlayerInventorySlots(Inventory inventory) {
-        addSlots(Slot::new, inventory, 3, 9, 9, 27, 8, 84);
-        addSlots(Slot::new, inventory, 1, 9, 0, 9, 8, 142);
-    }
 }

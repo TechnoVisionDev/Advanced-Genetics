@@ -20,9 +20,9 @@ public class ItemRegistry {
 
     private static final FabricItemSettings ITEM_SETTINGS = new FabricItemSettings().group(AdvancedGenetics.TAB);
 
+    // Organic Matter and Cells
     public static final Map<EntityType, OrganicMatterItem> MATTER = new HashMap<>();
     public static final Map<EntityType, CellItem> CELLS = new HashMap<>();
-    public static final DnaItem DNA_HELIX = new DnaItem();
 
     // Tools
     public static final ScalpelItem METAL_SCALPEL = new ScalpelItem(25);
@@ -34,11 +34,16 @@ public class ItemRegistry {
     // Block Items
     public static final BlockItem CELL_ANALYZER = new BlockItem(BlockRegistry.CELL_ANALYZER, ITEM_SETTINGS);
     public static final BlockItem DNA_EXTRACTOR = new BlockItem(BlockRegistry.DNA_EXTRACTOR, ITEM_SETTINGS);
+    public static final BlockItem DNA_DECRYPTER = new BlockItem(BlockRegistry.DNA_DECRYPTER, ITEM_SETTINGS);
+
+    // Other Items
+    public static final DnaItem DNA_HELIX = new DnaItem();
 
     public static void registerItems() {
         // Block Items
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "cell_analyzer"), CELL_ANALYZER);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "dna_extractor"), DNA_EXTRACTOR);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "dna_decrypter"), DNA_DECRYPTER);
 
         // Tools
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "metal_scalpel"), METAL_SCALPEL);
@@ -63,7 +68,7 @@ public class ItemRegistry {
             CELLS.put(entity.getType(), cellItem);
         }
 
-        // DNA
+        // Other Items
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "dna_helix"), DNA_HELIX);
     }
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "advancedgenetics:block/dna_decrypter",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "advancedgenetics:block/dna_decrypter"
+    },
+    "facing=south": {
+      "model": "advancedgenetics:block/dna_decrypter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "advancedgenetics:block/dna_decrypter",
+      "y": 270
+    }
+  }
+}

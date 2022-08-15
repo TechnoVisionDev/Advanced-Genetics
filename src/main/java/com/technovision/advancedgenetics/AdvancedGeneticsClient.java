@@ -1,6 +1,7 @@
 package com.technovision.advancedgenetics;
 
 import com.technovision.advancedgenetics.common.block.cellanalyzer.CellAnalyzerScreen;
+import com.technovision.advancedgenetics.common.block.dnadecrypter.DnaDecrypterScreen;
 import com.technovision.advancedgenetics.common.block.dnaextractor.DnaExtractorScreen;
 import com.technovision.advancedgenetics.registry.ItemRegistry;
 import com.technovision.advancedgenetics.registry.ScreenRegistry;
@@ -15,6 +16,7 @@ public class AdvancedGeneticsClient implements ClientModInitializer {
         // Register screens
         HandledScreens.register(ScreenRegistry.CELL_ANALYZER_SCREEN_HANDLER, CellAnalyzerScreen::new);
         HandledScreens.register(ScreenRegistry.DNA_EXTRACTOR_SCREEN_HANDLER, DnaExtractorScreen::new);
+        HandledScreens.register(ScreenRegistry.DNA_DECRYPTER_SCREEN_HANDLER, DnaDecrypterScreen::new);
 
         // Dynamically dolor cells
         ItemRegistry.CELLS.values().forEach(item -> ColorProviderRegistry.ITEM.register(item::getColor, item));
