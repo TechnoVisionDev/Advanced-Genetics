@@ -62,7 +62,7 @@ public class Config {
             plasmidRequiredGenes = builder
                     .comment("The number of genes needed to fill a plasmid.",
                             "Default: 24 genes")
-                    .defineInRange("plasmidRequiredGenes", 24, 1, Integer.MAX_VALUE);
+                    .defineInRange("plasmidRequiredGenes", 24, 1, 100);
             overclockSpeed = builder
                     .comment("The number of seconds that an overclock item speeds up a machine.",
                             "Default: 2 seconds faster")

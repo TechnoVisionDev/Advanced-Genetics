@@ -1,11 +1,14 @@
 package com.technovision.advancedgenetics.common.item;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
+import com.technovision.advancedgenetics.api.genetics.Entities;
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -14,8 +17,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-
-import static com.technovision.advancedgenetics.api.genetics.DnaHandler.*;
 
 public class DnaItem extends Item {
 
@@ -37,5 +38,23 @@ public class DnaItem extends Item {
             color = Formatting.GRAY.getColorValue();
         }
         tooltip.add(geneName.setStyle(Style.EMPTY.withColor(color)));
+    }
+
+    public static boolean isDecoded(ItemStack stack) {
+        final NbtCompound tag = stack.getOrCreateNbt();
+        return tag.getBoolean("decoded");
+    }
+
+    public static void setGene(ItemStack cellStack, ItemStack dnaStack) {
+        EntityType entityType = ((CellItem)(cellStack.getItem())).getEntityType();
+        Genes gene = Entities.findEntityByType(entityType).getRandomGene();
+        final NbtCompound tag = dnaStack.getOrCreateNbt();
+        tag.putString("gene", gene.toString());
+        tag.putBoolean("decoded", false);
+    }
+
+    public static void decode(ItemStack stack) {
+        final NbtCompound tag = stack.getOrCreateNbt();
+        tag.putBoolean("decoded", true);
     }
 }
