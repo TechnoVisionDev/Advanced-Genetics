@@ -22,6 +22,7 @@ public class Config {
         private static final String categoryDnaDecrypter = "dna_decrypter";
 
         public static ForgeConfigSpec.DoubleValue basicGeneChance;
+        public static ForgeConfigSpec.IntValue overclockEnergy;
 
         public static ForgeConfigSpec.IntValue cellAnalyzerEnergyCapacity;
         public static ForgeConfigSpec.IntValue cellAnalyzerEnergyPerTick;
@@ -49,6 +50,10 @@ public class Config {
                     .comment("Percent chance to receive a basic gene upon DNA decryption.",
                             "Default: 50% chance")
                     .defineInRange("basicGeneChance", 0.50, 0.00, 1.00);
+            overclockEnergy = builder
+                    .comment("The amount of energy per tick that an overclock item uses.",
+                            "Default: 5 E/t")
+                    .defineInRange("overclockEnergy", 5, 0, Integer.MAX_VALUE);
             builder.pop();
 
             // Cell Analyzer

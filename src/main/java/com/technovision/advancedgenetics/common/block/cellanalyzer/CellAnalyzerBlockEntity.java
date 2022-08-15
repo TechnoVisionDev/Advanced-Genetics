@@ -54,7 +54,7 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
         if (recipe != null) {
             ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
             ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
-            return getEnergyStorage().getAmount() >= Config.Common.cellAnalyzerEnergyPerTick.get()
+            return getEnergyStorage().getAmount() >= getEnergyRequirement()
                     && (ItemStack.canCombine(input, recipe.getInput()) && input.getCount() >= recipe.getInput().getCount())
                     && (recipe.getOutput().getCount() + output.getCount()) <= recipe.getOutput().getMaxCount()
                     && (ItemStack.canCombine(output, recipe.getOutput()) || output.isEmpty());
@@ -73,7 +73,7 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
                 setOrIncrement(OUTPUT_SLOT_INDEX, recipe.getOutput().copy());
             }
         }
-        extractEnergy(Config.Common.cellAnalyzerEnergyPerTick.get());
+        extractEnergy(getEnergyRequirement());
         markDirty();
     }
 
@@ -91,5 +91,9 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
         return new CellAnalyzerScreenHandler(syncId, inv, this, this, getPropertyDelegate());
+    }
+
+    private int getEnergyRequirement() {
+        return Config.Common.cellAnalyzerEnergyPerTick.get() + (Config.Common.overclockEnergy.get() * getOverclock());
     }
 }

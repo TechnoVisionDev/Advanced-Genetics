@@ -41,7 +41,7 @@ public class DnaExtractorBlockEntity extends AbstractInventoryBlockEntity {
     public boolean canProcessRecipe() {
         return !getStackInSlot(INPUT_SLOT_INDEX).isEmpty()
                 && getStackInSlot(OUTPUT_SLOT_INDEX).isEmpty()
-                && getEnergyStorage().getAmount() >= Config.Common.dnaExtractorEnergyPerTick.get();
+                && getEnergyStorage().getAmount() >= getEnergyRequirement();
     }
 
     @Override
@@ -58,7 +58,7 @@ public class DnaExtractorBlockEntity extends AbstractInventoryBlockEntity {
             }
             decrementSlot(INPUT_SLOT_INDEX, 1);
         }
-        extractEnergy(Config.Common.dnaExtractorEnergyPerTick.get());
+        extractEnergy(getEnergyRequirement());
         markDirty();
     }
 
@@ -74,5 +74,9 @@ public class DnaExtractorBlockEntity extends AbstractInventoryBlockEntity {
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
         return new DnaExtractorScreenHandler(syncId, inv, this, this, getPropertyDelegate());
+    }
+
+    private int getEnergyRequirement() {
+        return Config.Common.dnaExtractorEnergyPerTick.get() + (Config.Common.overclockEnergy.get() * getOverclock());
     }
 }

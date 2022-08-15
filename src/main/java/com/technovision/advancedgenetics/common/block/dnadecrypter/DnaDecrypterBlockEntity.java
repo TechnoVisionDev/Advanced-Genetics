@@ -41,7 +41,7 @@ public class DnaDecrypterBlockEntity extends AbstractInventoryBlockEntity {
         ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
         ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
         return !input.isEmpty() && input.hasNbt()
-                && getEnergyStorage().getAmount() >= Config.Common.dnaDecrypterEnergyPerTick.get()
+                && getEnergyStorage().getAmount() >= getEnergyRequirement()
                 && !input.getNbt().getBoolean("decoded")
                 && 1 + output.getCount() <= output.getMaxCount()
                 && (output.isEmpty() || output.getNbt().getString("gene").equals(input.getNbt().getString("gene")));
@@ -62,7 +62,7 @@ public class DnaDecrypterBlockEntity extends AbstractInventoryBlockEntity {
             }
             decrementSlot(INPUT_SLOT_INDEX, 1);
         }
-        extractEnergy(Config.Common.dnaDecrypterEnergyPerTick.get());
+        extractEnergy(getEnergyRequirement());
         markDirty();
     }
 
@@ -78,5 +78,9 @@ public class DnaDecrypterBlockEntity extends AbstractInventoryBlockEntity {
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
         return new DnaDecrypterScreenHandler(syncId, inv, this, this, getPropertyDelegate());
+    }
+
+    private int getEnergyRequirement() {
+        return Config.Common.dnaDecrypterEnergyPerTick.get() + (Config.Common.overclockEnergy.get() * getOverclock());
     }
 }
