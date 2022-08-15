@@ -1,7 +1,7 @@
 package com.technovision.advancedgenetics.client;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
-import com.technovision.advancedgenetics.common.item.GlassSyringeItem;
+import com.technovision.advancedgenetics.common.item.SyringeItem;
 import com.technovision.advancedgenetics.registry.ItemRegistry;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
@@ -17,7 +17,7 @@ public class ClientEvents {
             ModelPredicateProviderRegistry.register(
                     ItemRegistry.GLASS_SYRINGE,
                     new Identifier(AdvancedGenetics.MOD_ID, "filled"),
-                    (itemStack, clientWorld, livingEntity, num) -> GlassSyringeItem.isFilled(itemStack) ? 1 : 0
+                    (itemStack, clientWorld, livingEntity, num) -> SyringeItem.isFilled(itemStack) ? 1 : 0
             );
         });
     }

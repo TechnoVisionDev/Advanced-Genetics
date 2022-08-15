@@ -20,9 +20,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GlassSyringeItem extends Item {
+public class SyringeItem extends Item {
 
-    public GlassSyringeItem() {
+    public SyringeItem() {
         super(new FabricItemSettings().group(AdvancedGenetics.TAB).maxCount(1));
     }
 
@@ -75,5 +75,10 @@ public class GlassSyringeItem extends Item {
         final NbtCompound tag = stack.getOrCreateNbt();
         tag.putBoolean("filled", true);
         tag.putBoolean("purified", false);
+    }
+
+    public static void purify(ItemStack stack) {
+        final NbtCompound tag = stack.getOrCreateNbt();
+        tag.putBoolean("purified", true);
     }
 }

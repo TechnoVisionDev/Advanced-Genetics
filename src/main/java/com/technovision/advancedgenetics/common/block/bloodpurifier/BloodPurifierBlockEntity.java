@@ -2,8 +2,7 @@ package com.technovision.advancedgenetics.common.block.bloodpurifier;
 
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
-import com.technovision.advancedgenetics.common.block.plasmidinfuser.PlasmidInfuserScreenHandler;
-import com.technovision.advancedgenetics.common.item.PlasmidItem;
+import com.technovision.advancedgenetics.common.item.SyringeItem;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -41,10 +40,10 @@ public class BloodPurifierBlockEntity extends AbstractInventoryBlockEntity {
     public boolean canProcessRecipe() {
         ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
         ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
-        return !input.isEmpty() && !output.isEmpty() && input.hasNbt()
+        return !input.isEmpty() && output.isEmpty() && input.hasNbt()
                 && getEnergyStorage().getAmount() >= getEnergyRequirement()
-                && input.getNbt().getBoolean("decoded")
-                && PlasmidItem.canCombine(input, output);
+                && input.getNbt().getBoolean("filled")
+                && !input.getNbt().getBoolean("purified");
     }
 
     @Override
@@ -55,8 +54,9 @@ public class BloodPurifierBlockEntity extends AbstractInventoryBlockEntity {
             setProgress(0);
             ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
             if (ThreadLocalRandom.current().nextDouble() <= Config.Common.bloodPurifierSuccessRate.get()) {
-                ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
-                PlasmidItem.combine(input, output);
+                ItemStack output = input.copy();
+                SyringeItem.purify(output);
+                setOrIncrement(OUTPUT_SLOT_INDEX, output);
             }
             decrementSlot(INPUT_SLOT_INDEX, 1);
         }
