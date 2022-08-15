@@ -13,13 +13,10 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Random;
 
 import static com.technovision.advancedgenetics.api.genetics.GeneHandler.*;
 
 public class DnaItem extends Item {
-
-    private static Random rand = new Random();
 
     public DnaItem() {
         super(new FabricItemSettings().group(AdvancedGenetics.TAB));

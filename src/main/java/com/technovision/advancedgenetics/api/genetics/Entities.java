@@ -55,7 +55,7 @@ public enum Entities {
     public List<Genes> getGenes() { return genes; }
 
     public Genes getRandomGene() {
-        if (rand.nextDouble() <= Config.Common.basicGeneChance.get()) return Genes.BASIC;
+        if (genes.isEmpty() || rand.nextDouble() <= Config.Common.basicGeneChance.get()) return Genes.BASIC;
         int index = rand.nextInt(genes.size());
         return genes.get(index);
     }
