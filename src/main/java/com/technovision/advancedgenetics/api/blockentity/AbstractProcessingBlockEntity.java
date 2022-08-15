@@ -11,6 +11,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Nameable;
@@ -27,6 +28,7 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     private int overclock = 0;
     private final SimpleEnergyStorage energyStorage;
     private int maxProgress;
+    private final PropertyDelegate propertyDelegate;
 
     public AbstractProcessingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, long energyCapacity, int maxProgress) {
         super(type, pos, state);
@@ -39,6 +41,28 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
             }
         };
         this.maxProgress = maxProgress;
+        this.propertyDelegate = new PropertyDelegate() {
+            public int get(int index) {
+                return switch (index) {
+                    case 0 -> getProgress();
+                    case 1 -> getMaxProgress();
+                    case 2 -> (int) getEnergyStorage().getAmount();
+                    case 3 -> (int) getEnergyStorage().getCapacity();
+                    case 4 -> getOverclock();
+                    default -> 0;
+                };
+            }
+            public void set(int index, int value) {
+                switch (index) {
+                    case 0 -> setProgress(value);
+                    case 2 -> insertEnergy(value);
+                    case 4 -> setOverclock(value);
+                }
+            }
+            public int size() {
+                return 5;
+            }
+        };
     }
 
     @Override
@@ -163,5 +187,9 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
         int realMaxProgress = (maxProgress - (20 * getOverclock()));
         if (realMaxProgress < 0) realMaxProgress = 1;
         return realMaxProgress;
+    }
+
+    public PropertyDelegate getPropertyDelegate() {
+        return propertyDelegate;
     }
 }

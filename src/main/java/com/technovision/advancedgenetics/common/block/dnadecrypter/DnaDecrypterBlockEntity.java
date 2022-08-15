@@ -10,7 +10,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Recipe;
-import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -24,32 +23,8 @@ public class DnaDecrypterBlockEntity extends AbstractInventoryBlockEntity {
     public static final int INPUT_SLOT_INDEX = 0;
     public static final int OUTPUT_SLOT_INDEX = 1;
 
-    protected final PropertyDelegate propertyDelegate;
-
     public DnaDecrypterBlockEntity(BlockPos pos, BlockState state) {
         super(DefaultedList.ofSize(SLOT_COUNT, ItemStack.EMPTY), BlockEntityRegistry.DNA_DECRYPTER_BLOCK_ENTITY, pos, state, Config.Common.dnaDecrypterEnergyCapacity.get(), Config.Common.dnaDecrypterTicksPerOperation.get());
-        this.propertyDelegate = new PropertyDelegate() {
-            public int get(int index) {
-                return switch (index) {
-                    case 0 -> getProgress();
-                    case 1 -> getMaxProgress();
-                    case 2 -> (int) getEnergyStorage().getAmount();
-                    case 3 -> (int) getEnergyStorage().getCapacity();
-                    case 4 -> getOverclock();
-                    default -> 0;
-                };
-            }
-            public void set(int index, int value) {
-                switch (index) {
-                    case 0 -> setProgress(value);
-                    case 2 -> insertEnergy(value);
-                    case 4 -> setOverclock(value);
-                }
-            }
-            public int size() {
-                return 5;
-            }
-        };
     }
 
     @Override
@@ -95,6 +70,6 @@ public class DnaDecrypterBlockEntity extends AbstractInventoryBlockEntity {
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new DnaDecrypterScreenHandler(syncId, inv, this, this, propertyDelegate);
+        return new DnaDecrypterScreenHandler(syncId, inv, this, this, getPropertyDelegate());
     }
 }

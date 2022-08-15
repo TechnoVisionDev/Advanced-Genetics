@@ -8,6 +8,9 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+
+import javax.annotation.Nullable;
 
 public abstract class AbstractInventoryBlockEntity extends AbstractProcessingBlockEntity implements ImplementedInventory {
 
@@ -38,6 +41,16 @@ public abstract class AbstractInventoryBlockEntity extends AbstractProcessingBlo
     @Override
     public void dropContents() {
         ItemScatterer.spawn(world, pos, this);
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction side) {
+        return slot == 1;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction side) {
+        return slot == 0;
     }
 
     public ItemStack getStackInSlot(int slot) {
