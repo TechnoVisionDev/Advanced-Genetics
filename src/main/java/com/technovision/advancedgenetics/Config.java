@@ -16,13 +16,14 @@ public class Config {
 
     public static class Common {
 
-        private static final String categorySettings = "settings";
+        private static final String categoryGeneralSettings = "general_settings";
         private static final String categoryCellAnalyzer = "cell_analyzer";
         private static final String categoryDnaExtractor = "dna_extractor";
         private static final String categoryDnaDecrypter = "dna_decrypter";
         private static final String categoryPlasmidInfuser = "plasmid_infuser";
 
         public static ForgeConfigSpec.DoubleValue basicGeneChance;
+        public static ForgeConfigSpec.IntValue overclockSpeed;
         public static ForgeConfigSpec.IntValue overclockEnergy;
 
         public static ForgeConfigSpec.IntValue cellAnalyzerEnergyCapacity;
@@ -52,11 +53,15 @@ public class Config {
         public Common(ForgeConfigSpec.Builder builder) {
 
             // General Settings
-            builder.comment("Settings").push(categorySettings);
+            builder.comment("General Settings").push(categoryGeneralSettings);
             basicGeneChance = builder
                     .comment("Percent chance to receive a basic gene upon DNA decryption.",
                             "Default: 50% chance")
                     .defineInRange("basicGeneChance", 0.50, 0.00, 1.00);
+            overclockSpeed = builder
+                    .comment("The number of seconds that an overclock item speeds up a machine.",
+                            "Default: 2 seconds faster")
+                    .defineInRange("overclockSpeed", 2, 0, Integer.MAX_VALUE);
             overclockEnergy = builder
                     .comment("The amount of energy per tick that an overclock item uses.",
                             "Default: 5 E/t")
@@ -75,12 +80,12 @@ public class Config {
                     .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
             cellAnalyzerTicksPerOperation = builder
                     .comment("Ticks per operation when using the Cell Analyzer.",
-                            "Default: 200 ticks")
-                    .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
+                            "Default: 400 ticks")
+                    .defineInRange("ticksPerOperation", 400, 20, Integer.MAX_VALUE);
             cellAnalyzerMaxOverclock = builder
                     .comment("The max amount of overclock items that can be used on the Cell Analyzer.",
-                            "Default: 8x overclock")
-                    .defineInRange("maxOverclock", 8, 0, Integer.MAX_VALUE);
+                            "Default: 10x overclock")
+                    .defineInRange("maxOverclock", 10, 0, Integer.MAX_VALUE);
             cellAnalyzerSuccessRate = builder
                     .comment("Percent chance for the Cell Analyzer to successfully create a cell.",
                             "Default: 100% success rate")
@@ -100,11 +105,11 @@ public class Config {
             dnaExtractorTicksPerOperation = builder
                     .comment("Ticks per operation when using the DNA Extractor.",
                             "Default: 200 ticks")
-                    .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
+                    .defineInRange("ticksPerOperation", 200, 20, Integer.MAX_VALUE);
             dnaExtractorMaxOverclock = builder
                     .comment("The max amount of overclock items that can be used on the DNA Extractor.",
-                            "Default: 8x overclock")
-                    .defineInRange("maxOverclock", 8, 0, Integer.MAX_VALUE);
+                            "Default: 5x overclock")
+                    .defineInRange("maxOverclock", 5, 0, Integer.MAX_VALUE);
             dnaExtractorSuccessRate = builder
                     .comment("Percent chance for the DNA Extractor to successfully extract a DNA helix.",
                             "Default: 100% success rate")
@@ -124,11 +129,11 @@ public class Config {
             dnaDecrypterTicksPerOperation = builder
                     .comment("Ticks per operation when using the DNA Decrypter.",
                             "Default: 200 ticks")
-                    .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
+                    .defineInRange("ticksPerOperation", 200, 20, Integer.MAX_VALUE);
             dnaDecrypterMaxOverclock = builder
                     .comment("The max amount of overclock items that can be used on the DNA Decrypter.",
-                            "Default: 8x overclock")
-                    .defineInRange("maxOverclock", 8, 0, Integer.MAX_VALUE);
+                            "Default: 5x overclock")
+                    .defineInRange("maxOverclock", 5, 0, Integer.MAX_VALUE);
             dnaDecrypterSuccessRate = builder
                     .comment("Percent chance for the DNA Decrypter to successfully decode a DNA helix.",
                             "Default: 100% success rate")
@@ -148,11 +153,11 @@ public class Config {
             plasmidInfuserTicksPerOperation = builder
                     .comment("Ticks per operation when using the Plasmid Infuser.",
                             "Default: 200 ticks")
-                    .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
+                    .defineInRange("ticksPerOperation", 400, 20, Integer.MAX_VALUE);
             plasmidInfuserMaxOverclock = builder
                     .comment("The max amount of overclock items that can be used on the Plasmid Infuser.",
-                            "Default: 8x overclock")
-                    .defineInRange("maxOverclock", 8, 0, Integer.MAX_VALUE);
+                            "Default: 10x overclock")
+                    .defineInRange("maxOverclock", 10, 0, Integer.MAX_VALUE);
             plasmidInfuserSuccessRate = builder
                     .comment("Percent chance for the Plasmid Infuser to successfully decode a DNA helix.",
                             "Default: 100% success rate")

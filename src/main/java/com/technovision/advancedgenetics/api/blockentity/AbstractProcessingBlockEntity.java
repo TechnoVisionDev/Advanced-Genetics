@@ -1,6 +1,7 @@
 package com.technovision.advancedgenetics.api.blockentity;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
+import com.technovision.advancedgenetics.Config;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
@@ -188,8 +189,9 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     }
 
     public int getMaxProgress() {
-        int realMaxProgress = (maxProgress - (20 * getOverclock()));
-        if (realMaxProgress < 0) realMaxProgress = 1;
+        int base = 20 * Config.Common.overclockSpeed.get();
+        int realMaxProgress = (maxProgress - (base * getOverclock()));
+        if (realMaxProgress < 20) realMaxProgress = 20;
         return realMaxProgress;
     }
 
