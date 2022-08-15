@@ -1,6 +1,7 @@
 package com.technovision.advancedgenetics.common.item;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
+import com.technovision.advancedgenetics.api.genetics.Genes;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -10,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -31,6 +33,14 @@ public class SyringeItem extends Item {
         if (!stack.hasNbt() || !isFilled(stack)) return;
         if (!isPurified(stack)) {
             tooltip.add(Text.literal("Contaminated").formatted(Formatting.GRAY));
+        }
+        NbtCompound tag = stack.getOrCreateNbt();
+        if (tag.contains("genes")) {
+            NbtCompound genesTag = tag.getCompound("genes");
+            for (String key : genesTag.getKeys()) {
+                Genes gene = Genes.valueOf(genesTag.getString(key));
+                tooltip.add(Text.literal(gene.getName()).setStyle(Style.EMPTY.withColor(gene.getColor())));
+            }
         }
     }
 
@@ -80,5 +90,14 @@ public class SyringeItem extends Item {
     public static void purify(ItemStack stack) {
         final NbtCompound tag = stack.getOrCreateNbt();
         tag.putBoolean("purified", true);
+    }
+
+    public static void addGene(ItemStack plasmid, ItemStack syringe) {
+        String gene = plasmid.getNbt().getString("gene");
+        final NbtCompound syringeTag = syringe.getOrCreateNbt();
+        NbtCompound genes = syringeTag.getCompound("genes");
+        genes.putString(gene, gene);
+        syringeTag.put("genes", genes);
+        syringeTag.putBoolean("purified", false);
     }
 }

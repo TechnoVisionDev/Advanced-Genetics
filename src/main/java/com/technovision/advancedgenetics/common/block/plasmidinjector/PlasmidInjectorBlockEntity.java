@@ -2,8 +2,8 @@ package com.technovision.advancedgenetics.common.block.plasmidinjector;
 
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
-import com.technovision.advancedgenetics.common.block.plasmidinfuser.PlasmidInfuserScreenHandler;
 import com.technovision.advancedgenetics.common.item.PlasmidItem;
+import com.technovision.advancedgenetics.common.item.SyringeItem;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -41,10 +41,11 @@ public class PlasmidInjectorBlockEntity extends AbstractInventoryBlockEntity {
     public boolean canProcessRecipe() {
         ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
         ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
-        return !input.isEmpty() && !output.isEmpty() && input.hasNbt()
+        return !input.isEmpty() && !output.isEmpty() && input.hasNbt() && output.hasNbt()
                 && getEnergyStorage().getAmount() >= getEnergyRequirement()
-                && input.getNbt().getBoolean("decoded")
-                && PlasmidItem.canCombine(input, output);
+                && input.getNbt().getInt("count") >= PlasmidItem.MAX_GENES
+                && output.getNbt().getBoolean("filled")
+                && output.getNbt().getBoolean("purified");
     }
 
     @Override
@@ -56,7 +57,7 @@ public class PlasmidInjectorBlockEntity extends AbstractInventoryBlockEntity {
             ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
             if (ThreadLocalRandom.current().nextDouble() <= Config.Common.plasmidInjectorSuccessRate.get()) {
                 ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
-                PlasmidItem.combine(input, output);
+                SyringeItem.addGene(input, output);
             }
             decrementSlot(INPUT_SLOT_INDEX, 1);
         }
