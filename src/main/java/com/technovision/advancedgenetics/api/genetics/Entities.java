@@ -1,5 +1,6 @@
 package com.technovision.advancedgenetics.api.genetics;
 
+import com.technovision.advancedgenetics.Config;
 import net.minecraft.entity.EntityType;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import static com.technovision.advancedgenetics.api.genetics.Genes.*;
 
 public enum Entities {
     COW("cow", EntityType.COW, "443626", List.of(MILKY)),
-    PIG("pig", EntityType.PIG, "f19e98", List.of()),
+    PIG("pig", EntityType.PIG, "f19e98", List.of(MEATY)),
     CHICKEN("chicken", EntityType.CHICKEN, "e2e2e2", List.of()),
     SHEEP("sheep", EntityType.SHEEP, "dedede", List.of()),
     SQUID("squid", EntityType.SQUID, "546d80", List.of()),
@@ -54,8 +55,8 @@ public enum Entities {
     public List<Genes> getGenes() { return genes; }
 
     public Genes getRandomGene() {
-        int index = rand.nextInt(genes.size()+1);
-        if (index == genes.size()) return Genes.BASIC;
+        if (rand.nextDouble() <= Config.Common.basicGeneChance.get()) return Genes.BASIC;
+        int index = rand.nextInt(genes.size());
         return genes.get(index);
     }
 

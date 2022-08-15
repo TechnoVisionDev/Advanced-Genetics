@@ -16,8 +16,11 @@ public class Config {
 
     public static class Common {
 
+        private static final String categorySettings = "settings";
         private static final String categoryCellAnalyzer = "cell_analyzer";
         private static final String categoryDnaExtractor = "dna_extractor";
+
+        public static ForgeConfigSpec.DoubleValue basicGeneChance;
 
         public static ForgeConfigSpec.IntValue cellAnalyzerEnergyCapacity;
         public static ForgeConfigSpec.IntValue cellAnalyzerEnergyPerTick;
@@ -30,6 +33,13 @@ public class Config {
         public static ForgeConfigSpec.DoubleValue dnaExtractorSuccessRate;
 
         public Common(ForgeConfigSpec.Builder builder) {
+
+            builder.comment("Settings").push(categorySettings);
+            basicGeneChance = builder
+                    .comment("Percent chance to receive a basic gene upon DNA decryption.",
+                            "Default: 50% chance")
+                    .defineInRange("basicGeneChance", 0.50, 0.00, 1.00);
+            builder.pop();
 
             builder.comment("Cell Analyzer").push(categoryCellAnalyzer);
             cellAnalyzerEnergyCapacity = builder
