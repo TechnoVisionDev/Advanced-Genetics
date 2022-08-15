@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "SHS",
+    "iii"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "minecraft:sticky_piston"
+    },
+    "H": {
+      "tag": "advancedgenetics:cells"
+    }
+  },
+  "result": {
+    "item": "advancedgenetics:dna_extractor"
+  }
+}

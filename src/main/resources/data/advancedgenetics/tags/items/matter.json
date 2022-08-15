@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "advancedgenetics:cow_matter",
+    "advancedgenetics:pig_matter",
+    "advancedgenetics:chicken_matter",
+    "advancedgenetics:sheep_matter",
+    "advancedgenetics:squid_matter",
+    "advancedgenetics:horse_matter",
+    "advancedgenetics:mooshroom_matter",
+    "advancedgenetics:spider_matter",
+    "advancedgenetics:cave_spider_matter",
+    "advancedgenetics:creeper_matter",
+    "advancedgenetics:zombie_matter",
+    "advancedgenetics:drowned_matter",
+    "advancedgenetics:husk_matter",
+    "advancedgenetics:skeleton_matter",
+    "advancedgenetics:wither_skeleton_matter",
+    "advancedgenetics:stray_matter"
+  ]
+}
