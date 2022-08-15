@@ -3,9 +3,7 @@ package com.technovision.advancedgenetics.common.block.dnadecrypter;
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
 import com.technovision.advancedgenetics.api.genetics.GeneHandler;
-import com.technovision.advancedgenetics.common.block.dnaextractor.DnaExtractorScreenHandler;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
-import com.technovision.advancedgenetics.registry.ItemRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -59,9 +57,13 @@ public class DnaDecrypterBlockEntity extends AbstractInventoryBlockEntity {
 
     @Override
     public boolean canProcessRecipe() {
-        return !getStackInSlot(INPUT_SLOT_INDEX).isEmpty()
-                && getStackInSlot(OUTPUT_SLOT_INDEX).isEmpty()
-                && getEnergyStorage().getAmount() >= Config.Common.dnaDecrypterEnergyPerTick.get();
+        ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
+        ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
+        return !input.isEmpty() && input.hasNbt()
+                && getEnergyStorage().getAmount() >= Config.Common.dnaDecrypterEnergyPerTick.get()
+                && !input.getNbt().getBoolean("decoded")
+                && 1 + output.getCount() <= output.getMaxCount()
+                && (output.isEmpty() || output.getNbt().getString("gene").equals(input.getNbt().getString("gene")));
     }
 
     @Override
@@ -72,8 +74,8 @@ public class DnaDecrypterBlockEntity extends AbstractInventoryBlockEntity {
             setProgress(0);
             ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
             if (ThreadLocalRandom.current().nextDouble() <= Config.Common.dnaDecrypterSuccessRate.get()) {
-                ItemStack output = new ItemStack(ItemRegistry.DNA_HELIX);
-                GeneHandler.setGene(input, output);
+                ItemStack output = input.copy();
+                GeneHandler.decode(output);
                 setOrIncrement(OUTPUT_SLOT_INDEX, output);
             }
             decrementSlot(INPUT_SLOT_INDEX, 1);
