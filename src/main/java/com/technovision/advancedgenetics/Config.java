@@ -22,6 +22,7 @@ public class Config {
         private static final String categoryDnaDecrypter = "dna_decrypter";
         private static final String categoryPlasmidInfuser = "plasmid_infuser";
         private static final String categoryBloodPurifier = "blood_purifier";
+        private static final String categoryPlasmidInjector = "plasmid_injector";
 
         public static ForgeConfigSpec.DoubleValue basicGeneChance;
         public static ForgeConfigSpec.IntValue plasmidRequiredGenes;
@@ -58,6 +59,12 @@ public class Config {
         public static ForgeConfigSpec.IntValue bloodPurifierMaxOverclock;
         public static ForgeConfigSpec.DoubleValue bloodPurifierSuccessRate;
 
+        public static ForgeConfigSpec.IntValue plasmidInjectorEnergyCapacity;
+        public static ForgeConfigSpec.IntValue plasmidInjectorEnergyPerTick;
+        public static ForgeConfigSpec.IntValue plasmidInjectorTicksPerOperation;
+        public static ForgeConfigSpec.IntValue plasmidInjectorMaxOverclock;
+        public static ForgeConfigSpec.DoubleValue plasmidInjectorSuccessRate;
+
         public Common(ForgeConfigSpec.Builder builder) {
 
             // General Settings
@@ -87,7 +94,7 @@ public class Config {
                             "Default: 20,000 (20k E)")
                     .defineInRange("energyCapacity", 20000, 0, Integer.MAX_VALUE);
             cellAnalyzerEnergyPerTick = builder
-                    .comment("Energy consumed per tick when Cell Analyzer is processing.",
+                    .comment("Energy consumed per tick when the Cell Analyzer is processing.",
                             "Default: 20 E")
                     .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
             cellAnalyzerTicksPerOperation = builder
@@ -111,7 +118,7 @@ public class Config {
                             "Default: 20,000 (20k E)")
                     .defineInRange("energyCapacity", 20000, 0, Integer.MAX_VALUE);
             dnaExtractorEnergyPerTick = builder
-                    .comment("Energy consumed per tick when DNA Extractor is processing.",
+                    .comment("Energy consumed per tick when the DNA Extractor is processing.",
                             "Default: 20 E")
                     .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
             dnaExtractorTicksPerOperation = builder
@@ -135,7 +142,7 @@ public class Config {
                             "Default: 20,000 (20k E)")
                     .defineInRange("energyCapacity", 20000, 0, Integer.MAX_VALUE);
             dnaDecrypterEnergyPerTick = builder
-                    .comment("Energy consumed per tick when DNA Decrypter is processing.",
+                    .comment("Energy consumed per tick when the DNA Decrypter is processing.",
                             "Default: 20 E")
                     .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
             dnaDecrypterTicksPerOperation = builder
@@ -159,7 +166,7 @@ public class Config {
                             "Default: 20,000 (20k E)")
                     .defineInRange("energyCapacity", 20000, 0, Integer.MAX_VALUE);
             plasmidInfuserEnergyPerTick = builder
-                    .comment("Energy consumed per tick when Plasmid Infuser is processing.",
+                    .comment("Energy consumed per tick when the Plasmid Infuser is processing.",
                             "Default: 20 E")
                     .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
             plasmidInfuserTicksPerOperation = builder
@@ -183,7 +190,7 @@ public class Config {
                             "Default: 20,000 (20k E)")
                     .defineInRange("energyCapacity", 20000, 0, Integer.MAX_VALUE);
             bloodPurifierEnergyPerTick = builder
-                    .comment("Energy consumed per tick when Blood Purifier is processing.",
+                    .comment("Energy consumed per tick when the Blood Purifier is processing.",
                             "Default: 20 E")
                     .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
             bloodPurifierTicksPerOperation = builder
@@ -196,6 +203,30 @@ public class Config {
                     .defineInRange("maxOverclock", 5, 0, Integer.MAX_VALUE);
             bloodPurifierSuccessRate = builder
                     .comment("Percent chance for the Blood Purifier to successfully purify blood.",
+                            "Default: 100% success rate")
+                    .defineInRange("successRate", 1.00, 0.00, 1.00);
+            builder.pop();
+
+            // Plasmid Injector
+            builder.comment("Plasmid Injector").push(categoryPlasmidInjector);
+            plasmidInjectorEnergyCapacity = builder
+                    .comment("Maximum energy capacity for the Plasmid Injector.",
+                            "Default: 20,000 (20k E)")
+                    .defineInRange("energyCapacity", 20000, 0, Integer.MAX_VALUE);
+            plasmidInjectorEnergyPerTick = builder
+                    .comment("Energy consumed per tick when the Plasmid Injector is processing.",
+                            "Default: 20 E")
+                    .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
+            plasmidInjectorTicksPerOperation = builder
+                    .comment("Ticks per operation when using the Plasmid Injector.",
+                            "Default: 400 ticks")
+                    .defineInRange("ticksPerOperation", 400, 20, Integer.MAX_VALUE);
+            plasmidInjectorMaxOverclock = builder
+                    .comment("The max amount of overclock items that can be used on the Plasmid Injector.",
+                            "Default: 10x overclock")
+                    .defineInRange("maxOverclock", 10, 0, Integer.MAX_VALUE);
+            plasmidInjectorSuccessRate = builder
+                    .comment("Percent chance for the Plasmid Injector to successfully inject a tplasmid into the syringe.",
                             "Default: 100% success rate")
                     .defineInRange("successRate", 1.00, 0.00, 1.00);
             builder.pop();

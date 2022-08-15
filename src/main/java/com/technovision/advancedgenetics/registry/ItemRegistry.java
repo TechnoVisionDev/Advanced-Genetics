@@ -34,6 +34,7 @@ public class ItemRegistry {
     public static final BlockItem DNA_DECRYPTER = new BlockItem(BlockRegistry.DNA_DECRYPTER, ITEM_SETTINGS);
     public static final BlockItem PLASMID_INFUSER = new BlockItem(BlockRegistry.PLASMID_INFUSER, ITEM_SETTINGS);
     public static final BlockItem BLOOD_PURIFIER = new BlockItem(BlockRegistry.BLOOD_PURIFIER, ITEM_SETTINGS);
+    public static final BlockItem PLASMID_INJECTOR = new BlockItem(BlockRegistry.PLASMID_INJECTOR, ITEM_SETTINGS);
 
     // Other Items
     public static final DnaItem DNA_HELIX = new DnaItem();
@@ -47,6 +48,7 @@ public class ItemRegistry {
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "dna_decrypter"), DNA_DECRYPTER);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "plasmid_infuser"), PLASMID_INFUSER);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "blood_purifier"), BLOOD_PURIFIER);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "plasmid_injector"), PLASMID_INJECTOR);
 
         // Tools
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "metal_scalpel"), METAL_SCALPEL);
