@@ -2,6 +2,7 @@ package com.technovision.advancedgenetics.common.item;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.api.genetics.Genes;
+import com.technovision.advancedgenetics.components.AdvancedGeneticsComponents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -22,6 +23,7 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SyringeItem extends Item {
@@ -68,7 +70,7 @@ public class SyringeItem extends Item {
         } else if (tag.getBoolean("purified") && tag.contains("genes")) {
             // Inject genes into bloodstream
             if (!user.getWorld().isClient()) {
-                inject(user.getMainHandStack());
+                inject((PlayerEntity) user, user.getMainHandStack());
                 user.damage(DamageSource.GENERIC, 1.0f);
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 20*10));
             }
@@ -84,6 +86,16 @@ public class SyringeItem extends Item {
     @Override
     public int getMaxUseTime(ItemStack stack) {
         return 32;
+    }
+
+    private static List<Genes> getGenes(ItemStack stack) {
+        List<Genes> genes = new ArrayList<>();
+        NbtCompound genesTag = stack.getOrCreateNbt().getCompound("genes");
+        for (String geneName : genesTag.getKeys()) {
+            Genes gene = Genes.valueOf(geneName);
+            genes.add(gene);
+        }
+        return genes;
     }
 
     public static boolean isFilled(ItemStack stack) {
@@ -116,7 +128,12 @@ public class SyringeItem extends Item {
         syringeTag.putBoolean("purified", false);
     }
 
-    public static void inject(ItemStack stack) {
+    public static void inject(PlayerEntity user, ItemStack stack) {
+        // Add genes to user
+        List<Genes> genes = getGenes(stack);
+        user.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).addGenes(genes);
+
+        // Reset syringe data
         final NbtCompound tag = stack.getOrCreateNbt();
         tag.remove("filled");
         tag.remove("purified");

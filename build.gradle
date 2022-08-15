@@ -19,6 +19,10 @@ repositories {
 		name = 'Curse Maven'
 		url = 'https://cursemaven.com'
 	}
+	maven {
+		name = 'Ladysnake Mods'
+		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+	}
 }
 
 dependencies {
@@ -41,6 +45,10 @@ dependencies {
 	include modImplementation("curse.maven:forgeconfigapiport-547434:3904745") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
+
+	// Cardinal Components API
+	include modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.0.1")
+	include modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.0.1")
 }
 
 processResources {

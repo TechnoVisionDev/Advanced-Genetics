@@ -24,10 +24,18 @@
     ],
     "client": [
       "com.technovision.advancedgenetics.AdvancedGeneticsClient"
+    ],
+    "cardinal-components": [
+      "com.technovision.advancedgenetics.components.AdvancedGeneticsComponents"
     ]
   },
   "mixins": [
   ],
+  "custom": {
+    "cardinal-components": [
+      "advancedgenetics:player_genetics"
+    ]
+  },
 
   "depends": {
     "fabricloader": ">=0.14.6",
