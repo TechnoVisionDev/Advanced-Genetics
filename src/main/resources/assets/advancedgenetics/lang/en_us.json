@@ -43,5 +43,5 @@
   "advancedgenetics.container.cell_analyzer_block_entity": "Cell Analyzer",
   "advancedgenetics.container.dna_extractor_block_entity": "DNA Extractor",
   "tooltip.advancedgenetics.energy_requirement": "Requires %d E/t",
-  "tooltip.advancedgenetics.dna.default": "Encrypted"
+  "tooltip.advancedgenetics.dna.encrypted": "Encrypted"
 }

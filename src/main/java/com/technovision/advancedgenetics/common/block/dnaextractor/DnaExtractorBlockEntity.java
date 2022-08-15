@@ -2,8 +2,9 @@ package com.technovision.advancedgenetics.common.block.dnaextractor;
 
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
-import com.technovision.advancedgenetics.common.recipe.dnaextractor.DnaExtractorRecipe;
+import com.technovision.advancedgenetics.api.genetics.GeneHandler;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
+import com.technovision.advancedgenetics.registry.ItemRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -24,7 +25,6 @@ public class DnaExtractorBlockEntity extends AbstractInventoryBlockEntity {
     public static final int INPUT_SLOT_INDEX = 0;
     public static final int OUTPUT_SLOT_INDEX = 1;
 
-    private DnaExtractorRecipe recipe;
     protected final PropertyDelegate propertyDelegate;
 
     public DnaExtractorBlockEntity(BlockPos pos, BlockState state) {
@@ -54,30 +54,13 @@ public class DnaExtractorBlockEntity extends AbstractInventoryBlockEntity {
     }
 
     @Override
-    public void updateRecipe() {
-        if (world == null || world.isClient()) return;
-        if (!getStackInSlot(INPUT_SLOT_INDEX).isEmpty()) {
-             world.getRecipeManager().getAllMatches(DnaExtractorRecipe.Type.INSTANCE, new SimpleInventory(1), world)
-                    .stream()
-                    .filter(recipe -> ItemStack.canCombine(getStackInSlot(0), recipe.getInput()))
-                    .findFirst()
-                    .ifPresent(recipe -> {
-                        this.recipe = recipe;
-                    });
-        }
-    }
+    public void updateRecipe() { }
 
     @Override
     public boolean canProcessRecipe() {
-        if (recipe != null) {
-            ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
-            ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
-            return getEnergyStorage().getAmount() >= Config.Common.dnaExtractorEnergyPerTick.get()
-                    && (ItemStack.canCombine(input, recipe.getInput()) && input.getCount() >= recipe.getInput().getCount())
-                    && (recipe.getOutput().getCount() + output.getCount()) <= recipe.getOutput().getMaxCount()
-                    && (ItemStack.canCombine(output, recipe.getOutput()) || output.isEmpty());
-        }
-        return false;
+        return !getStackInSlot(INPUT_SLOT_INDEX).isEmpty()
+                && getStackInSlot(OUTPUT_SLOT_INDEX).isEmpty()
+                && getEnergyStorage().getAmount() >= Config.Common.dnaExtractorEnergyPerTick.get();
     }
 
     @Override
@@ -86,23 +69,24 @@ public class DnaExtractorBlockEntity extends AbstractInventoryBlockEntity {
             incrementProgress();
         } else {
             setProgress(0);
-            decrementSlot(INPUT_SLOT_INDEX, recipe.getInput().getCount());
+            ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
             if (ThreadLocalRandom.current().nextDouble() <= Config.Common.dnaExtractorSuccessRate.get()) {
-                setOrIncrement(OUTPUT_SLOT_INDEX, recipe.getOutput().copy());
+                ItemStack output = new ItemStack(ItemRegistry.DNA_HELIX);
+                GeneHandler.setGene(input, output);
+                setOrIncrement(OUTPUT_SLOT_INDEX, output);
             }
+            decrementSlot(INPUT_SLOT_INDEX, 1);
         }
         extractEnergy(Config.Common.dnaExtractorEnergyPerTick.get());
         markDirty();
     }
 
     @Override
-    public <T extends Recipe<SimpleInventory>> void setRecipe(@Nullable T recipe) {
-        this.recipe = (DnaExtractorRecipe) recipe;
-    }
+    public <T extends Recipe<SimpleInventory>> void setRecipe(@Nullable T recipe) { }
 
     @Override
     public Recipe<SimpleInventory> getRecipe() {
-        return recipe;
+        return null;
     }
 
     @Nullable
