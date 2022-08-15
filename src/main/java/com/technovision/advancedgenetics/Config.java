@@ -20,6 +20,7 @@ public class Config {
         private static final String categoryCellAnalyzer = "cell_analyzer";
         private static final String categoryDnaExtractor = "dna_extractor";
         private static final String categoryDnaDecrypter = "dna_decrypter";
+        private static final String categoryPlasmidInfuser = "plasmid_infuser";
 
         public static ForgeConfigSpec.DoubleValue basicGeneChance;
         public static ForgeConfigSpec.IntValue overclockEnergy;
@@ -41,6 +42,12 @@ public class Config {
         public static ForgeConfigSpec.IntValue dnaDecrypterTicksPerOperation;
         public static ForgeConfigSpec.IntValue dnaDecrypterMaxOverclock;
         public static ForgeConfigSpec.DoubleValue dnaDecrypterSuccessRate;
+
+        public static ForgeConfigSpec.IntValue plasmidInfuserEnergyCapacity;
+        public static ForgeConfigSpec.IntValue plasmidInfuserEnergyPerTick;
+        public static ForgeConfigSpec.IntValue plasmidInfuserTicksPerOperation;
+        public static ForgeConfigSpec.IntValue plasmidInfuserMaxOverclock;
+        public static ForgeConfigSpec.DoubleValue plasmidInfuserSuccessRate;
 
         public Common(ForgeConfigSpec.Builder builder) {
 
@@ -124,6 +131,30 @@ public class Config {
                     .defineInRange("maxOverclock", 8, 0, Integer.MAX_VALUE);
             dnaDecrypterSuccessRate = builder
                     .comment("Percent chance for the DNA Decrypter to successfully decode a DNA helix.",
+                            "Default: 100% success rate")
+                    .defineInRange("successRate", 1.00, 0.00, 1.00);
+            builder.pop();
+
+            // Plasmid Infuser
+            builder.comment("Plasmid Infuser").push(categoryPlasmidInfuser);
+            plasmidInfuserEnergyCapacity = builder
+                    .comment("Maximum energy capacity for the Plasmid Infuser.",
+                            "Default: 20,000 (20k E)")
+                    .defineInRange("energyCapacity", 20000, 0, Integer.MAX_VALUE);
+            plasmidInfuserEnergyPerTick = builder
+                    .comment("Energy consumed per tick when Plasmid Infuser is processing.",
+                            "Default: 20 E")
+                    .defineInRange("energyPerTick", 20, 0, Integer.MAX_VALUE);
+            plasmidInfuserTicksPerOperation = builder
+                    .comment("Ticks per operation when using the Plasmid Infuser.",
+                            "Default: 200 ticks")
+                    .defineInRange("ticksPerOperation", 200, 1, Integer.MAX_VALUE);
+            plasmidInfuserMaxOverclock = builder
+                    .comment("The max amount of overclock items that can be used on the Plasmid Infuser.",
+                            "Default: 8x overclock")
+                    .defineInRange("maxOverclock", 8, 0, Integer.MAX_VALUE);
+            plasmidInfuserSuccessRate = builder
+                    .comment("Percent chance for the Plasmid Infuser to successfully decode a DNA helix.",
                             "Default: 100% success rate")
                     .defineInRange("successRate", 1.00, 0.00, 1.00);
             builder.pop();

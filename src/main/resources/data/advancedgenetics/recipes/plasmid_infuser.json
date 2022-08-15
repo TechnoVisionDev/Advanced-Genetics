@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "zzz",
+    "yxy",
+    "zaz"
+  ],
+  "key": {
+    "z": {
+      "item": "minecraft:iron_ingot"
+    },
+    "y": {
+      "item": "advancedgenetics:plasmid"
+    },
+    "x": {
+      "item": "minecraft:piston"
+    },
+    "a": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "advancedgenetics:plasmid_infuser"
+  }
+}

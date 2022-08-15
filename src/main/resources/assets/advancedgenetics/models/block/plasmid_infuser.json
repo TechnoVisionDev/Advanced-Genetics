@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "advancedgenetics:blocks/plasmid_infuser_front",
+    "down": "advancedgenetics:blocks/machine_bottom",
+    "up": "advancedgenetics:blocks/machine_top",
+    "east": "advancedgenetics:blocks/machine_side",
+    "west": "advancedgenetics:blocks/machine_side",
+    "north": "advancedgenetics:blocks/plasmid_infuser_front",
+    "south": "advancedgenetics:blocks/machine_side"
+  }
+}
