@@ -55,14 +55,48 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
 
         // Potion effect genes
         if (totalSeconds % 4 == 0) {
-            if (hasGene(Genes.RESISTANCE)) {
-                player.setStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20*6, 1, false, false, false), player);
-            }
+            applyPotionEffects();
         }
 
         // Lay egg gene (every 5 min)
         if (totalSeconds % 300 == 0) {
             player.dropStack(new ItemStack(Items.EGG));
+        }
+    }
+
+    private void applyPotionEffects() {
+        if (hasGene(Genes.RESISTANCE)) {
+            player.setStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20*6, 0, false, false, false), player);
+        }
+        if (hasGene(Genes.HASTE)) {
+            player.setStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 20*6, 0, false, false, false), player);
+        }
+        if (hasGene(Genes.SPEED)) {
+            player.setStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20*6, 0, false, false, false), player);
+        }
+        if (hasGene(Genes.REGENERATION)) {
+            player.setStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 20*6, 0, false, false, false), player);
+        }
+        if (hasGene(Genes.STRENGTH)) {
+            player.setStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 20*6, 0, false, false, false), player);
+        }
+        if (hasGene(Genes.FIREPROOF)) {
+            player.setStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 20*6, 0, false, false, false), player);
+        }
+        if (hasGene(Genes.NIGHT_VISION)) {
+            player.setStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20*6, 0, false, false, false), player);
+        }
+        if (hasGene(Genes.JUMP_BOOST)) {
+            player.setStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 20*6, 0, false, false, false), player);
+        }
+        if (hasGene(Genes.WATER_BREATHING)) {
+            player.setStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 20*6, 0, false, false, false), player);
+        }
+        if (hasGene(Genes.INVISIBILITY)) {
+            player.setStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 20*6, 0, false, false, false), player);
+        }
+        if (hasGene(Genes.LUCK)) {
+            player.setStatusEffect(new StatusEffectInstance(StatusEffects.LUCK, 20*6, 0, false, false, false), player);
         }
     }
 
