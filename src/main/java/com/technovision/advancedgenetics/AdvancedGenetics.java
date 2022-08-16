@@ -1,10 +1,16 @@
 package com.technovision.advancedgenetics;
 
 import com.technovision.advancedgenetics.client.ClientEvents;
+import com.technovision.advancedgenetics.commands.AddGeneCommand;
+import com.technovision.advancedgenetics.commands.GeneArgumentType;
+import com.technovision.advancedgenetics.commands.RemoveGeneCommand;
 import com.technovision.advancedgenetics.events.GeneticsEvents;
 import com.technovision.advancedgenetics.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -35,5 +41,10 @@ public class AdvancedGenetics implements ModInitializer {
 
         // Register events
         GeneticsEvents.registerEvents();
+
+        // Register commands
+        ArgumentTypeRegistry.registerArgumentType(new Identifier(MOD_ID, "gene"), GeneArgumentType.class, ConstantArgumentSerializer.of(GeneArgumentType::gene));
+        CommandRegistrationCallback.EVENT.register(AddGeneCommand::register);
+        CommandRegistrationCallback.EVENT.register(RemoveGeneCommand::register);
     }
 }
