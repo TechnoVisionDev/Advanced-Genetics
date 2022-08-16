@@ -26,7 +26,7 @@
       "com.technovision.advancedgenetics.AdvancedGeneticsClient"
     ],
     "cardinal-components": [
-      "com.technovision.advancedgenetics.components.AdvancedGeneticsComponents"
+      "com.technovision.advancedgenetics.registry.ComponentRegistry"
     ]
   },
   "mixins": [

@@ -1,7 +1,7 @@
 package com.technovision.advancedgenetics.events;
 
 import com.technovision.advancedgenetics.api.genetics.Genes;
-import com.technovision.advancedgenetics.components.AdvancedGeneticsComponents;
+import com.technovision.advancedgenetics.registry.ComponentRegistry;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -12,9 +12,9 @@ import net.minecraft.server.network.ServerPlayerEntity;
  */
 public class DamageReceivedEvent {
 
-    private ServerPlayerEntity player;
-    private DamageSource source;
-    private float amount;
+    private final ServerPlayerEntity player;
+    private final DamageSource source;
+    private final float amount;
 
     public DamageReceivedEvent(ServerPlayerEntity player, DamageSource source, float amount) {
         this.player = player;
@@ -43,7 +43,7 @@ public class DamageReceivedEvent {
     public static boolean onDamageReceivedEvent(DamageReceivedEvent event) {
         // Handles No Fall Damage gene
         ServerPlayerEntity player = event.getPlayer();
-        if (event.getSource().isFromFalling() && player.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).containsGene(Genes.NO_FALL_DAMAGE)) {
+        if (event.getSource().isFromFalling() && player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.NO_FALL_DAMAGE)) {
             return true;
         }
         return false;

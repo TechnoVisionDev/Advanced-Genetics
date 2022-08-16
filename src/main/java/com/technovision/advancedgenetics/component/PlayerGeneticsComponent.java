@@ -1,7 +1,9 @@
-package com.technovision.advancedgenetics.components;
+package com.technovision.advancedgenetics.component;
 
-import com.technovision.advancedgenetics.api.components.EntityGeneticsComponent;
+import com.technovision.advancedgenetics.api.component.EntityGeneticsComponent;
 import com.technovision.advancedgenetics.api.genetics.Genes;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -51,6 +53,13 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
         tickCounter = 0;
         if (totalSeconds == Long.MAX_VALUE) totalSeconds = 0;
 
+        // Potion effect genes
+        if (totalSeconds % 2 == 0) {
+            if (hasGene(Genes.RESISTANCE)) {
+                player.setStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20*5, 1, false, false, false), player);
+            }
+        }
+
         // Lay egg gene (every 5 min)
         if (totalSeconds % 300 == 0) {
             player.dropStack(new ItemStack(Items.EGG));
@@ -73,7 +82,7 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
     }
 
     @Override
-    public boolean containsGene(Genes gene) {
+    public boolean hasGene(Genes gene) {
         return genes.containsKey(gene.toString());
     }
 

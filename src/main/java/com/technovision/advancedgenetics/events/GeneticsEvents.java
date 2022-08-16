@@ -1,7 +1,7 @@
 package com.technovision.advancedgenetics.events;
 
 import com.technovision.advancedgenetics.api.genetics.Genes;
-import com.technovision.advancedgenetics.components.AdvancedGeneticsComponents;
+import com.technovision.advancedgenetics.registry.ComponentRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
@@ -27,7 +27,7 @@ public class GeneticsEvents {
                 if (world.isClient() || !player.getMainHandStack().isEmpty()) return ActionResult.PASS;
                 BlockPos pos = hitResult.getBlockPos();
                 if (world.getBlockState(pos).getBlock() != Blocks.GRASS_BLOCK) return ActionResult.PASS;
-                if (!player.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).containsGene(Genes.EAT_GRASS)) return ActionResult.PASS;
+                if (!player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.EAT_GRASS)) return ActionResult.PASS;
                 if (player.getHungerManager().isNotFull()) {
                     player.getHungerManager().add(1, 0.0f);
                     world.setBlockState(pos, Blocks.DIRT.getDefaultState());
@@ -42,16 +42,16 @@ public class GeneticsEvents {
                     if (entity instanceof PlayerEntity clickedPlayer) {
                         // Milk player
                         ItemStack stack = player.getMainHandStack();
-                        if (stack.getItem() == Items.BUCKET && clickedPlayer.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).containsGene(Genes.MILKY)) {
+                        if (stack.getItem() == Items.BUCKET && clickedPlayer.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.MILKY)) {
                             player.setStackInHand(Hand.MAIN_HAND, new ItemStack(Items.MILK_BUCKET));
                         }
                         // Shear porkchops off player
-                        if (stack.getItem() == Items.SHEARS && clickedPlayer.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).containsGene(Genes.MEATY)) {
+                        if (stack.getItem() == Items.SHEARS && clickedPlayer.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.MEATY)) {
                             clickedPlayer.dropStack(new ItemStack(Items.PORKCHOP));
                             player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
                         }
                         // Shear wool off player
-                        if (stack.getItem() == Items.SHEARS && clickedPlayer.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).containsGene(Genes.WOOLY)) {
+                        if (stack.getItem() == Items.SHEARS && clickedPlayer.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.WOOLY)) {
                             clickedPlayer.dropStack(new ItemStack(Items.WHITE_WOOL));
                             player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
                         }
@@ -63,7 +63,7 @@ public class GeneticsEvents {
         // Handles "Explosive Exit" gene
         ServerPlayerEvents.ALLOW_DEATH.register((player, damageSource, damageAmount) -> {
             if (player.getInventory().count(Items.GUNPOWDER) >= 5) {
-                if (player.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).containsGene(Genes.EXPLOSIVE_EXIT)) {
+                if (player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.EXPLOSIVE_EXIT)) {
                     player.getWorld().createExplosion(player, player.getX(), player.getY(), player.getZ(), 3.0f, Explosion.DestructionType.BREAK);
                 }
             }

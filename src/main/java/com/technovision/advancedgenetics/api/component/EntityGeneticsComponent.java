@@ -1,4 +1,4 @@
-package com.technovision.advancedgenetics.api.components;
+package com.technovision.advancedgenetics.api.component;
 
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import dev.onyxstudios.cca.api.v3.component.Component;
@@ -15,7 +15,7 @@ public interface EntityGeneticsComponent extends Component, ServerTickingCompone
 
     Map<String, Genes> getGenesMap();
 
-    boolean containsGene(Genes gene);
+    boolean hasGene(Genes gene);
 
     void addGene(Genes gene);
 

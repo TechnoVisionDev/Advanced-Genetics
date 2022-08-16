@@ -2,7 +2,7 @@ package com.technovision.advancedgenetics.common.item;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.api.genetics.Genes;
-import com.technovision.advancedgenetics.components.AdvancedGeneticsComponents;
+import com.technovision.advancedgenetics.registry.ComponentRegistry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -131,7 +131,7 @@ public class SyringeItem extends Item {
     public static void inject(PlayerEntity user, ItemStack stack) {
         // Add genes to user
         List<Genes> genes = getGenes(stack);
-        user.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).addGenes(genes);
+        user.getComponent(ComponentRegistry.PLAYER_GENETICS).addGenes(genes);
 
         // Reset syringe data
         final NbtCompound tag = stack.getOrCreateNbt();

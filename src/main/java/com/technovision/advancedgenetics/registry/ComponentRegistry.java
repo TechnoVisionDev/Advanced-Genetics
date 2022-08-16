@@ -1,17 +1,17 @@
-package com.technovision.advancedgenetics.components;
+package com.technovision.advancedgenetics.registry;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
+import com.technovision.advancedgenetics.component.PlayerGeneticsComponent;
 import dev.onyxstudios.cca.api.v3.component.ComponentKey;
-import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import net.minecraft.util.Identifier;
 
-public class AdvancedGeneticsComponents implements EntityComponentInitializer {
+public class ComponentRegistry implements EntityComponentInitializer {
 
     public static final ComponentKey<PlayerGeneticsComponent> PLAYER_GENETICS =
-            ComponentRegistry.getOrCreate(new Identifier(AdvancedGenetics.MOD_ID, "player_genetics"), PlayerGeneticsComponent.class);
+            dev.onyxstudios.cca.api.v3.component.ComponentRegistry.getOrCreate(new Identifier(AdvancedGenetics.MOD_ID, "player_genetics"), PlayerGeneticsComponent.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {

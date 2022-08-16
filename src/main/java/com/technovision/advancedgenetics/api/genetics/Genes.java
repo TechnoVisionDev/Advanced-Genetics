@@ -6,13 +6,14 @@ import net.minecraft.util.Formatting;
 
 public enum Genes {
     BASIC("Basic Gene", "9707bf0fd3", Formatting.GRAY),
-    MILKY("Milky", "3b107", Formatting.GRAY),
-    MEATY("Meaty", "f8c6d", "f7adba"),
-    WOOLY("Wooly", "a7ae3", Formatting.GRAY),
     EAT_GRASS("Eat Grass", "73f73be68", "59ba56"),
+    EXPLOSIVE_EXIT("Explosive Exit", "fdcdf662a4360f", Formatting.RED),
     LAY_EGG("Lay Egg", "cb03a78", Formatting.YELLOW),
+    MEATY("Meaty", "f8c6d", "f7adba"),
+    MILKY("Milky", "3b107", Formatting.GRAY),
     NO_FALL_DAMAGE("No Fall Damage", "71b2af23b460e1", Formatting.BLUE),
-    EXPLOSIVE_EXIT("Explosive Exit", "fdcdf662a4360f", Formatting.RED);
+    RESISTANCE("Resistance", "c35070bce1", Formatting.LIGHT_PURPLE),
+    WOOLY("Wooly", "a7ae3", Formatting.GRAY);
 
     private final String name;
     private final String encryptedName;
