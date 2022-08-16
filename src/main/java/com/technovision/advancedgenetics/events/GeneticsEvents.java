@@ -4,9 +4,13 @@ import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.component.PlayerGeneticsComponent;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -14,6 +18,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.explosion.Explosion;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Handles genes that trigger on rick clicking an item or block.
@@ -74,6 +80,21 @@ public class GeneticsEvents {
                 player.dropStack(new ItemStack(Items.EMERALD));
             }
             return true;
+        });
+
+        // Handles "Wither Hit" gene
+        AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+            if (player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.WITHER_HIT)) {
+                // Apply wither affect for 1-5 seconds
+                if (entity instanceof LivingEntity livingEntity) {
+                    if (!livingEntity.hasStatusEffect(StatusEffects.WITHER)) {
+                        int seconds = ThreadLocalRandom.current().nextInt(5) + 1;
+                        livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 20*seconds, 0));
+                        return ActionResult.SUCCESS;
+                    }
+                }
+            }
+            return ActionResult.PASS;
         });
     }
 }

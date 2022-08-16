@@ -23,7 +23,7 @@ public enum Entities {
     DROWNED("drowned", EntityType.DROWNED, "4d9280", List.of(RESISTANCE, WATER_BREATHING)),
     HUSK("husk", EntityType.HUSK, "7a6849", List.of(RESISTANCE)),
     SKELETON("skeleton", EntityType.SKELETON, "bcbcbc", List.of()),
-    WITHER_SKELETON("wither_skeleton", EntityType.WITHER_SKELETON, "343434", List.of(WITHER_RESISTANCE)),
+    WITHER_SKELETON("wither_skeleton", EntityType.WITHER_SKELETON, "343434", List.of(WITHER_HIT)),
     STRAY("stray", EntityType.STRAY, "9caeac", List.of());
 
     private static final Random rand = new Random();
