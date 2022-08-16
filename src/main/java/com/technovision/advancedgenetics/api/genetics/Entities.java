@@ -11,7 +11,7 @@ import static com.technovision.advancedgenetics.api.genetics.Genes.*;
 public enum Entities {
     COW("cow", EntityType.COW, "443626", List.of(MILKY, EAT_GRASS)),
     PIG("pig", EntityType.PIG, "f19e98", List.of(MEATY)),
-    CHICKEN("chicken", EntityType.CHICKEN, "e2e2e2", List.of(LAY_EGG)),
+    CHICKEN("chicken", EntityType.CHICKEN, "e2e2e2", List.of(LAY_EGG, NO_FALL_DAMAGE)),
     SHEEP("sheep", EntityType.SHEEP, "dedede", List.of(EAT_GRASS, WOOLY)),
     SQUID("squid", EntityType.SQUID, "546d80", List.of()),
     HORSE("horse", EntityType.HORSE, "b98968", List.of()),

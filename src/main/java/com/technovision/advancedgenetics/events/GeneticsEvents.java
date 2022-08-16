@@ -2,6 +2,7 @@ package com.technovision.advancedgenetics.events;
 
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.components.AdvancedGeneticsComponents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.block.Blocks;
@@ -11,13 +12,14 @@ import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.explosion.Explosion;
 
 /**
  * Handles genes that trigger on rick clicking an item or block.
  *
  * @author TechnoVision
  */
-public class RightClickEvents {
+public class GeneticsEvents {
 
     public static void registerEvents() {
         // Handles the "Eat Grass" gene
@@ -57,5 +59,15 @@ public class RightClickEvents {
                     return ActionResult.SUCCESS;
                 }
         );
+
+        // Handles "Explosive Exit" gene
+        ServerPlayerEvents.ALLOW_DEATH.register((player, damageSource, damageAmount) -> {
+            if (player.getInventory().count(Items.GUNPOWDER) >= 5) {
+                if (player.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).containsGene(Genes.EXPLOSIVE_EXIT)) {
+                    player.getWorld().createExplosion(player, player.getX(), player.getY(), player.getZ(), 3.0f, Explosion.DestructionType.BREAK);
+                }
+            }
+            return true;
+        });
     }
 }

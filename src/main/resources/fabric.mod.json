@@ -30,6 +30,7 @@
     ]
   },
   "mixins": [
+    "advancedgenetics.mixins.json"
   ],
   "custom": {
     "cardinal-components": [

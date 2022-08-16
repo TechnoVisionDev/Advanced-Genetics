@@ -11,6 +11,7 @@ public enum Genes {
     WOOLY("Wooly", "a7ae3", Formatting.GRAY),
     EAT_GRASS("Eat Grass", "73f73be68", "59ba56"),
     LAY_EGG("Lay Egg", "cb03a78", Formatting.YELLOW),
+    NO_FALL_DAMAGE("No Fall Damage", "71b2af23b460e1", Formatting.BLUE),
     EXPLOSIVE_EXIT("Explosive Exit", "fdcdf662a4360f", Formatting.RED);
 
     private final String name;
