@@ -6,9 +6,9 @@ import net.minecraft.util.Formatting;
 
 public enum Genes {
     BASIC("Basic Gene", "9707bf0fd3", Formatting.GRAY),
-    MILKY("Milky", "3b107", "d1d1cf"),
+    MILKY("Milky", "3b107", Formatting.GRAY),
     MEATY("Meaty", "f8c6d", "f7adba"),
-    EAT_GRASS("Eat Grass", "73f73be68", Formatting.GREEN);
+    EAT_GRASS("Eat Grass", "73f73be68", "59ba56");
 
     private final String name;
     private final String encryptedName;

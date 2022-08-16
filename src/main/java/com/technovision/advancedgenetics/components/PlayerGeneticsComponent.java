@@ -51,11 +51,8 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
     }
 
     @Override
-    public Genes getGeneByName(String name) {
-        for (Genes gene : Genes.values()) {
-            if (gene.getName().equals(name)) return gene;
-        }
-        return null;
+    public boolean containsGene(Genes gene) {
+        return genes.containsKey(gene.toString());
     }
 
     @Override

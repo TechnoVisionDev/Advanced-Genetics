@@ -15,7 +15,7 @@ public interface EntityGeneticsComponent extends Component, ServerTickingCompone
 
     Map<String, Genes> getGenesMap();
 
-    Genes getGeneByName(String name);
+    boolean containsGene(Genes gene);
 
     void addGene(Genes gene);
 
