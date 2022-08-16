@@ -24,6 +24,7 @@ public enum Genes {
     SPEED("Speed", "c372f"),
     STRENGTH("Strength", "63ee3a1b"),
     WATER_BREATHING("Water Breathing", "4fa023594764255"),
+    WITHER_RESISTANCE("Wither Resistance", "15e26cc9132777ca"),
     WOOLY("Wooly", "a7ae3");
 
     private final String name;

@@ -57,6 +57,11 @@ public class DamageReceivedEvent {
             player.removeStatusEffect(StatusEffects.POISON);
             return true;
         }
+        // Handles "Wither Resistance" gene
+        if (player.hasStatusEffect(StatusEffects.WITHER) && component.hasGene(Genes.WITHER_RESISTANCE)) {
+            player.removeStatusEffect(StatusEffects.WITHER);
+            return true;
+        }
         return false;
     }
 }
