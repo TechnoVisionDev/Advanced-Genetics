@@ -6,6 +6,7 @@ import net.minecraft.nbt.NbtCompound;
 public enum Genes {
     BASIC("Basic Gene", "9707bf0fd3"),
     EAT_GRASS("Eat Grass", "73f73be68"),
+    EMERALD_HEART("Emerald Heart", "85f608e331505"),
     EXPLOSIVE_EXIT("Explosive Exit", "fdcdf662a4360f"),
     FIREPROOF("Fireproof", "c821b0866"),
     HASTE("Haste", "de3b4"),
