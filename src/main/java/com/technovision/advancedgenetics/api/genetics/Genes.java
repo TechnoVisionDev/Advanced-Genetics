@@ -17,6 +17,7 @@ public enum Genes {
     MILKY("Milky", "3b107"),
     NIGHT_VISION("Night Vision", "4cbe4ae9154d"),
     NO_FALL_DAMAGE("No Fall Damage", "71b2af23b460e1"),
+    POISON_IMMUNITY("Poison Immunity", "0be142668a3eeca"),
     REGENERATION("Regeneration", "35de2da49504"),
     RESISTANCE("Resistance", "c35070bce1"),
     SPEED("Speed", "c372f"),
