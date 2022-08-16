@@ -55,6 +55,7 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
 
         // Potion effect genes
         if (totalSeconds % 4 == 0) {
+            checkFoodStatus();
             applyPotionEffects();
         }
 
@@ -64,6 +65,9 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
         }
     }
 
+    /**
+     * Apply permanent potion effects based on active genes.
+     */
     private void applyPotionEffects() {
         if (hasGene(Genes.RESISTANCE)) {
             player.setStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20*6, 0, false, false, false), player);
@@ -97,6 +101,17 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
         }
         if (hasGene(Genes.LUCK)) {
             player.setStatusEffect(new StatusEffectInstance(StatusEffects.LUCK, 20*6, 0, false, false, false), player);
+        }
+    }
+
+    /**
+     * Checks if a user is at half hunger and uses the
+     * "no-hunger" gene to prevent further loss.
+     */
+    private void checkFoodStatus() {
+        if (player.getHungerManager().getFoodLevel() > 10) return;
+        if (hasGene(Genes.NO_HUNGER)) {
+            player.getHungerManager().add(1, 0.0f);
         }
     }
 
@@ -135,20 +150,5 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
     @Override
     public void removeGene(Genes gene) {
         genes.remove(gene.toString());
-    }
-
-    /**
-     * Checks if a user is at half hunger and seeks to use a poppet to remedy.
-     *
-     * @param player the player being inspected.
-     */
-    private static void checkFoodStatus(PlayerEntity player) {
-        if (player.getHungerManager().getFoodLevel() > 10) return;
-        /**
-        final Poppet hungerPoppet = PoppetUtil.getPlayerPoppet(player, HUNGER_PROTECTION);
-        if (hungerPoppet == null) return;
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 60 * 20, 1));
-        usePoppet(hungerPoppet, 1);
-         */
     }
 }
