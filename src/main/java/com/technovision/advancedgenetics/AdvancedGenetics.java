@@ -2,6 +2,7 @@ package com.technovision.advancedgenetics;
 
 import com.technovision.advancedgenetics.client.ClientEvents;
 import com.technovision.advancedgenetics.commands.AddGeneCommand;
+import com.technovision.advancedgenetics.commands.ClearGeneCommand;
 import com.technovision.advancedgenetics.commands.GeneArgumentType;
 import com.technovision.advancedgenetics.commands.RemoveGeneCommand;
 import com.technovision.advancedgenetics.events.GeneticsEvents;
@@ -46,5 +47,6 @@ public class AdvancedGenetics implements ModInitializer {
         ArgumentTypeRegistry.registerArgumentType(new Identifier(MOD_ID, "gene"), GeneArgumentType.class, ConstantArgumentSerializer.of(GeneArgumentType::gene));
         CommandRegistrationCallback.EVENT.register(AddGeneCommand::register);
         CommandRegistrationCallback.EVENT.register(RemoveGeneCommand::register);
+        CommandRegistrationCallback.EVENT.register(ClearGeneCommand::register);
     }
 }

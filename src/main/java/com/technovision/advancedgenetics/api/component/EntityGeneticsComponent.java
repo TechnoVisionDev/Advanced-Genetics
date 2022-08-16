@@ -22,4 +22,6 @@ public interface EntityGeneticsComponent extends Component, ServerTickingCompone
     void addGenes(List<Genes> genes);
 
     void removeGene(Genes gene);
+
+    void removeAllGenes();
 }

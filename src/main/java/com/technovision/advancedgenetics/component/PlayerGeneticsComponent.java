@@ -151,4 +151,9 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
     public void removeGene(Genes gene) {
         genes.remove(gene.toString());
     }
+
+    @Override
+    public void removeAllGenes() {
+        genes.clear();
+    }
 }
