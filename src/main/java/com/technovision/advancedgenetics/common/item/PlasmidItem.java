@@ -34,7 +34,7 @@ public class PlasmidItem extends Item {
             if (count < MAX_GENES) {
                 text += " " + count + "/" + MAX_GENES;
             }
-            tooltip.add(Text.literal(text).setStyle(Style.EMPTY.withColor(gene.getColor())));
+            tooltip.add(Text.literal(text).formatted(Formatting.GRAY));
         }
     }
 

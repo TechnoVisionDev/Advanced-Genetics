@@ -54,9 +54,9 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
         if (totalSeconds == Long.MAX_VALUE) totalSeconds = 0;
 
         // Potion effect genes
-        if (totalSeconds % 2 == 0) {
+        if (totalSeconds % 4 == 0) {
             if (hasGene(Genes.RESISTANCE)) {
-                player.setStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20*5, 1, false, false, false), player);
+                player.setStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20*6, 1, false, false, false), player);
             }
         }
 

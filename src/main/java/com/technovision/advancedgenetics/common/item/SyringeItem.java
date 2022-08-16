@@ -43,7 +43,7 @@ public class SyringeItem extends Item {
             NbtCompound genesTag = tag.getCompound("genes");
             for (String key : genesTag.getKeys()) {
                 Genes gene = Genes.valueOf(genesTag.getString(key));
-                tooltip.add(Text.literal(gene.getName()).setStyle(Style.EMPTY.withColor(gene.getColor())));
+                tooltip.add(Text.literal(gene.getName()).formatted(Formatting.GRAY));
             }
         }
     }
