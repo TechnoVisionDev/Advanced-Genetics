@@ -3,6 +3,8 @@ package com.technovision.advancedgenetics.components;
 import com.technovision.advancedgenetics.api.components.EntityGeneticsComponent;
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 
 import java.util.HashMap;
@@ -14,10 +16,12 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
     private final Map<String, Genes> genes = new HashMap<>();
     private final PlayerEntity player;
     private int tickCounter;
+    private long totalSeconds;
 
     public PlayerGeneticsComponent(PlayerEntity player) {
         this.player = player;
         this.tickCounter = 0;
+        this.totalSeconds = 0;
     }
 
     @Override
@@ -40,11 +44,17 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
 
     @Override
     public void serverTick() {
+        // Handler timers
         tickCounter++;
         if (tickCounter < 20) return;
+        totalSeconds++;
         tickCounter = 0;
+        if (totalSeconds == Long.MAX_VALUE) totalSeconds = 0;
 
-
+        // Lay egg gene (every 5 min)
+        if (totalSeconds % 300 == 0) {
+            player.dropStack(new ItemStack(Items.EGG));
+        }
     }
 
     @Override
