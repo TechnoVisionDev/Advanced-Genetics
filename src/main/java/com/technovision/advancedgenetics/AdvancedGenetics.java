@@ -1,6 +1,7 @@
 package com.technovision.advancedgenetics;
 
 import com.technovision.advancedgenetics.client.ClientEvents;
+import com.technovision.advancedgenetics.events.PlayerEvents;
 import com.technovision.advancedgenetics.events.RightClickEvents;
 import com.technovision.advancedgenetics.registry.*;
 import net.fabricmc.api.ModInitializer;
@@ -35,5 +36,6 @@ public class AdvancedGenetics implements ModInitializer {
 
         // Register events
         RightClickEvents.registerEvents();
+        PlayerEvents.registerEvents();
     }
 }

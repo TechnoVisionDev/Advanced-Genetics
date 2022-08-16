@@ -10,7 +10,8 @@ public enum Genes {
     MEATY("Meaty", "f8c6d", "f7adba"),
     WOOLY("Wooly", "a7ae3", Formatting.GRAY),
     EAT_GRASS("Eat Grass", "73f73be68", "59ba56"),
-    LAY_EGG("Lay Egg", "cb03a78", Formatting.YELLOW);
+    LAY_EGG("Lay Egg", "cb03a78", Formatting.YELLOW),
+    EXPLOSIVE_EXIT("Explosive Exit", "fdcdf662a4360f", Formatting.RED);
 
     private final String name;
     private final String encryptedName;

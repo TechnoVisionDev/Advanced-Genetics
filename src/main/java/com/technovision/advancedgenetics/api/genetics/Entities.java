@@ -18,7 +18,8 @@ public enum Entities {
     MOOSHROOM("mooshroom", EntityType.MOOSHROOM, "a81012", List.of()),
     SPIDER("spider", EntityType.SPIDER, "4f453c", List.of()),
     CAVE_SPIDER("cave_spider", EntityType.CAVE_SPIDER, "546870", List.of()),
-    CREEPER("creeper", EntityType.CREEPER, "65d152", List.of()),
+    CREEPER("creeper", EntityType.CREEPER, "65d152", List.of(EXPLOSIVE_EXIT
+    )),
     ZOMBIE("zombie", EntityType.ZOMBIE, "3e692d", List.of()),
     DROWNED("drowned", EntityType.DROWNED, "4d9280", List.of()),
     HUSK("husk", EntityType.HUSK, "7a6849", List.of()),

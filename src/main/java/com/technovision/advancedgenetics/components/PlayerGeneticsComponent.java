@@ -93,4 +93,19 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
     public void removeGene(Genes gene) {
         genes.remove(gene.toString());
     }
+
+    /**
+     * Checks if a user is at half hunger and seeks to use a poppet to remedy.
+     *
+     * @param player the player being inspected.
+     */
+    private static void checkFoodStatus(PlayerEntity player) {
+        if (player.getHungerManager().getFoodLevel() > 10) return;
+        /**
+        final Poppet hungerPoppet = PoppetUtil.getPlayerPoppet(player, HUNGER_PROTECTION);
+        if (hungerPoppet == null) return;
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 60 * 20, 1));
+        usePoppet(hungerPoppet, 1);
+         */
+    }
 }
