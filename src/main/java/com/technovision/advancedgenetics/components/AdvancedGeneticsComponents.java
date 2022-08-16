@@ -16,6 +16,6 @@ public class AdvancedGeneticsComponents implements EntityComponentInitializer {
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
         // Add the component to every PlayerEntity instance, and copy it on respawn
-        registry.registerForPlayers(PLAYER_GENETICS, player -> new PlayerGeneticsComponent(), RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(PLAYER_GENETICS, PlayerGeneticsComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
 }

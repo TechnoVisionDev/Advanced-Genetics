@@ -8,6 +8,7 @@ public enum Genes {
     BASIC("Basic Gene", "9707bf0fd3", Formatting.GRAY),
     MILKY("Milky", "3b107", Formatting.GRAY),
     MEATY("Meaty", "f8c6d", "f7adba"),
+    WOOLY("Wooly", "a7ae3", Formatting.GRAY),
     EAT_GRASS("Eat Grass", "73f73be68", "59ba56");
 
     private final String name;

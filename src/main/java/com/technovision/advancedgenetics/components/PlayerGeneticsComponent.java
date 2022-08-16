@@ -2,6 +2,7 @@ package com.technovision.advancedgenetics.components;
 
 import com.technovision.advancedgenetics.api.components.EntityGeneticsComponent;
 import com.technovision.advancedgenetics.api.genetics.Genes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 
 import java.util.HashMap;
@@ -11,6 +12,13 @@ import java.util.Map;
 public class PlayerGeneticsComponent implements EntityGeneticsComponent {
 
     private final Map<String, Genes> genes = new HashMap<>();
+    private final PlayerEntity player;
+    private int tickCounter;
+
+    public PlayerGeneticsComponent(PlayerEntity player) {
+        this.player = player;
+        this.tickCounter = 0;
+    }
 
     @Override
     public void readFromNbt(NbtCompound tag) {
@@ -32,7 +40,11 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
 
     @Override
     public void serverTick() {
-        // TODO: Implement
+        tickCounter++;
+        if (tickCounter < 20) return;
+        tickCounter = 0;
+
+
     }
 
     @Override

@@ -48,8 +48,13 @@ public class RightClickEvents {
                             player.setStackInHand(Hand.MAIN_HAND, new ItemStack(Items.MILK_BUCKET));
                         }
                         // Shear porkchops off player
-                        else if (stack.getItem() == Items.SHEARS && clickedPlayer.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).containsGene(Genes.MEATY)) {
+                        if (stack.getItem() == Items.SHEARS && clickedPlayer.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).containsGene(Genes.MEATY)) {
                             clickedPlayer.dropStack(new ItemStack(Items.PORKCHOP));
+                            player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
+                        }
+                        // Shear wool off player
+                        if (stack.getItem() == Items.SHEARS && clickedPlayer.getComponent(AdvancedGeneticsComponents.PLAYER_GENETICS).containsGene(Genes.WOOLY)) {
+                            clickedPlayer.dropStack(new ItemStack(Items.WHITE_WOOL));
                             player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
                         }
                     }
