@@ -7,16 +7,22 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.explosion.Explosion;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -95,6 +101,22 @@ public class GeneticsEvents {
                 }
             }
             return ActionResult.PASS;
+        });
+
+        // Handles "Shoot Fireball" gene
+        UseItemCallback.EVENT.register((player, world, hand) -> {
+            if (!player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.SHOOT_FIREBALLS)) {
+                // Shoots a fire charge if holding blaze rod
+                if (player.getMainHandStack().getItem() == Items.BLAZE_ROD) {
+                    // TODO: FIX THIS VECTOR!
+                    Vec3d v3 = player.getCameraPosVec(0);
+                    FireballEntity fireballEntity = new FireballEntity(world, player, v3.getX(), v3.getY(), v3.getZ(), 1);
+                    world.spawnEntity(fireballEntity);
+                    player.playSound(SoundEvents.ITEM_FIRECHARGE_USE, 1.0f, 1.0f);
+                    return TypedActionResult.success(player.getMainHandStack());
+                }
+            }
+            return TypedActionResult.pass(player.getMainHandStack());
         });
     }
 }

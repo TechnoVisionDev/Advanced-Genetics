@@ -23,6 +23,7 @@ public enum Genes {
     REGENERATION("Regeneration", "35de2da49504"),
     RESISTANCE("Resistance", "c35070bce1"),
     SPEED("Speed", "c372f"),
+    SHOOT_FIREBALLS("Shoot Fireballs", "a3d39362dbd6dd0"),
     STRENGTH("Strength", "63ee3a1b"),
     WATER_BREATHING("Water Breathing", "4fa023594764255"),
     WITHER_RESISTANCE("Wither Resistance", "15e26cc9132777ca"),
