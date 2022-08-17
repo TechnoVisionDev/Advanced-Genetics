@@ -46,6 +46,7 @@
   "block.advancedgenetics.plasmid_infuser": "Plasmid Infuser",
   "block.advancedgenetics.blood_purifier": "Blood Purifier",
   "block.advancedgenetics.plasmid_injector": "Plasmid Injector",
+  "block.advancedgenetics.anti_field_block": "Anti-Field Block",
   "advancedgenetics.container.cell_analyzer_block_entity": "Cell Analyzer",
   "advancedgenetics.container.dna_extractor_block_entity": "DNA Extractor",
   "advancedgenetics.container.dna_decrypter_block_entity": "DNA Decrypter",

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "advancedgenetics:block/anti_field_block"
+    }
+  }
+}

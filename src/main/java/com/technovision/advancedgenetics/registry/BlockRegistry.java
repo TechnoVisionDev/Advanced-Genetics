@@ -7,6 +7,10 @@ import com.technovision.advancedgenetics.common.block.dnadecrypter.DnaDecrypterB
 import com.technovision.advancedgenetics.common.block.dnaextractor.DnaExtractorBlock;
 import com.technovision.advancedgenetics.common.block.plasmidinfuser.PlasmidInfuserBlock;
 import com.technovision.advancedgenetics.common.block.plasmidinjector.PlasmidInjectorBlock;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.Block;
+import net.minecraft.block.Material;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -18,6 +22,7 @@ public class BlockRegistry {
     public static final PlasmidInfuserBlock PLASMID_INFUSER = new PlasmidInfuserBlock();
     public static final BloodPurifierBlock BLOOD_PURIFIER = new BloodPurifierBlock();
     public static final PlasmidInjectorBlock PLASMID_INJECTOR = new PlasmidInjectorBlock();
+    public static final Block ANTI_FIELD_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.METAL));
 
     public static void registerBlocks() {
         Registry.register(Registry.BLOCK, new Identifier(AdvancedGenetics.MOD_ID, "cell_analyzer"), CELL_ANALYZER);
@@ -26,5 +31,6 @@ public class BlockRegistry {
         Registry.register(Registry.BLOCK, new Identifier(AdvancedGenetics.MOD_ID, "plasmid_infuser"), PLASMID_INFUSER);
         Registry.register(Registry.BLOCK, new Identifier(AdvancedGenetics.MOD_ID, "blood_purifier"), BLOOD_PURIFIER);
         Registry.register(Registry.BLOCK, new Identifier(AdvancedGenetics.MOD_ID, "plasmid_injector"), PLASMID_INJECTOR);
+        Registry.register(Registry.BLOCK, new Identifier(AdvancedGenetics.MOD_ID, "anti_field_block"), ANTI_FIELD_BLOCK);
     }
 }
