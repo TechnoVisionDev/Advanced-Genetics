@@ -12,6 +12,7 @@ public enum Genes {
     HASTE("Haste", "de3b4"),
     INVISIBILITY("Invisibility", "d53895c6eb78"),
     JUMP_BOOST("Jump Boost", "25f03ac91f"),
+    KEEP_INVENTORY("Keep Inventory", "a2bb0c29020dc3"),
     LAY_EGG("Lay Egg", "cb03a78"),
     LUCK("Luck", "382e"),
     MEATY("Meaty", "f8c6d"),

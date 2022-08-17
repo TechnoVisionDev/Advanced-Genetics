@@ -16,6 +16,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -117,6 +118,14 @@ public class GeneticsEvents {
                 }
             }
             return TypedActionResult.pass(player.getMainHandStack());
+        });
+
+        // Handles "Keep Inventory" gene
+        ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
+            if (newPlayer.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.KEEP_INVENTORY)) {
+                System.out.println("2");
+                newPlayer.getInventory().clone(oldPlayer.getInventory());
+            }
         });
     }
 }
