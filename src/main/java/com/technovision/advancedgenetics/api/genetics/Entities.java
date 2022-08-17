@@ -9,22 +9,31 @@ import java.util.Random;
 import static com.technovision.advancedgenetics.api.genetics.Genes.*;
 
 public enum Entities {
+    BLAZE("blaze", EntityType.BLAZE, "ffd528", List.of(FIREPROOF, SHOOT_FIREBALLS)),
+    CAT("cat", EntityType.CAT, "747474", List.of(SPEED)),
     COW("cow", EntityType.COW, "443626", List.of(MILKY, EAT_GRASS)),
-    PIG("pig", EntityType.PIG, "f19e98", List.of(MEATY)),
     CHICKEN("chicken", EntityType.CHICKEN, "e2e2e2", List.of(LAY_EGG, NO_FALL_DAMAGE)),
-    SHEEP("sheep", EntityType.SHEEP, "dedede", List.of(EAT_GRASS, WOOLY)),
-    SQUID("squid", EntityType.SQUID, "546d80", List.of(WATER_BREATHING)),
-    HORSE("horse", EntityType.HORSE, "b98968", List.of(JUMP_BOOST)),
-    MOOSHROOM("mooshroom", EntityType.MOOSHROOM, "a81012", List.of(MILKY, EAT_GRASS)),
-    SPIDER("spider", EntityType.SPIDER, "4f453c", List.of(NIGHT_VISION)),
     CAVE_SPIDER("cave_spider", EntityType.CAVE_SPIDER, "546870", List.of(NIGHT_VISION, POISON_IMMUNITY)),
     CREEPER("creeper", EntityType.CREEPER, "65d152", List.of(EXPLOSIVE_EXIT)),
-    ZOMBIE("zombie", EntityType.ZOMBIE, "3e692d", List.of(RESISTANCE)),
     DROWNED("drowned", EntityType.DROWNED, "4d9280", List.of(RESISTANCE, WATER_BREATHING)),
+    ENDERMAN("enderman", EntityType.ENDERMAN, "e079fa", List.of()),
+    HORSE("horse", EntityType.HORSE, "946734", List.of(JUMP_BOOST)),
     HUSK("husk", EntityType.HUSK, "7a6849", List.of(RESISTANCE)),
+    IRON_GOLEM("iron_golem", EntityType.IRON_GOLEM, "e2dbd6", List.of(REGENERATION, RESISTANCE)),
+    MAGMA_CUBE("magma_cube", EntityType.MAGMA_CUBE, "d3550e", List.of(FIREPROOF)),
+    MOOSHROOM("mooshroom", EntityType.MOOSHROOM, "a81012", List.of(MILKY, EAT_GRASS)),
+    OCELOT("ocelot", EntityType.OCELOT, "f2d19a", List.of(SPEED)),
+    PIG("pig", EntityType.PIG, "f19e98", List.of(MEATY)),
+    SHEEP("sheep", EntityType.SHEEP, "dedede", List.of(EAT_GRASS, WOOLY)),
+    SQUID("squid", EntityType.SQUID, "546d80", List.of(WATER_BREATHING)),
+    SPIDER("spider", EntityType.SPIDER, "4f453c", List.of(NIGHT_VISION)),
     SKELETON("skeleton", EntityType.SKELETON, "bcbcbc", List.of()),
-    WITHER_SKELETON("wither_skeleton", EntityType.WITHER_SKELETON, "343434", List.of(WITHER_HIT)),
-    STRAY("stray", EntityType.STRAY, "9caeac", List.of());
+    STRAY("stray", EntityType.STRAY, "9caeac", List.of()),
+    SLIME("slime", EntityType.SLIME, "7bce6a", List.of()),
+    VILLAGER("villager", EntityType.VILLAGER, "be886c", List.of(EMERALD_HEART)),
+    WOLF("wolf", EntityType.WOLF, "dddadb", List.of(NO_HUNGER)),
+    WITHER_SKELETON("wither_skeleton", EntityType.WITHER_SKELETON, "343434", List.of(WITHER_HIT, WITHER_RESISTANCE)),
+    ZOMBIE("zombie", EntityType.ZOMBIE, "3e692d", List.of(RESISTANCE));
 
     private static final Random rand = new Random();
     private final String name;
