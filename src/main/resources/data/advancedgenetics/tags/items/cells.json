@@ -16,6 +16,14 @@
     "advancedgenetics:husk_cell",
     "advancedgenetics:skeleton_cell",
     "advancedgenetics:wither_skeleton_cell",
-    "advancedgenetics:stray_cell"
+    "advancedgenetics:stray_cell",
+    "advancedgenetics:wither_cell",
+    "advancedgenetics:warden_cell",
+    "advancedgenetics:silverfish_cell",
+    "advancedgenetics:panda_cell",
+    "advancedgenetics:rabbit_cell",
+    "advancedgenetics:bat_cell",
+    "advancedgenetics:ghast_cell",
+    "advancedgenetics:polar_bear_cell"
   ]
 }

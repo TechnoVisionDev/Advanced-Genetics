@@ -16,6 +16,14 @@
     "advancedgenetics:husk_matter",
     "advancedgenetics:skeleton_matter",
     "advancedgenetics:wither_skeleton_matter",
-    "advancedgenetics:stray_matter"
+    "advancedgenetics:stray_matter",
+    "advancedgenetics:wither_matter",
+    "advancedgenetics:warden_matter",
+    "advancedgenetics:silverfish_matter",
+    "advancedgenetics:panda_matter",
+    "advancedgenetics:rabbit_matter",
+    "advancedgenetics:bat_matter",
+    "advancedgenetics:ghast_matter",
+    "advancedgenetics:polar_bear_matter"
   ]
 }

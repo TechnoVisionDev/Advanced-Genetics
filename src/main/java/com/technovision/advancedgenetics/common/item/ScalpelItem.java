@@ -35,7 +35,7 @@ public class ScalpelItem extends Item {
             if (type == EntityType.SKELETON_HORSE) {
                 item = ItemRegistry.MATTER.get(EntityType.SKELETON);
             }
-            else if (type == EntityType.ZOMBIE_HORSE || type == EntityType.ZOMBIFIED_PIGLIN) {
+            else if (type == EntityType.ZOMBIE_HORSE || type == EntityType.ZOMBIFIED_PIGLIN || type == EntityType.ZOMBIE_VILLAGER) {
                 item = ItemRegistry.MATTER.get(EntityType.ZOMBIE);
             }
             else if (type == EntityType.MULE) {
@@ -43,6 +43,9 @@ public class ScalpelItem extends Item {
             }
             else if (type == EntityType.PIGLIN || type == EntityType.PIGLIN_BRUTE) {
                 item = ItemRegistry.MATTER.get(EntityType.PIG);
+            }
+            else if (type == EntityType.WITCH) {
+                item = ItemRegistry.MATTER.get(EntityType.VILLAGER);
             }
         }
         if (item != null) {
