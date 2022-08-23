@@ -18,7 +18,7 @@ public enum Entities {
     CREEPER("creeper", EntityType.CREEPER, "65d152", List.of(EXPLOSIVE_EXIT)),
     DROWNED("drowned", EntityType.DROWNED, "4d9280", List.of(RESISTANCE, WATER_BREATHING)),
     ENDERMAN("enderman", EntityType.ENDERMAN, "e079fa", List.of(TELEPORT)),
-    ENDER_DRAGON("ender_dragon", EntityType.ENDER_DRAGON, "e079fa", List.of(KEEP_INVENTORY, REGENERATION)),
+    ENDER_DRAGON("ender_dragon", EntityType.ENDER_DRAGON, "e079fa", List.of(KEEP_INVENTORY, FLIGHT)),
     GHAST("ghast", EntityType.GHAST, "f6f6f6", List.of(SHOOT_FIREBALLS)),
     HORSE("horse", EntityType.HORSE, "946734", List.of(JUMP_BOOST)),
     HUSK("husk", EntityType.HUSK, "7a6849", List.of(RESISTANCE)),
@@ -40,8 +40,8 @@ public enum Entities {
     VILLAGER("villager", EntityType.VILLAGER, "be886c", List.of(EMERALD_HEART)),
     WOLF("wolf", EntityType.WOLF, "dddadb", List.of(NO_HUNGER)),
     WARDEN("warden", EntityType.WARDEN, "006668", List.of(KEEP_INVENTORY, NIGHT_VISION, STRENGTH)),
-    WITHER_SKELETON("wither_skeleton", EntityType.WITHER_SKELETON, "343434", List.of(WITHER_HIT, WITHER_RESISTANCE)),
-    WITHER("wither", EntityType.WITHER, "343434", List.of(WITHER_RESISTANCE, KEEP_INVENTORY)),
+    WITHER_SKELETON("wither_skeleton", EntityType.WITHER_SKELETON, "343434", List.of(WITHER_HIT)),
+    WITHER("wither", EntityType.WITHER, "343434", List.of(WITHER_RESISTANCE, WITHER_HIT)),
     ZOMBIE("zombie", EntityType.ZOMBIE, "3e692d", List.of(RESISTANCE));
 
     private static final Random rand = new Random();

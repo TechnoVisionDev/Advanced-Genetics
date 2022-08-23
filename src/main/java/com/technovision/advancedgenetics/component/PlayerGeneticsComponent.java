@@ -57,6 +57,7 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent, AutoSyn
         // Potion effect genes
         if (totalSeconds % 4 == 0) {
             checkFoodStatus();
+            checkFlightStatus();
             applyPotionEffects();
         }
 
@@ -114,6 +115,19 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent, AutoSyn
         if (hasGene(Genes.NO_HUNGER)) {
             player.getHungerManager().add(1, 0.0f);
         }
+    }
+
+    /**
+     * Checks if a user has the flight gene and enables/disables flight.
+     */
+    private void checkFlightStatus() {
+        if (hasGene(Genes.FLIGHT)) {
+            player.getAbilities().allowFlying = true;
+        } else {
+            player.getAbilities().allowFlying = false;
+            player.getAbilities().flying = false;
+        }
+        player.sendAbilitiesUpdate();
     }
 
     @Override

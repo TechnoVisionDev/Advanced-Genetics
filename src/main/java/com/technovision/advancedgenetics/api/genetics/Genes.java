@@ -9,6 +9,7 @@ public enum Genes {
     EMERALD_HEART("Emerald Heart", "85f608e331505"),
     EXPLOSIVE_EXIT("Explosive Exit", "fdcdf662a4360f"),
     FIREPROOF("Fireproof", "c821b0866"),
+    FLIGHT("Flight", "8d39f0"),
     HASTE("Haste", "de3b4"),
     INFINITY("Infinity", "d0067cad"),
     INVISIBILITY("Invisibility", "d53895c6eb78"),
