@@ -6,6 +6,7 @@ import com.technovision.advancedgenetics.commands.ClearGeneCommand;
 import com.technovision.advancedgenetics.commands.GeneArgumentType;
 import com.technovision.advancedgenetics.commands.RemoveGeneCommand;
 import com.technovision.advancedgenetics.events.GeneticsEvents;
+import com.technovision.advancedgenetics.events.KeyInputEvents;
 import com.technovision.advancedgenetics.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -42,6 +43,7 @@ public class AdvancedGenetics implements ModInitializer {
 
         // Register events
         GeneticsEvents.registerEvents();
+        KeyInputEvents.registerServerSide();
 
         // Register commands
         ArgumentTypeRegistry.registerArgumentType(new Identifier(MOD_ID, "gene"), GeneArgumentType.class, ConstantArgumentSerializer.of(GeneArgumentType::gene));

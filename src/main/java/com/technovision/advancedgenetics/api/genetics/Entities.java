@@ -17,7 +17,7 @@ public enum Entities {
     CAVE_SPIDER("cave_spider", EntityType.CAVE_SPIDER, "546870", List.of(NIGHT_VISION, POISON_IMMUNITY)),
     CREEPER("creeper", EntityType.CREEPER, "65d152", List.of(EXPLOSIVE_EXIT)),
     DROWNED("drowned", EntityType.DROWNED, "4d9280", List.of(RESISTANCE, WATER_BREATHING)),
-    ENDERMAN("enderman", EntityType.ENDERMAN, "e079fa", List.of()),
+    ENDERMAN("enderman", EntityType.ENDERMAN, "e079fa", List.of(TELEPORT)),
     ENDER_DRAGON("ender_dragon", EntityType.ENDER_DRAGON, "e079fa", List.of(KEEP_INVENTORY, REGENERATION)),
     GHAST("ghast", EntityType.GHAST, "f6f6f6", List.of(SHOOT_FIREBALLS)),
     HORSE("horse", EntityType.HORSE, "946734", List.of(JUMP_BOOST)),

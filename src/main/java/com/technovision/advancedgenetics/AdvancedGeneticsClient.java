@@ -6,6 +6,7 @@ import com.technovision.advancedgenetics.common.block.dnadecrypter.DnaDecrypterS
 import com.technovision.advancedgenetics.common.block.dnaextractor.DnaExtractorScreen;
 import com.technovision.advancedgenetics.common.block.plasmidinfuser.PlasmidInfuserScreen;
 import com.technovision.advancedgenetics.common.block.plasmidinjector.PlasmidInjectorScreen;
+import com.technovision.advancedgenetics.events.KeyInputEvents;
 import com.technovision.advancedgenetics.registry.ItemRegistry;
 import com.technovision.advancedgenetics.registry.ScreenRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -26,5 +27,8 @@ public class AdvancedGeneticsClient implements ClientModInitializer {
 
         // Dynamically dolor cells
         ItemRegistry.CELLS.values().forEach(item -> ColorProviderRegistry.ITEM.register(item::getColor, item));
+
+        // Register key binding events
+        KeyInputEvents.registerClientSide();
     }
 }

@@ -26,6 +26,7 @@ public enum Genes {
     SPEED("Speed", "c372f"),
     SHOOT_FIREBALLS("Shoot Fireballs", "a3d39362dbd6dd0"),
     STRENGTH("Strength", "63ee3a1b"),
+    TELEPORT("Teleport", "e68b3b94"),
     WATER_BREATHING("Water Breathing", "4fa023594764255"),
     WITHER_RESISTANCE("Wither Resistance", "15e26cc9132777ca"),
     WITHER_HIT("Wither Hit", "3d6f11df43"),

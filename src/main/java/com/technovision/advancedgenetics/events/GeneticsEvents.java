@@ -123,7 +123,6 @@ public class GeneticsEvents {
         // Handles "Keep Inventory" gene
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
             if (newPlayer.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.KEEP_INVENTORY)) {
-                System.out.println("2");
                 newPlayer.getInventory().clone(oldPlayer.getInventory());
             }
         });

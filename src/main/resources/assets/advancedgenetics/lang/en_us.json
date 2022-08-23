@@ -88,5 +88,7 @@
   "advancedgenetics.container.plasmid_infuser_block_entity": "Plasmid Infuser",
   "advancedgenetics.container.blood_purifier_block_entity": "Blood Purifier",
   "advancedgenetics.container.plasmid_injector_block_entity": "Plasmid Injector",
-  "tooltip.advancedgenetics.energy_requirement": "Requires %d E/t"
+  "tooltip.advancedgenetics.energy_requirement": "Requires %d E/t",
+  "key.advancedgenetics.category": "Advanced Genetics",
+  "key.advancedgenetics.teleport": "Teleport"
 }
