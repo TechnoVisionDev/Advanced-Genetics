@@ -121,6 +121,7 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent, AutoSyn
      * Checks if a user has the flight gene and enables/disables flight.
      */
     private void checkFlightStatus() {
+        if (player.isCreative()) return;
         if (hasGene(Genes.FLIGHT)) {
             player.getAbilities().allowFlying = true;
         } else {

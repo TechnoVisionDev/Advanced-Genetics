@@ -1,5 +1,6 @@
 package com.technovision.advancedgenetics.events;
 
+import com.technovision.advancedgenetics.api.genetics.Entities;
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.component.PlayerGeneticsComponent;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
@@ -9,9 +10,11 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.ItemStack;
@@ -73,7 +76,7 @@ public class GeneticsEvents {
             return ActionResult.SUCCESS;
         });
 
-        // Handles "Explosive Exit" and "Emerald Heart" gene
+        // Handles "Explosive Exit", "Emerald Heart", and "Slimy" gene
         ServerPlayerEvents.ALLOW_DEATH.register((player, damageSource, damageAmount) -> {
             PlayerGeneticsComponent component = player.getComponent(ComponentRegistry.PLAYER_GENETICS);
             if (component.hasGene(Genes.EXPLOSIVE_EXIT)) {
@@ -85,6 +88,13 @@ public class GeneticsEvents {
             if (component.hasGene(Genes.EMERALD_HEART)) {
                 // Drop emerald on death
                 player.dropStack(new ItemStack(Items.EMERALD));
+            }
+            if (component.hasGene(Genes.SLIMY)) {
+                // Spawn slime
+                SlimeEntity slime = new SlimeEntity(EntityType.SLIME, player.getWorld());
+                slime.setPosition(player.getPos());
+                slime.setSize(ThreadLocalRandom.current().nextInt(3), false);
+                player.getWorld().spawnEntity(slime);
             }
             return true;
         });

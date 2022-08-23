@@ -35,7 +35,7 @@ public enum Entities {
     SPIDER("spider", EntityType.SPIDER, "4f453c", List.of(NIGHT_VISION)),
     SKELETON("skeleton", EntityType.SKELETON, "bcbcbc", List.of(INFINITY)),
     STRAY("stray", EntityType.STRAY, "9caeac", List.of(INFINITY)),
-    SLIME("slime", EntityType.SLIME, "7bce6a", List.of()),
+    SLIME("slime", EntityType.SLIME, "7bce6a", List.of(SLIMY)),
     SILVERFISH("silverfish", EntityType.SILVERFISH, "9caeac", List.of(HASTE)),
     VILLAGER("villager", EntityType.VILLAGER, "be886c", List.of(EMERALD_HEART)),
     WOLF("wolf", EntityType.WOLF, "dddadb", List.of(NO_HUNGER)),
