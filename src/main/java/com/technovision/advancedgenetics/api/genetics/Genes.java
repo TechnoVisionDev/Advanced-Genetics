@@ -10,6 +10,7 @@ public enum Genes {
     EXPLOSIVE_EXIT("Explosive Exit", "fdcdf662a4360f"),
     FIREPROOF("Fireproof", "c821b0866"),
     HASTE("Haste", "de3b4"),
+    INFINITY("Infinity", "d0067cad"),
     INVISIBILITY("Invisibility", "d53895c6eb78"),
     JUMP_BOOST("Jump Boost", "25f03ac91f"),
     KEEP_INVENTORY("Keep Inventory", "a2bb0c29020dc3"),
