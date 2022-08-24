@@ -34,7 +34,7 @@ public class SyringeItem extends Item {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         if (!stack.hasNbt() || !isFilled(stack)) return;
         if (!isPurified(stack)) {
-            tooltip.add(Text.literal("Contaminated").formatted(Formatting.GRAY));
+            tooltip.add(Text.literal("Contaminated").formatted(Formatting.DARK_RED));
         }
         NbtCompound tag = stack.getOrCreateNbt();
         if (tag.contains("genes")) {
@@ -171,5 +171,6 @@ public class SyringeItem extends Item {
         tag.remove("filled");
         tag.remove("purified");
         tag.remove("genes");
+        tag.remove("uuid");
     }
 }
