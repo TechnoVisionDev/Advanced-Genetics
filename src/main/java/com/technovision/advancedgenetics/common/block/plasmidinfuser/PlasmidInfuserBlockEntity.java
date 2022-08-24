@@ -2,6 +2,7 @@ package com.technovision.advancedgenetics.common.block.plasmidinfuser;
 
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
+import com.technovision.advancedgenetics.common.item.AntiPlasmidItem;
 import com.technovision.advancedgenetics.common.item.PlasmidItem;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
 import net.minecraft.block.BlockState;
@@ -55,7 +56,11 @@ public class PlasmidInfuserBlockEntity extends AbstractInventoryBlockEntity {
             ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
             if (ThreadLocalRandom.current().nextDouble() <= Config.Common.plasmidInfuserSuccessRate.get()) {
                 ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
-                PlasmidItem.combine(input, output);
+                if (output.getItem() instanceof AntiPlasmidItem) {
+                    AntiPlasmidItem.combine(input, output);
+                } else {
+                    PlasmidItem.combine(input, output);
+                }
             }
             decrementSlot(INPUT_SLOT_INDEX, 1);
         }

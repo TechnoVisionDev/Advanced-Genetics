@@ -40,7 +40,7 @@ public class ItemRegistry {
     // Other Items
     public static final DnaItem DNA_HELIX = new DnaItem();
     public static final PlasmidItem PLASMID = new PlasmidItem();
-    public static final PlasmidItem ANTIPLASMID = new PlasmidItem();
+    public static final AntiPlasmidItem ANTIPLASMID = new AntiPlasmidItem();
 
     public static void registerItems() {
         // Block Items

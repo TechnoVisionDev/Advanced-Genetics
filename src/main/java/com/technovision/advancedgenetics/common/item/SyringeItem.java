@@ -2,6 +2,7 @@ package com.technovision.advancedgenetics.common.item;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.api.genetics.Genes;
+import com.technovision.advancedgenetics.component.PlayerGeneticsComponent;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
@@ -15,10 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,8 +39,10 @@ public class SyringeItem extends Item {
         if (tag.contains("genes")) {
             NbtCompound genesTag = tag.getCompound("genes");
             for (String key : genesTag.getKeys()) {
-                Genes gene = Genes.valueOf(genesTag.getString(key));
-                tooltip.add(Text.literal(gene.getName()).formatted(Formatting.GRAY));
+                Genes gene = Genes.valueOf(key);
+                String geneName = gene.getName();
+                if (genesTag.getBoolean(key)) geneName = "Anti " + geneName;
+                tooltip.add(Text.literal(geneName).formatted(Formatting.GRAY));
             }
         }
     }
@@ -87,12 +87,12 @@ public class SyringeItem extends Item {
         return 32;
     }
 
-    private static List<Genes> getGenes(ItemStack stack) {
-        List<Genes> genes = new ArrayList<>();
+    private static List<Pair<Genes, Boolean>> getGenes(ItemStack stack) {
+        List<Pair<Genes, Boolean>> genes = new ArrayList<>();
         NbtCompound genesTag = stack.getOrCreateNbt().getCompound("genes");
         for (String geneName : genesTag.getKeys()) {
             Genes gene = Genes.valueOf(geneName);
-            genes.add(gene);
+            genes.add(new Pair<>(gene, genesTag.getBoolean(geneName)));
         }
         return genes;
     }
@@ -122,15 +122,30 @@ public class SyringeItem extends Item {
         String gene = plasmid.getNbt().getString("gene");
         final NbtCompound syringeTag = syringe.getOrCreateNbt();
         NbtCompound genes = syringeTag.getCompound("genes");
-        genes.putString(gene, gene);
+        genes.putBoolean(gene, false);
+        syringeTag.put("genes", genes);
+        syringeTag.putBoolean("purified", false);
+    }
+
+    public static void addAntiGene(ItemStack plasmid, ItemStack syringe) {
+        String gene = plasmid.getNbt().getString("gene");
+        final NbtCompound syringeTag = syringe.getOrCreateNbt();
+        NbtCompound genes = syringeTag.getCompound("genes");
+        genes.putBoolean(gene, true);
         syringeTag.put("genes", genes);
         syringeTag.putBoolean("purified", false);
     }
 
     public static void inject(PlayerEntity user, ItemStack stack) {
         // Add genes to user
-        List<Genes> genes = getGenes(stack);
-        user.getComponent(ComponentRegistry.PLAYER_GENETICS).addGenes(genes);
+        PlayerGeneticsComponent component = user.getComponent(ComponentRegistry.PLAYER_GENETICS);
+        for (Pair<Genes, Boolean> gene : getGenes(stack)) {
+            if (gene.getRight()) {
+                component.removeGene(gene.getLeft());
+            } else {
+                component.addGene(gene.getLeft());
+            }
+        }
 
         // Reset syringe data
         final NbtCompound tag = stack.getOrCreateNbt();

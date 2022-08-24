@@ -2,6 +2,7 @@ package com.technovision.advancedgenetics.common.block.plasmidinjector;
 
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
+import com.technovision.advancedgenetics.common.item.AntiPlasmidItem;
 import com.technovision.advancedgenetics.common.item.PlasmidItem;
 import com.technovision.advancedgenetics.common.item.SyringeItem;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
@@ -57,7 +58,11 @@ public class PlasmidInjectorBlockEntity extends AbstractInventoryBlockEntity {
             ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
             if (ThreadLocalRandom.current().nextDouble() <= Config.Common.plasmidInjectorSuccessRate.get()) {
                 ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
-                SyringeItem.addGene(input, output);
+                if (input.getItem() instanceof AntiPlasmidItem) {
+                    SyringeItem.addAntiGene(input, output);
+                } else {
+                    SyringeItem.addGene(input, output);
+                }
             }
             decrementSlot(INPUT_SLOT_INDEX, 1);
         }
