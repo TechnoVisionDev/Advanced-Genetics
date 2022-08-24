@@ -117,11 +117,24 @@ public class SyringeItem extends Item {
         tag.putBoolean("filled", true);
         tag.putBoolean("purified", false);
         tag.putUuid("uuid", player.getUuid());
+
+        // Add any existing genes
+        for (Genes gene : player.getComponent(ComponentRegistry.PLAYER_GENETICS).getGenes()) {
+            addGene(stack, gene);
+        }
     }
 
     public static void purify(ItemStack stack) {
         final NbtCompound tag = stack.getOrCreateNbt();
         tag.putBoolean("purified", true);
+    }
+
+    public static void addGene(ItemStack syringe, Genes gene) {
+        final NbtCompound syringeTag = syringe.getOrCreateNbt();
+        NbtCompound genes = syringeTag.getCompound("genes");
+        genes.putBoolean(gene.toString(), false);
+        syringeTag.put("genes", genes);
+        syringeTag.putBoolean("purified", false);
     }
 
     public static void addGene(ItemStack plasmid, ItemStack syringe) {
@@ -142,9 +155,9 @@ public class SyringeItem extends Item {
         syringeTag.putBoolean("purified", false);
     }
 
-    public static void inject(PlayerEntity user, ItemStack stack) {
+    public static void inject(PlayerEntity player, ItemStack stack) {
         // Add genes to user
-        PlayerGeneticsComponent component = user.getComponent(ComponentRegistry.PLAYER_GENETICS);
+        PlayerGeneticsComponent component = player.getComponent(ComponentRegistry.PLAYER_GENETICS);
         for (Pair<Genes, Boolean> gene : getGenes(stack)) {
             if (gene.getRight()) {
                 component.removeGene(gene.getLeft());
