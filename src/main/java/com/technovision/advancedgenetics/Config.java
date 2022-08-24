@@ -79,7 +79,7 @@ public class Config {
             // General Settings
             builder.comment("General Settings").push(categoryGeneralSettings);
             hardMode = builder
-                    .comment("Removes the flight gene from bat DNA and makes plasmids no longer accept basic genes.",
+                    .comment("Increase difficulty by making plasmids no longer accept basic genes.",
                             "Default: false")
                     .define("hardMode", false);
             geneSharing = builder

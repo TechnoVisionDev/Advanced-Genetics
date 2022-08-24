@@ -2,6 +2,7 @@ package com.technovision.advancedgenetics.common.block.plasmidinfuser;
 
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.blockentity.AbstractInventoryBlockEntity;
+import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.common.item.AntiPlasmidItem;
 import com.technovision.advancedgenetics.common.item.PlasmidItem;
 import com.technovision.advancedgenetics.registry.BlockEntityRegistry;
@@ -41,10 +42,16 @@ public class PlasmidInfuserBlockEntity extends AbstractInventoryBlockEntity {
     public boolean canProcessRecipe() {
         ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
         ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
-        return !input.isEmpty() && !output.isEmpty() && input.hasNbt()
+        if (!input.isEmpty() && !output.isEmpty() && input.hasNbt()
                 && getEnergyStorage().getAmount() >= getEnergyRequirement()
                 && input.getNbt().getBoolean("decoded")
-                && PlasmidItem.canCombine(input, output);
+                && PlasmidItem.canCombine(input, output)) {
+            if (Config.Common.hardMode.get()) {
+                return !input.getNbt().getString("gene").equals(Genes.BASIC.toString());
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
