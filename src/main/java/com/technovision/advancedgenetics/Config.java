@@ -23,9 +23,12 @@ public class Config {
         private static final String categoryPlasmidInfuser = "plasmid_infuser";
         private static final String categoryBloodPurifier = "blood_purifier";
         private static final String categoryPlasmidInjector = "plasmid_injector";
+        private static final String categoryCloningMachine = "cloning_machine";
 
+        public static ForgeConfigSpec.BooleanValue hardMode;
+        public static ForgeConfigSpec.BooleanValue geneSharing;
         public static ForgeConfigSpec.DoubleValue basicGeneChance;
-        public static ForgeConfigSpec.IntValue plasmidRequiredGenes;
+        public static ForgeConfigSpec.IntValue plasmidRequirement;
         public static ForgeConfigSpec.IntValue overclockSpeed;
         public static ForgeConfigSpec.IntValue overclockEnergy;
 
@@ -65,18 +68,32 @@ public class Config {
         public static ForgeConfigSpec.IntValue plasmidInjectorMaxOverclock;
         public static ForgeConfigSpec.DoubleValue plasmidInjectorSuccessRate;
 
+        public static ForgeConfigSpec.IntValue cloningMachineEnergyCapacity;
+        public static ForgeConfigSpec.IntValue cloningMachineEnergyPerTick;
+        public static ForgeConfigSpec.IntValue cloningMachineTicksPerOperation;
+        public static ForgeConfigSpec.IntValue cloningMachineMaxOverclock;
+        public static ForgeConfigSpec.DoubleValue cloningMachineSuccessRate;
+
         public Common(ForgeConfigSpec.Builder builder) {
 
             // General Settings
             builder.comment("General Settings").push(categoryGeneralSettings);
+            hardMode = builder
+                    .comment("Removes the flight gene from bat DNA and makes plasmids no longer accept basic genes.",
+                            "Default: false")
+                    .define("hardMode", false);
+            geneSharing = builder
+                    .comment("Allows players to take the blood of other players and get all of their genes from it.",
+                            "Default: false")
+                    .define("geneSharing", false);
             basicGeneChance = builder
                     .comment("Percent chance to receive a basic gene upon DNA decryption.",
                             "Default: 50% chance")
                     .defineInRange("basicGeneChance", 0.50, 0.00, 1.00);
-            plasmidRequiredGenes = builder
-                    .comment("The number of genes needed to fill a plasmid.",
-                            "Default: 24 genes")
-                    .defineInRange("plasmidRequiredGenes", 24, 1, 100);
+            plasmidRequirement = builder
+                    .comment("The number of decrypted DNA helices needed to fill a plasmid.",
+                            "Default: 24 DNA helices")
+                    .defineInRange("plasmidRequirement", 24, 2, 100);
             overclockSpeed = builder
                     .comment("The number of seconds that an overclock item speeds up a machine.",
                             "Default: 2 seconds faster")
@@ -178,7 +195,7 @@ public class Config {
                             "Default: 10x overclock")
                     .defineInRange("maxOverclock", 10, 0, Integer.MAX_VALUE);
             plasmidInfuserSuccessRate = builder
-                    .comment("Percent chance for the Plasmid Infuser to successfully decode a DNA helix.",
+                    .comment("Percent chance for the Plasmid Infuser to successfully add DNA helix to plasmid.",
                             "Default: 100% success rate")
                     .defineInRange("successRate", 1.00, 0.00, 1.00);
             builder.pop();
@@ -227,6 +244,30 @@ public class Config {
                     .defineInRange("maxOverclock", 10, 0, Integer.MAX_VALUE);
             plasmidInjectorSuccessRate = builder
                     .comment("Percent chance for the Plasmid Injector to successfully inject a tplasmid into the syringe.",
+                            "Default: 100% success rate")
+                    .defineInRange("successRate", 1.00, 0.00, 1.00);
+            builder.pop();
+
+            // Cloning Machine
+            builder.comment("Cloning Machine").push(categoryCloningMachine);
+            cloningMachineEnergyCapacity = builder
+                    .comment("Maximum energy capacity for the Cloning Machine.",
+                            "Default: 500,000 (500k E)")
+                    .defineInRange("energyCapacity", 500000, 0, Integer.MAX_VALUE);
+            cloningMachineEnergyPerTick = builder
+                    .comment("Energy consumed per tick when the Cloning Machine is processing.",
+                            "Default: 1000 E")
+                    .defineInRange("energyPerTick", 1000, 0, Integer.MAX_VALUE);
+            cloningMachineTicksPerOperation = builder
+                    .comment("Ticks per operation when using the Cloning Machine.",
+                            "Default: 600 ticks")
+                    .defineInRange("ticksPerOperation", 600, 20, Integer.MAX_VALUE);
+            cloningMachineMaxOverclock = builder
+                    .comment("The max amount of overclock items that can be used on the Cloning Machine.",
+                            "Default: 5x overclock")
+                    .defineInRange("maxOverclock", 5, 0, Integer.MAX_VALUE);
+            cloningMachineSuccessRate = builder
+                    .comment("Percent chance for the cloning machine to successfully spawn an entity.",
                             "Default: 100% success rate")
                     .defineInRange("successRate", 1.00, 0.00, 1.00);
             builder.pop();

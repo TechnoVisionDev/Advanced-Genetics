@@ -1,6 +1,7 @@
 package com.technovision.advancedgenetics.common.item;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
+import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.component.PlayerGeneticsComponent;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
@@ -63,12 +64,16 @@ public class SyringeItem extends Item {
         if (!tag.getBoolean("filled")) {
             // Draw blood
             if (!world.isClient()) {
-                fill(stack);
+                fill(stack, (PlayerEntity)user);
                 user.damage(DamageSource.GENERIC, 1.0f);
             }
         } else if (tag.getBoolean("purified") && tag.contains("genes")) {
             // Inject genes into bloodstream
             if (!user.getWorld().isClient()) {
+                if (!Config.Common.geneSharing.get() && !tag.getUuid("uuid").equals(user.getUuid())) {
+                    user.sendMessage(Text.translatable("message."+AdvancedGenetics.MOD_ID+".syringe", "§7"+user.getName().getString()+"§f"));
+                    return stack;
+                }
                 inject((PlayerEntity) user, user.getMainHandStack());
                 user.damage(DamageSource.GENERIC, 1.0f);
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 20*10));
@@ -107,10 +112,11 @@ public class SyringeItem extends Item {
         return tag.getBoolean("purified");
     }
 
-    public static void fill(ItemStack stack) {
+    public static void fill(ItemStack stack, PlayerEntity player) {
         final NbtCompound tag = stack.getOrCreateNbt();
         tag.putBoolean("filled", true);
         tag.putBoolean("purified", false);
+        tag.putUuid("uuid", player.getUuid());
     }
 
     public static void purify(ItemStack stack) {

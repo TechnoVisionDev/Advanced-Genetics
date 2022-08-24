@@ -89,6 +89,7 @@
   "advancedgenetics.container.blood_purifier_block_entity": "Blood Purifier",
   "advancedgenetics.container.plasmid_injector_block_entity": "Plasmid Injector",
   "tooltip.advancedgenetics.energy_requirement": "Requires %d E/t",
+  "message.advancedgenetics.syringe": "That syringe can only be used by %s.",
   "key.advancedgenetics.category": "Advanced Genetics",
   "key.advancedgenetics.teleport": "Teleport"
 }
