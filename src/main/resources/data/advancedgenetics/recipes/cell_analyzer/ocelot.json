@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:ocelot_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:ocelot_cell"
+  }
+}

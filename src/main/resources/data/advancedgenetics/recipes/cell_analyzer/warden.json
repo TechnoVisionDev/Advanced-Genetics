@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:warden_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:warden_cell"
+  }
+}

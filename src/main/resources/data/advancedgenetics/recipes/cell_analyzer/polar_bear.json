@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:polar_bear_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:polar_bear_cell"
+  }
+}

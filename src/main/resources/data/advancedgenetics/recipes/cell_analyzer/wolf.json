@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:wolf_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:wolf_cell"
+  }
+}

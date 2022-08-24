@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:iron_golem_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:iron_golem_cell"
+  }
+}
