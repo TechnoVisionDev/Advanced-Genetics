@@ -7,6 +7,7 @@ import net.minecraft.nbt.NbtCompound;
 public enum Genes {
     BASIC("Basic Gene", "9707bf0fd3"),
     CLIMB_WALLS("Climb Walls", "055de4bedf7"),
+    DRAGONS_HEALTH("Dragons Health", "35a20972825af"),
     EAT_GRASS("Eat Grass", "73f73be68"),
     EMERALD_HEART("Emerald Heart", "85f608e331505"),
     EXPLOSIVE_EXIT("Explosive Exit", "fdcdf662a4360f"),

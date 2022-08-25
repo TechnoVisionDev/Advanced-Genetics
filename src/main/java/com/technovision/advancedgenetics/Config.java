@@ -112,6 +112,7 @@ public class Config {
             // Genes
             builder.comment("Genes", "Set any gene to 'false' to disable it").push(categoryGenes);
             genes.put("climb_walls", builder.define("climb_walls", true));
+            genes.put("dragons_health", builder.define("dragons_health", true));
             genes.put("eat_grass", builder.define("eat_grass", true));
             genes.put("emerald_heart", builder.define("emerald_heart", true));
             genes.put("explosive_exit", builder.define("explosive_exit", true));

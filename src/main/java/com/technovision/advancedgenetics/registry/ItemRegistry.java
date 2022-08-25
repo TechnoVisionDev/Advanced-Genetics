@@ -41,6 +41,7 @@ public class ItemRegistry {
     public static final DnaItem DNA_HELIX = new DnaItem();
     public static final PlasmidItem PLASMID = new PlasmidItem();
     public static final AntiPlasmidItem ANTIPLASMID = new AntiPlasmidItem();
+    public static final DragonHealthCrystalItem DRAGON_HEALTH_CRYSTAL = new DragonHealthCrystalItem();
 
     public static void registerItems() {
         // Block Items
@@ -63,6 +64,7 @@ public class ItemRegistry {
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "dna_helix"), DNA_HELIX);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "plasmid"), PLASMID);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "antiplasmid"), ANTIPLASMID);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "dragon_health_crystal"), DRAGON_HEALTH_CRYSTAL);
 
         // Organic Matter
         for (Entities entity : Entities.values()) {
