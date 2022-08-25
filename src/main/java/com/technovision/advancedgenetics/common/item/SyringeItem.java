@@ -41,9 +41,11 @@ public class SyringeItem extends Item {
             NbtCompound genesTag = tag.getCompound("genes");
             for (String key : genesTag.getKeys()) {
                 Genes gene = Genes.valueOf(key);
-                String geneName = gene.getName();
-                if (genesTag.getBoolean(key)) geneName = "Anti " + geneName;
-                tooltip.add(Text.literal(geneName).formatted(Formatting.GRAY));
+                if (gene.isEnabled()) {
+                    String geneName = gene.getName();
+                    if (genesTag.getBoolean(key)) geneName = "Anti " + geneName;
+                    tooltip.add(Text.literal(geneName).formatted(Formatting.GRAY));
+                }
             }
         }
     }

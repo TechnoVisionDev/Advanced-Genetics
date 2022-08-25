@@ -149,6 +149,7 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
 
     @Override
     public boolean hasGene(Genes gene) {
+        if (!gene.isEnabled()) return false;
         return genes.containsKey(gene.toString());
     }
 

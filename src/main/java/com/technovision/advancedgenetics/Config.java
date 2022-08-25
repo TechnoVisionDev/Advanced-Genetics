@@ -133,8 +133,8 @@ public class Config {
             genes.put("poison_immunity", builder.define("poison_immunity", true));
             genes.put("regeneration", builder.define("regeneration", true));
             genes.put("resistance", builder.define("resistance", true));
-            genes.put("scareCreepers", builder.define("scareCreepers", true));
-            genes.put("scareSkeletons", builder.define("scareSkeletons", true));
+            genes.put("scare_creepers", builder.define("scare_creepers", true));
+            genes.put("scare_skeletons", builder.define("scare_skeletons", true));
             genes.put("shoot_fireballs", builder.define("shoot_fireballs", true));
             genes.put("slimy", builder.define("slimy", true));
             genes.put("speed", builder.define("speed", true));
