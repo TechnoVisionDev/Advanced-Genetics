@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,8 +21,10 @@ public class ScalpelItem extends Item {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (!user.getWorld().isClient() && hand == Hand.MAIN_HAND) {
+        ItemCooldownManager cooldownManager = user.getItemCooldownManager();
+        if (!user.getWorld().isClient() && hand == Hand.MAIN_HAND && !cooldownManager.isCoolingDown(stack.getItem())) {
             scrapeEntity(stack, user, entity);
+            cooldownManager.set(stack.getItem(), 10);
             return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
