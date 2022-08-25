@@ -3,6 +3,7 @@ package com.technovision.advancedgenetics.api.genetics;
 import com.technovision.advancedgenetics.Config;
 import net.minecraft.entity.EntityType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -76,8 +77,15 @@ public enum Entities {
 
     public Genes getRandomGene() {
         if (genes.isEmpty() || rand.nextDouble() <= Config.Common.basicGeneChance.get()) return Genes.BASIC;
-        int index = rand.nextInt(genes.size());
-        return genes.get(index);
+        List<Genes> enabledGenes = new ArrayList<>();
+        for (Genes gene : getGenes()) {
+            if (gene.isEnabled()) {
+                enabledGenes.add(gene);
+            }
+        }
+        if (enabledGenes.isEmpty()) return Genes.BASIC;
+        int index = rand.nextInt(enabledGenes.size());
+        return enabledGenes.get(index);
     }
 
     public static Entities findEntityByType(EntityType type){

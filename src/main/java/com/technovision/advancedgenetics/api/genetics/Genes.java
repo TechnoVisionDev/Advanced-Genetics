@@ -1,5 +1,6 @@
 package com.technovision.advancedgenetics.api.genetics;
 
+import com.technovision.advancedgenetics.Config;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 
@@ -55,6 +56,13 @@ public enum Genes {
 
     public String getEncryptedName() {
         return encryptedName;
+    }
+
+    public boolean isEnabled() {
+        if (this == Genes.BASIC) return false;
+        Boolean result = Config.Common.genes.get(this.toString().toLowerCase()).get();
+        if (result == null) return false;
+        return result;
     }
 
     public static Genes getGeneByItem(ItemStack stack) {

@@ -3,6 +3,8 @@ package com.technovision.advancedgenetics;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.HashMap;
+
 public class Config {
 
     public static final Common COMMON;
@@ -17,6 +19,7 @@ public class Config {
     public static class Common {
 
         private static final String categoryGeneralSettings = "general_settings";
+        private static final String categoryGenes = "genes";
         private static final String categoryCellAnalyzer = "cell_analyzer";
         private static final String categoryDnaExtractor = "dna_extractor";
         private static final String categoryDnaDecrypter = "dna_decrypter";
@@ -74,6 +77,8 @@ public class Config {
         public static ForgeConfigSpec.IntValue cloningMachineMaxOverclock;
         public static ForgeConfigSpec.DoubleValue cloningMachineSuccessRate;
 
+        public static HashMap<String, ForgeConfigSpec.BooleanValue> genes = new HashMap<>();
+
         public Common(ForgeConfigSpec.Builder builder) {
 
             // General Settings
@@ -102,6 +107,45 @@ public class Config {
                     .comment("The amount of extra energy per tick that an overclock item uses.",
                             "Default: 5 E/t")
                     .defineInRange("overclockEnergy", 5, 0, Integer.MAX_VALUE);
+            builder.pop();
+
+            // Genes
+            builder.comment("Genes", "Set any gene to 'false' to disable it").push(categoryGenes);
+            genes.put("climb_walls", builder.define("climb_walls", true));
+            genes.put("eat_grass", builder.define("eat_grass", true));
+            genes.put("emerald_heart", builder.define("emerald_heart", true));
+            genes.put("explosive_exit", builder.define("explosive_exit", true));
+            genes.put("fireproof", builder.define("fireproof", true));
+            genes.put("flight", builder.define("flight", true));
+            genes.put("haste", builder.define("haste", true));
+            genes.put("infinity", builder.define("infinity", true));
+            genes.put("invisibility", builder.define("invisibility", true));
+            genes.put("jump_boost", builder.define("jump_boost", true));
+            genes.put("keep_inventory", builder.define("keep_inventory", true));
+            genes.put("lay_egg", builder.define("lay_egg", true));
+            genes.put("luck", builder.define("luck", true));
+            genes.put("meaty", builder.define("meaty", true));
+            genes.put("milky", builder.define("milky", true));
+            genes.put("mob_sight", builder.define("mob_sight", true));
+            genes.put("night_vision", builder.define("night_vision", true));
+            genes.put("no_fall_damage", builder.define("no_fall_damage", true));
+            genes.put("no_hunger", builder.define("no_hunger", true));
+            genes.put("poison_immunity", builder.define("poison_immunity", true));
+            genes.put("regeneration", builder.define("regeneration", true));
+            genes.put("resistance", builder.define("resistance", true));
+            genes.put("scareCreepers", builder.define("scareCreepers", true));
+            genes.put("scareSkeletons", builder.define("scareSkeletons", true));
+            genes.put("shoot_fireballs", builder.define("shoot_fireballs", true));
+            genes.put("slimy", builder.define("slimy", true));
+            genes.put("speed", builder.define("speed", true));
+            genes.put("strength", builder.define("strength", true));
+            genes.put("teleport", builder.define("teleport", true));
+            genes.put("venom", builder.define("venom", true));
+            genes.put("water_breathing", builder.define("water_breathing", true));
+            genes.put("web_walking", builder.define("web_walking", true));
+            genes.put("wither_resistance", builder.define("wither_resistance", true));
+            genes.put("wither_hit", builder.define("wither_hit", true));
+            genes.put("wooly", builder.define("wooly", true));
             builder.pop();
 
             // Cell Analyzer
