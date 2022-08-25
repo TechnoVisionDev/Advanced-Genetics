@@ -2,6 +2,7 @@ package com.technovision.advancedgenetics.component;
 
 import com.technovision.advancedgenetics.api.component.EntityGeneticsComponent;
 import com.technovision.advancedgenetics.api.genetics.Genes;
+import com.technovision.advancedgenetics.registry.ComponentRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,6 +29,7 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
 
     @Override
     public void readFromNbt(NbtCompound tag) {
+        genes.clear();
         NbtCompound genesTag = tag.getCompound("genes");
         for (String geneName : genesTag.getKeys()) {
             Genes gene = Genes.valueOf(geneName);
@@ -153,6 +155,7 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
     @Override
     public void addGene(Genes gene) {
         genes.put(gene.toString(), gene);
+        player.syncComponent(ComponentRegistry.PLAYER_GENETICS);
     }
 
     @Override
@@ -160,15 +163,18 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
         for (Genes gene : genesList) {
             genes.put(gene.toString(), gene);
         }
+        player.syncComponent(ComponentRegistry.PLAYER_GENETICS);
     }
 
     @Override
     public void removeGene(Genes gene) {
         genes.remove(gene.toString());
+        player.syncComponent(ComponentRegistry.PLAYER_GENETICS);
     }
 
     @Override
     public void removeAllGenes() {
         genes.clear();
+        player.syncComponent(ComponentRegistry.PLAYER_GENETICS);
     }
 }

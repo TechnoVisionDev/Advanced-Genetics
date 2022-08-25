@@ -30,12 +30,6 @@ public class PlayerEntityMixin {
     @Inject(at = @At("HEAD"), method = "slowMovement", cancellable = true)
     public void slowMovement(BlockState state, Vec3d multiplier, CallbackInfo info) {
         PlayerEntity player = (PlayerEntity) (Object) this;
-        if (player.getWorld().isClient()) {
-            System.out.println("CLIENT: "+player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.WEB_WALKING));
-        }
-        if (!player.getWorld().isClient()) {
-            System.out.println("SERVER: "+player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.WEB_WALKING));
-        }
         if (player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.WEB_WALKING)) {
             info.cancel();
         }
