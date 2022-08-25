@@ -38,7 +38,7 @@ public enum Entities {
     SLIME("slime", EntityType.SLIME, "7bce6a", List.of(SLIMY)),
     SILVERFISH("silverfish", EntityType.SILVERFISH, "9caeac", List.of(HASTE)),
     VILLAGER("villager", EntityType.VILLAGER, "be886c", List.of(EMERALD_HEART)),
-    WOLF("wolf", EntityType.WOLF, "dddadb", List.of(NO_HUNGER)),
+    WOLF("wolf", EntityType.WOLF, "dddadb", List.of(NO_HUNGER, SCARE_SKELETONS)),
     WARDEN("warden", EntityType.WARDEN, "006668", List.of(KEEP_INVENTORY, NIGHT_VISION, STRENGTH)),
     WITHER_SKELETON("wither_skeleton", EntityType.WITHER_SKELETON, "343434", List.of(WITHER_HIT)),
     WITHER("wither", EntityType.WITHER, "343434", List.of(WITHER_RESISTANCE, WITHER_HIT)),

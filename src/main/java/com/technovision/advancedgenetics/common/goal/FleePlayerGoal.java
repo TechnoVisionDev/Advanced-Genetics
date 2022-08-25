@@ -16,8 +16,8 @@ public class FleePlayerGoal extends FleeEntityGoal<PlayerEntity> {
 
     private final Genes requiredGene;
 
-    public FleePlayerGoal(PathAwareEntity mob, Genes requiredGene) {
-        super(mob, PlayerEntity.class, 6.0F, 1.0, 1.2);
+    public FleePlayerGoal(PathAwareEntity mob, Genes requiredGene, float distance, double slowSpeed, double fastSpeed) {
+        super(mob, PlayerEntity.class, distance, slowSpeed, fastSpeed);
         this.requiredGene = requiredGene;
     }
 

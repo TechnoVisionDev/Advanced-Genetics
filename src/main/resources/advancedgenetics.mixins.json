@@ -8,6 +8,7 @@
     "PlayerEntityMixin",
     "BowItemMixin",
     "CreeperEntityMixin",
+    "SkeletonEntityMixin",
     "FleeEntityGoalAccessor"
   ],
   "client": [

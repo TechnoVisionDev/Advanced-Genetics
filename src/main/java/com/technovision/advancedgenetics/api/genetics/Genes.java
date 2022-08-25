@@ -26,6 +26,7 @@ public enum Genes {
     REGENERATION("Regeneration", "35de2da49504"),
     RESISTANCE("Resistance", "c35070bce1"),
     SCARE_CREEPERS("Scare Creepers", "db3a00b15426a2"),
+    SCARE_SKELETONS("Scare Skeletons", "47e8282c9ed2397"),
     SHOOT_FIREBALLS("Shoot Fireballs", "a3d39362dbd6dd0"),
     SLIMY("Slimy", "1bd12"),
     SPEED("Speed", "c372f"),
