@@ -37,9 +37,8 @@ public class KeyInputEvents {
             String geneName = buf.readString();
             PlayerGeneticsComponent component = player.getComponent(ComponentRegistry.PLAYER_GENETICS);
             if (geneName.equals("teleport") && component.hasGene(Genes.TELEPORT)) {
-                // TODO: Fix vector
-                Vec3d v3 = player.getPos();
-                player.teleport(v3.getX()+6, v3.getY(), v3.getZ(), true);
+                Vec3d v3 = player.getRotationVector().multiply(6).add(player.getEyePos());
+                player.teleport(v3.getX(), v3.getY(), v3.getZ(), true);
             }
         });
     }
