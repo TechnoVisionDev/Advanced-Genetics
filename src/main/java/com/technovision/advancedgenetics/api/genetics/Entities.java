@@ -35,7 +35,7 @@ public enum Entities {
     RABBIT("rabbit", EntityType.RABBIT, "ada498", List.of(JUMP_BOOST, SPEED, LUCK)),
     SHEEP("sheep", EntityType.SHEEP, "dedede", List.of(EAT_GRASS, WOOLY)),
     SQUID("squid", EntityType.SQUID, "546d80", List.of(WATER_BREATHING)),
-    SPIDER("spider", EntityType.SPIDER, "4f453c", List.of(NIGHT_VISION, WEB_WALKING)),
+    SPIDER("spider", EntityType.SPIDER, "4f453c", List.of(NIGHT_VISION, CLIMB_WALLS)),
     SKELETON("skeleton", EntityType.SKELETON, "bcbcbc", List.of(INFINITY)),
     STRAY("stray", EntityType.STRAY, "9caeac", List.of(INFINITY)),
     SLIME("slime", EntityType.SLIME, "7bce6a", List.of(SLIMY)),

@@ -10,7 +10,8 @@
     "CreeperEntityMixin",
     "SkeletonEntityMixin",
     "FleeEntityGoalAccessor",
-    "EntityMixin"
+    "EntityMixin",
+    "LivingEntityMixin"
   ],
   "client": [
   ],
