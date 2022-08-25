@@ -19,6 +19,7 @@ public enum Genes {
     LUCK("Luck", "382e"),
     MEATY("Meaty", "f8c6d"),
     MILKY("Milky", "3b107"),
+    MOB_SIGHT("Mob Sight", "e10c9a90d"),
     NIGHT_VISION("Night Vision", "4cbe4ae9154d"),
     NO_FALL_DAMAGE("No Fall Damage", "71b2af23b460e1"),
     NO_HUNGER("No Hunger", "301dd96b0"),
