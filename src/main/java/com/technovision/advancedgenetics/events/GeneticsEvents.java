@@ -2,6 +2,7 @@ package com.technovision.advancedgenetics.events;
 
 import com.technovision.advancedgenetics.api.genetics.Entities;
 import com.technovision.advancedgenetics.api.genetics.Genes;
+import com.technovision.advancedgenetics.common.entity.FireballEntity;
 import com.technovision.advancedgenetics.component.PlayerGeneticsComponent;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
@@ -17,7 +18,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.entity.projectile.SmallFireballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -136,10 +137,10 @@ public class GeneticsEvents {
         UseItemCallback.EVENT.register((player, world, hand) -> {
             if (!player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.SHOOT_FIREBALLS)) {
                 // Shoots a fire charge if holding blaze rod
-                if (player.getMainHandStack().getItem() == Items.BLAZE_ROD) {
-                    // TODO: FIX THIS VECTOR!
-                    Vec3d v3 = player.getCameraPosVec(0);
-                    FireballEntity fireballEntity = new FireballEntity(world, player, v3.getX(), v3.getY(), v3.getZ(), 1);
+                if (player.getMainHandStack().getItem() == Items.FIRE_CHARGE) {
+                    if (!player.isCreative()) player.getMainHandStack().decrement(1);
+                    Vec3d v3 = player.getRotationVec(1);
+                    FireballEntity fireballEntity = new FireballEntity(world, player, v3);
                     world.spawnEntity(fireballEntity);
                     player.playSound(SoundEvents.ITEM_FIRECHARGE_USE, 1.0f, 1.0f);
                     return TypedActionResult.success(player.getMainHandStack());
