@@ -37,7 +37,7 @@ public class RemoveGeneCommand {
             Genes gene = context.getArgument("gene", Genes.class);
             PlayerEntity player = selector.getPlayer(context.getSource());
             player.getComponent(ComponentRegistry.PLAYER_GENETICS).removeGene(gene);
-            player.sendMessage(Text.literal("Removed the §7" + gene.getName() + "§f gene from " + player.getName().getString() + "."));
+            player.sendMessage(Text.translatable("message.advancedgenetics.command.gene_remove", "§7"+gene.getName()+"§f", "§7"+player.getName().getString()+"§f"));
             return 1;
         } catch (Exception e) {
             System.out.println(e.getMessage());

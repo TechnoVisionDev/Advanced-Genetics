@@ -98,6 +98,9 @@
   "message.advancedgenetics.syringe": "That syringe can only be used by %s.",
   "message.advancedgenetics.inject_add": "You have gained the %s gene.",
   "message.advancedgenetics.inject_remove": "You have lost the %s gene.",
+  "message.advancedgenetics.command.gene_add": "Added the %s gene to %s.",
+  "message.advancedgenetics.command.gene_remove": "Removed the %s gene from %s.",
+  "message.advancedgenetics.command.gene_clear": "Cleared all genes from %s.",
   "key.advancedgenetics.category": "Advanced Genetics",
   "key.advancedgenetics.teleport": "Teleport"
 }

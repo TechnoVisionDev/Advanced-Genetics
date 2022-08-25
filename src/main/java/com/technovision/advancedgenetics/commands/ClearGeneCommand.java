@@ -34,7 +34,7 @@ public class ClearGeneCommand {
             EntitySelector selector = context.getArgument("player", EntitySelector.class);
             PlayerEntity player = selector.getPlayer(context.getSource());
             player.getComponent(ComponentRegistry.PLAYER_GENETICS).removeAllGenes();
-            player.sendMessage(Text.literal("Cleared all genes from " + player.getName().getString() + "."));
+            player.sendMessage(Text.translatable("message.advancedgenetics.command.gene_clear", "§7"+player.getName().getString()+"§f"));
             return 1;
         } catch (Exception e) {
             System.out.println(e.getMessage());
