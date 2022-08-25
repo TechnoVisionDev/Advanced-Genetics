@@ -2,7 +2,6 @@ package com.technovision.advancedgenetics.component;
 
 import com.technovision.advancedgenetics.api.component.EntityGeneticsComponent;
 import com.technovision.advancedgenetics.api.genetics.Genes;
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PlayerGeneticsComponent implements EntityGeneticsComponent, AutoSyncedComponent {
+public class PlayerGeneticsComponent implements EntityGeneticsComponent {
 
     private final Map<String, Genes> genes = new HashMap<>();
     private final PlayerEntity player;

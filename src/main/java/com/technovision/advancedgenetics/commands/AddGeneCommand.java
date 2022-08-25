@@ -8,6 +8,7 @@ import com.technovision.advancedgenetics.registry.ComponentRegistry;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.EntitySelector;
 import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -34,7 +35,7 @@ public class AddGeneCommand {
         try {
             EntitySelector selector = context.getArgument("player", EntitySelector.class);
             Genes gene = context.getArgument("gene", Genes.class);
-            ServerPlayerEntity player = selector.getPlayer(context.getSource());
+            PlayerEntity player = selector.getPlayer(context.getSource());
             player.getComponent(ComponentRegistry.PLAYER_GENETICS).addGene(gene);
             player.sendMessage(Text.literal("Added the §7" + gene.getName() + "§f gene to " + player.getName().getString() + "."));
             return 1;
