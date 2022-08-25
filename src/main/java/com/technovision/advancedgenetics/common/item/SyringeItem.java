@@ -160,11 +160,15 @@ public class SyringeItem extends Item {
     public static void inject(PlayerEntity player, ItemStack stack) {
         // Add genes to user
         PlayerGeneticsComponent component = player.getComponent(ComponentRegistry.PLAYER_GENETICS);
-        for (Pair<Genes, Boolean> gene : getGenes(stack)) {
-            if (gene.getRight()) {
-                component.removeGene(gene.getLeft());
-            } else {
-                component.addGene(gene.getLeft());
+        for (Pair<Genes, Boolean> genePair : getGenes(stack)) {
+            Boolean isAnti = genePair.getRight();
+            Genes gene = genePair.getLeft();
+            if (isAnti && component.hasGene(gene)) {
+                component.removeGene(gene);
+                player.sendMessage(Text.translatable("message."+AdvancedGenetics.MOD_ID+".inject_remove", "§7"+gene.getName()+"§f"));
+            } else if (!isAnti && !component.hasGene(gene)) {
+                component.addGene(gene);
+                player.sendMessage(Text.translatable("message."+AdvancedGenetics.MOD_ID+".inject_add", "§7"+gene.getName()+"§f"));
             }
         }
 

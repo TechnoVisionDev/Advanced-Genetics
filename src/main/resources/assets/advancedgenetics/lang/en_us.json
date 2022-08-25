@@ -96,6 +96,8 @@
   "advancedgenetics.container.plasmid_injector_block_entity": "Plasmid Injector",
   "tooltip.advancedgenetics.energy_requirement": "Requires %d E/t",
   "message.advancedgenetics.syringe": "That syringe can only be used by %s.",
+  "message.advancedgenetics.inject_add": "You have gained the %s gene.",
+  "message.advancedgenetics.inject_remove": "You have lost the %s gene.",
   "key.advancedgenetics.category": "Advanced Genetics",
   "key.advancedgenetics.teleport": "Teleport"
 }
