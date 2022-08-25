@@ -99,7 +99,7 @@ public class GeneticsEvents {
             return true;
         });
 
-        // Handles "Wither Hit" gene
+        // Handles "Wither Hit" and "Venom" gene
         AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
             if (player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.WITHER_HIT)) {
                 // Apply wither affect for 1-5 seconds
@@ -107,6 +107,22 @@ public class GeneticsEvents {
                     if (!livingEntity.hasStatusEffect(StatusEffects.WITHER)) {
                         int seconds = ThreadLocalRandom.current().nextInt(5) + 1;
                         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 20*seconds, 0));
+                        return ActionResult.SUCCESS;
+                    }
+                }
+            }
+            PlayerGeneticsComponent component = player.getComponent(ComponentRegistry.PLAYER_GENETICS);
+            if (entity instanceof LivingEntity livingEntity) {
+                if (component.hasGene(Genes.WITHER_HIT) && !livingEntity.hasStatusEffect(StatusEffects.WITHER)) {
+                    // Apply wither affect for 1-5 seconds
+                    int seconds = ThreadLocalRandom.current().nextInt(5) + 1;
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 20*seconds, 0));
+                    return ActionResult.SUCCESS;
+                }
+                if (component.hasGene(Genes.VENOM) && !livingEntity.hasStatusEffect(StatusEffects.POISON)) {
+                    // 5% chance to apply poison affect for 30 seconds
+                    if (ThreadLocalRandom.current().nextDouble() <= 0.05) {
+                        livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 20 * 30, 0));
                         return ActionResult.SUCCESS;
                     }
                 }

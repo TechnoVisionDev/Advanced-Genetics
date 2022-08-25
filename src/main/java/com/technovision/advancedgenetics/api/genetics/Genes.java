@@ -33,6 +33,7 @@ public enum Genes {
     SPEED("Speed", "c372f"),
     STRENGTH("Strength", "63ee3a1b"),
     TELEPORT("Teleport", "e68b3b94"),
+    VENOM("Venom", "393b6"),
     WATER_BREATHING("Water Breathing", "4fa023594764255"),
     WEB_WALKING("Web Walking", "c58cb03639f"),
     WITHER_RESISTANCE("Wither Resistance", "15e26cc9132777ca"),

@@ -14,7 +14,7 @@ public enum Entities {
     CAT("cat", EntityType.CAT, "747474", List.of(SPEED, SCARE_CREEPERS)),
     COW("cow", EntityType.COW, "443626", List.of(MILKY, EAT_GRASS)),
     CHICKEN("chicken", EntityType.CHICKEN, "e2e2e2", List.of(LAY_EGG, NO_FALL_DAMAGE)),
-    CAVE_SPIDER("cave_spider", EntityType.CAVE_SPIDER, "546870", List.of(NIGHT_VISION, POISON_IMMUNITY, WEB_WALKING)),
+    CAVE_SPIDER("cave_spider", EntityType.CAVE_SPIDER, "546870", List.of(NIGHT_VISION, VENOM, POISON_IMMUNITY, WEB_WALKING)),
     CREEPER("creeper", EntityType.CREEPER, "65d152", List.of(EXPLOSIVE_EXIT)),
     DROWNED("drowned", EntityType.DROWNED, "4d9280", List.of(RESISTANCE, WATER_BREATHING)),
     ENDERMAN("enderman", EntityType.ENDERMAN, "e079fa", List.of(TELEPORT)),
