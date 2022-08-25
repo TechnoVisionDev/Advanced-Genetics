@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.SlimeEntity;
@@ -64,12 +65,13 @@ public class GeneticsEvents {
                 }
                 // Shear porkchops off player
                 if (stack.getItem() == Items.SHEARS && component.hasGene(Genes.MEATY)) {
-                    clickedPlayer.dropStack(new ItemStack(Items.PORKCHOP));
+                    clickedPlayer.dropStack(new ItemStack(Items.PORKCHOP, 1));
+                    clickedPlayer.damage(DamageSource.player(player), 2);
                     player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
                 }
                 // Shear wool off player
                 if (stack.getItem() == Items.SHEARS && component.hasGene(Genes.WOOLY)) {
-                    clickedPlayer.dropStack(new ItemStack(Items.WHITE_WOOL));
+                    clickedPlayer.dropStack(new ItemStack(Items.WHITE_WOOL, 1));
                     player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
                 }
             }
