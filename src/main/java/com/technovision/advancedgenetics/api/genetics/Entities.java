@@ -11,7 +11,7 @@ import static com.technovision.advancedgenetics.api.genetics.Genes.*;
 public enum Entities {
     BAT("bat", EntityType.BAT, "524020", List.of(NIGHT_VISION)),
     BLAZE("blaze", EntityType.BLAZE, "ffd528", List.of(FIREPROOF, SHOOT_FIREBALLS)),
-    CAT("cat", EntityType.CAT, "747474", List.of(SPEED)),
+    CAT("cat", EntityType.CAT, "747474", List.of(SPEED, SCARE_CREEPERS)),
     COW("cow", EntityType.COW, "443626", List.of(MILKY, EAT_GRASS)),
     CHICKEN("chicken", EntityType.CHICKEN, "e2e2e2", List.of(LAY_EGG, NO_FALL_DAMAGE)),
     CAVE_SPIDER("cave_spider", EntityType.CAVE_SPIDER, "546870", List.of(NIGHT_VISION, POISON_IMMUNITY)),
@@ -25,7 +25,7 @@ public enum Entities {
     IRON_GOLEM("iron_golem", EntityType.IRON_GOLEM, "e2dbd6", List.of(REGENERATION, RESISTANCE)),
     MAGMA_CUBE("magma_cube", EntityType.MAGMA_CUBE, "d3550e", List.of(FIREPROOF)),
     MOOSHROOM("mooshroom", EntityType.MOOSHROOM, "a81012", List.of(MILKY, EAT_GRASS)),
-    OCELOT("ocelot", EntityType.OCELOT, "f2d19a", List.of(SPEED)),
+    OCELOT("ocelot", EntityType.OCELOT, "f2d19a", List.of(SPEED, SCARE_CREEPERS)),
     PANDA("panda", EntityType.PANDA, "f6f6f6", List.of(NO_HUNGER, MEATY)),
     PIG("pig", EntityType.PIG, "f19e98", List.of(MEATY)),
     POLAR_BEAR("polar_bear", EntityType.POLAR_BEAR, "f6f6f6", List.of(STRENGTH, MEATY)),

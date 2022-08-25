@@ -6,7 +6,9 @@
   "mixins": [
     "ServerPlayerEntityMixin",
     "PlayerEntityMixin",
-    "BowItemMixin"
+    "BowItemMixin",
+    "CreeperEntityMixin",
+    "FleeEntityGoalAccessor"
   ],
   "client": [
   ],
