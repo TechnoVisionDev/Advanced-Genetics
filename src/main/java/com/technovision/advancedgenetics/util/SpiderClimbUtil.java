@@ -28,17 +28,17 @@ public class SpiderClimbUtil {
         BlockState southUp = world.getBlockState(south.offset(Direction.UP, 1));
         BlockState westUp = world.getBlockState(west.offset(Direction.UP, 1));
 
-        if (northBS.getBlock() != Blocks.AIR && northUp.getBlock() != Blocks.AIR) {
-            return !northBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !northUp.isIn(BlockTags.REPLACEABLE_PLANTS);
+        if (northBS.getBlock() != Blocks.AIR && northUp.getBlock() != Blocks.AIR && !northBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !northUp.isIn(BlockTags.REPLACEABLE_PLANTS)) {
+            return true;
         }
-        else if (eastBS.getBlock() != Blocks.AIR && eastUp.getBlock() != Blocks.AIR) {
-            return !eastBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !eastUp.isIn(BlockTags.REPLACEABLE_PLANTS);
+        else if (eastBS.getBlock() != Blocks.AIR && eastUp.getBlock() != Blocks.AIR && !eastBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !eastUp.isIn(BlockTags.REPLACEABLE_PLANTS)) {
+            return true;
         }
-        else if (southBS.getBlock() != Blocks.AIR && southUp.getBlock() != Blocks.AIR) {
-            return !southBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !southUp.isIn(BlockTags.REPLACEABLE_PLANTS);
+        else if (southBS.getBlock() != Blocks.AIR && southUp.getBlock() != Blocks.AIR && !southBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !southUp.isIn(BlockTags.REPLACEABLE_PLANTS)) {
+            return true;
         }
-        else if (westBS.getBlock() != Blocks.AIR && westUp.getBlock() != Blocks.AIR) {
-            return !westBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !westUp.isIn(BlockTags.REPLACEABLE_PLANTS);
+        else if (westBS.getBlock() != Blocks.AIR && westUp.getBlock() != Blocks.AIR && !westBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !westUp.isIn(BlockTags.REPLACEABLE_PLANTS)) {
+            return true;
         }
         return false;
     }
@@ -56,17 +56,17 @@ public class SpiderClimbUtil {
         BlockState southBS = world.getBlockState(south);
         BlockState westBS = world.getBlockState(west);
 
-        if (northBS.getBlock() != Blocks.AIR) {
-            return !northBS.isIn(BlockTags.REPLACEABLE_PLANTS);
+        if (northBS.getBlock() != Blocks.AIR && !northBS.isIn(BlockTags.REPLACEABLE_PLANTS)) {
+            return true;
         }
-        else if (eastBS.getBlock() != Blocks.AIR ) {
-            return !eastBS.isIn(BlockTags.REPLACEABLE_PLANTS);
+        else if (eastBS.getBlock() != Blocks.AIR && !eastBS.isIn(BlockTags.REPLACEABLE_PLANTS)) {
+            return true;
         }
-        else if (southBS.getBlock() != Blocks.AIR) {
-            return !southBS.isIn(BlockTags.REPLACEABLE_PLANTS);
+        else if (southBS.getBlock() != Blocks.AIR && !southBS.isIn(BlockTags.REPLACEABLE_PLANTS)) {
+            return true;
         }
-        else if (westBS.getBlock() != Blocks.AIR) {
-            return !westBS.isIn(BlockTags.REPLACEABLE_PLANTS);
+        else if (westBS.getBlock() != Blocks.AIR && !westBS.isIn(BlockTags.REPLACEABLE_PLANTS)) {
+            return true;
         }
         return false;
     }

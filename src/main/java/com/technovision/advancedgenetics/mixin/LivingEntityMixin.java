@@ -39,7 +39,8 @@ public abstract class LivingEntityMixin extends Entity {
                     BlockPos blockPos = this.getBlockPos();
                     BlockState blockBelowPlayer = world.getBlockState(blockPos.offset(Direction.DOWN, 1));
                     if (blockBelowPlayer.getBlock() != Blocks.AIR
-                        && !blockBelowPlayer.isIn(BlockTags.REPLACEABLE_PLANTS)) {
+                        && !blockBelowPlayer.isIn(BlockTags.REPLACEABLE_PLANTS)
+                        && !blockBelowPlayer.isIn(BlockTags.FLOWERS)) {
                         if (SpiderClimbUtil.canStartClimb(player, blockPos)) {
                             this.climbingPos = Optional.of(blockPos);
                             info.setReturnValue(true);
