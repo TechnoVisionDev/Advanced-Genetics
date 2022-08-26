@@ -25,4 +25,8 @@ public interface EntityGeneticsComponent extends Component, ServerTickingCompone
     void removeGene(Genes gene);
 
     void removeAllGenes();
+
+    void addCooldown(String key, long seconds);
+
+    boolean isOnCooldown(String key);
 }

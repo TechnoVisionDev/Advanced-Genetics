@@ -17,6 +17,7 @@ import java.util.Map;
 public class PlayerGeneticsComponent implements EntityGeneticsComponent {
 
     private final Map<String, Genes> genes = new HashMap<>();
+    private final Map<String, Long> cooldowns = new HashMap<>();
     private final PlayerEntity player;
     private int tickCounter;
     private long totalSeconds;
@@ -177,5 +178,18 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
     public void removeAllGenes() {
         genes.clear();
         player.syncComponent(ComponentRegistry.PLAYER_GENETICS);
+    }
+
+    @Override
+    public void addCooldown(String key, long seconds) {
+        cooldowns.put(key, System.currentTimeMillis() + (1000 * seconds));
+        player.syncComponent(ComponentRegistry.PLAYER_GENETICS);
+    }
+
+    @Override
+    public boolean isOnCooldown(String key) {
+        Long cooldown = cooldowns.get(key);
+        if (cooldown == null) return false;
+        return (System.currentTimeMillis() < cooldown);
     }
 }

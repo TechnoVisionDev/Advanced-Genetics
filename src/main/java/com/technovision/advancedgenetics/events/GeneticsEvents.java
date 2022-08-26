@@ -95,7 +95,10 @@ public class GeneticsEvents {
             }
             if (component.hasGene(Genes.EMERALD_HEART)) {
                 // Drop emerald on death
-                player.dropStack(new ItemStack(Items.EMERALD));
+                if (!component.isOnCooldown("emerald_heart")) {
+                    player.dropStack(new ItemStack(Items.EMERALD));
+                    component.addCooldown("emerald_heart", 300);
+                }
             }
             if (component.hasGene(Genes.SLIMY)) {
                 // Spawn slime
