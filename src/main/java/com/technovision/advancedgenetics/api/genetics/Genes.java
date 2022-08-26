@@ -7,6 +7,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public enum Genes {
     BASIC("Basic Gene", "9707bf0fd3"),
+    BEELICIOUS("Beelicious", "f2d57d91ad"),
     CLIMB_WALLS("Climb Walls", "055de4bedf7"),
     DRAGONS_BREATH("Dragon's Breath", "4a3f341dc64aa0b"),
     DRAGONS_HEALTH("Dragon's Health", "35a2097282f5af1"),
@@ -16,7 +17,6 @@ public enum Genes {
     FIREPROOF("Fireproof", "c821b0866"),
     FLIGHT("Flight", "8d39f0"),
     HASTE("Haste", "de3b4"),
-    BEELICIOUS("Beelicious", "f2d57d91ad"),
     INFINITY("Infinity", "d0067cad"),
     INVISIBILITY("Invisibility", "d53895c6eb78"),
     JUMP_BOOST("Jump Boost", "25f03ac91f"),
