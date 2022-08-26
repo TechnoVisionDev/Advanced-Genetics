@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "advancedgenetics:bat_matter",
+    "advancedgenetics:bee_matter",
     "advancedgenetics:blaze_matter",
     "advancedgenetics:cat_matter",
     "advancedgenetics:cave_spider_matter",
@@ -26,6 +27,7 @@
     "advancedgenetics:polar_bear_matter",
     "advancedgenetics:rabbit_matter",
     "advancedgenetics:sheep_matter",
+    "advancedgenetics:shulker_matter",
     "advancedgenetics:silverfish_matter",
     "advancedgenetics:skeleton_matter",
     "advancedgenetics:slime_matter",

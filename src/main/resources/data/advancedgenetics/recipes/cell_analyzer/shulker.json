@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:shulker_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:shulker_cell"
+  }
+}

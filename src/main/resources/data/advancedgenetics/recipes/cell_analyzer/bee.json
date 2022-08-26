@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "item": "advancedgenetics:bee_matter"
+  },
+  "result": {
+    "item": "advancedgenetics:bee_cell"
+  }
+}

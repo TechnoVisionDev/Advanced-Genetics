@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "advancedgenetics:bat_cell",
+    "advancedgenetics:bee_cell",
     "advancedgenetics:blaze_cell",
     "advancedgenetics:cat_cell",
     "advancedgenetics:cave_spider_cell",
@@ -26,6 +27,7 @@
     "advancedgenetics:polar_bear_cell",
     "advancedgenetics:rabbit_cell",
     "advancedgenetics:sheep_cell",
+    "advancedgenetics:shulker_cell",
     "advancedgenetics:silverfish_cell",
     "advancedgenetics:skeleton_cell",
     "advancedgenetics:slime_cell",

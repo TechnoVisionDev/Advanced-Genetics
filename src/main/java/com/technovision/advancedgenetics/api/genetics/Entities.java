@@ -11,6 +11,7 @@ import static com.technovision.advancedgenetics.api.genetics.Genes.*;
 
 public enum Entities {
     BAT("bat", EntityType.BAT, "524020", List.of(NIGHT_VISION)),
+    BEE("bee", EntityType.BEE, "edc343", List.of()),
     BLAZE("blaze", EntityType.BLAZE, "ffd528", List.of(FIREPROOF, SHOOT_FIREBALLS)),
     CAT("cat", EntityType.CAT, "747474", List.of(SPEED, SCARE_CREEPERS)),
     COW("cow", EntityType.COW, "443626", List.of(MILKY, EAT_GRASS)),
@@ -20,7 +21,7 @@ public enum Entities {
     DROWNED("drowned", EntityType.DROWNED, "4d9280", List.of(RESISTANCE, WATER_BREATHING)),
     ENDERMAN("enderman", EntityType.ENDERMAN, "e079fa", List.of(TELEPORT)),
     ENDER_DRAGON("ender_dragon", EntityType.ENDER_DRAGON, "e079fa", List.of(FLIGHT, DRAGONS_BREATH, DRAGONS_HEALTH)),
-    FROG("frog", EntityType.FROG, "7fa058", List.of(POISON_IMMUNITY)),
+    FROG("frog", EntityType.FROG, "63902e", List.of(POISON_IMMUNITY)),
     GUARDIAN("guardian", EntityType.GUARDIAN, "83a59c", List.of(WATER_BREATHING, MOB_SIGHT)),
     GHAST("ghast", EntityType.GHAST, "f6f6f6", List.of(SHOOT_FIREBALLS)),
     HORSE("horse", EntityType.HORSE, "946734", List.of(JUMP_BOOST)),
@@ -35,6 +36,7 @@ public enum Entities {
     POLAR_BEAR("polar_bear", EntityType.POLAR_BEAR, "f6f6f6", List.of(STRENGTH, MEATY)),
     RABBIT("rabbit", EntityType.RABBIT, "ada498", List.of(JUMP_BOOST, SPEED, LUCK)),
     SHEEP("sheep", EntityType.SHEEP, "dedede", List.of(EAT_GRASS, WOOLY)),
+    SHULKER("shulker", EntityType.SHULKER, "976997", List.of(RESISTANCE)),
     SQUID("squid", EntityType.SQUID, "546d80", List.of(WATER_BREATHING)),
     SPIDER("spider", EntityType.SPIDER, "4f453c", List.of(NIGHT_VISION, CLIMB_WALLS)),
     SKELETON("skeleton", EntityType.SKELETON, "bcbcbc", List.of(INFINITY)),
