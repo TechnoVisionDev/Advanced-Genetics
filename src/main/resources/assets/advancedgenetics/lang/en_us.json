@@ -106,6 +106,7 @@
   "message.advancedgenetics.command.gene_add": "Added the %s gene to %s.",
   "message.advancedgenetics.command.gene_remove": "Removed the %s gene from %s.",
   "message.advancedgenetics.command.gene_clear": "Cleared all genes from %s.",
+  "message.advancedgenetics.cooldown": "The %s gene is on cooldown.",
   "key.advancedgenetics.category": "Advanced Genetics",
   "key.advancedgenetics.teleport": "Teleport",
   "key.advancedgenetics.dragons_breath": "Dragon's Breath"

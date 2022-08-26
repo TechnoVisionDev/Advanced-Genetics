@@ -17,6 +17,7 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.projectile.DragonFireballEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
@@ -43,14 +44,25 @@ public class KeyInputEvents {
             String geneName = buf.readString();
             PlayerGeneticsComponent component = player.getComponent(ComponentRegistry.PLAYER_GENETICS);
             if (geneName.equals("teleport") && component.hasGene(Genes.TELEPORT)) {
-                Vec3d v3 = player.getRotationVector().multiply(6).add(player.getEyePos());
-                player.teleport(v3.getX(), v3.getY(), v3.getZ(), true);
+                if (!component.isOnCooldown("teleport")) {
+                    Vec3d v3 = player.getRotationVector().multiply(6).add(player.getEyePos());
+                    player.teleport(v3.getX(), v3.getY(), v3.getZ(), true);
+                    component.addCooldown("teleport", 1);
+                } else {
+                    player.sendMessage(Text.translatable("message."+AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.TELEPORT.getName()+"§f"));
+                }
             }
             else if (geneName.equals("dragons_breath") && component.hasGene(Genes.DRAGONS_BREATH)) {
-                Vec3d v3 = player.getRotationVec(1);
-                DragonFireballEntity fireballEntity = new DragonFireballEntity(player.getWorld(), player, v3.getX(), v3.getY(), v3.getZ());
-                fireballEntity.setPosition(player.getX(), player.getY() + 1.5, player.getZ());
-                player.getWorld().spawnEntity(fireballEntity);
+                if (!component.isOnCooldown("dragons_breath")) {
+                    Vec3d v3 = player.getRotationVec(1);
+                    DragonFireballEntity fireballEntity = new DragonFireballEntity(player.getWorld(), player, v3.getX(), v3.getY(), v3.getZ());
+                    fireballEntity.setPosition(player.getX(), player.getY() + 1.5, player.getZ());
+                    player.getWorld().spawnEntity(fireballEntity);
+                    player.playSound(SoundEvents.ENTITY_ENDER_DRAGON_SHOOT, 1.0f, 1.0f);
+                    component.addCooldown("dragons_breath", 15);
+                } else {
+                    player.sendMessage(Text.translatable("message."+AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.DRAGONS_BREATH.getName()+"§f"));
+                }
             }
         });
     }
@@ -63,13 +75,11 @@ public class KeyInputEvents {
                 PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
                 buf.writeString("teleport");
                 ClientPlayNetworking.send(new Identifier(AdvancedGenetics.MOD_ID, "key_pressed"), buf);
-                client.player.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0f, 1.0f);
             }
             else if (dragonsBreathKey.wasPressed() && component.hasGene(Genes.DRAGONS_BREATH)) {
                 PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
                 buf.writeString("dragons_breath");
                 ClientPlayNetworking.send(new Identifier(AdvancedGenetics.MOD_ID, "key_pressed"), buf);
-                client.player.playSound(SoundEvents.ENTITY_ENDER_DRAGON_SHOOT, 1.0f, 1.0f);
             }
         });
     }

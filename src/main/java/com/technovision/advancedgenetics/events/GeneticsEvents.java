@@ -1,5 +1,6 @@
 package com.technovision.advancedgenetics.events;
 
+import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.api.genetics.Entities;
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.common.entity.FireballEntity;
@@ -24,6 +25,7 @@ import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -71,14 +73,23 @@ public class GeneticsEvents {
                 }
                 // Shear porkchops off player
                 if (stack.getItem() == Items.SHEARS && component.hasGene(Genes.MEATY)) {
-                    clickedPlayer.dropStack(new ItemStack(Items.PORKCHOP, 1));
-                    clickedPlayer.damage(DamageSource.player(player), 2);
-                    player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
+                    if (!component.isOnCooldown("meaty")) {
+                        clickedPlayer.dropStack(new ItemStack(Items.PORKCHOP, 1));
+                        player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
+                        component.addCooldown("meaty", 30);
+                    } else {
+                        player.sendMessage(Text.translatable("message."+ AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.MEATY.getName()+"§f"));
+                    }
                 }
                 // Shear wool off player
                 if (stack.getItem() == Items.SHEARS && component.hasGene(Genes.WOOLY)) {
-                    clickedPlayer.dropStack(new ItemStack(Items.WHITE_WOOL, 1));
-                    player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
+                    if (!component.isOnCooldown("wooly")) {
+                        clickedPlayer.dropStack(new ItemStack(Items.WHITE_WOOL, 1));
+                        player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
+                        component.addCooldown("wooly", 30);
+                    } else {
+                        player.sendMessage(Text.translatable("message."+ AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.WOOLY.getName()+"§f"));
+                    }
                 }
             }
             return ActionResult.SUCCESS;

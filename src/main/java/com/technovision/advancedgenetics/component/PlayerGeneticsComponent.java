@@ -183,7 +183,6 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
     @Override
     public void addCooldown(String key, long seconds) {
         cooldowns.put(key, System.currentTimeMillis() + (1000 * seconds));
-        player.syncComponent(ComponentRegistry.PLAYER_GENETICS);
     }
 
     @Override
