@@ -36,7 +36,7 @@ public enum Entities {
     POLAR_BEAR("polar_bear", EntityType.POLAR_BEAR, "f6f6f6", List.of(STRENGTH, MEATY)),
     RABBIT("rabbit", EntityType.RABBIT, "ada498", List.of(JUMP_BOOST, SPEED, LUCK)),
     SHEEP("sheep", EntityType.SHEEP, "ececec", List.of(EAT_GRASS, WOOLY)),
-    SHULKER("shulker", EntityType.SHULKER, "976997", List.of(RESISTANCE)),
+    SHULKER("shulker", EntityType.SHULKER, "976997", List.of(RESISTANCE, REGENERATION)),
     SQUID("squid", EntityType.SQUID, "546d80", List.of(WATER_BREATHING)),
     SPIDER("spider", EntityType.SPIDER, "4f453c", List.of(NIGHT_VISION, CLIMB_WALLS)),
     SKELETON("skeleton", EntityType.SKELETON, "bcbcbc", List.of(INFINITY)),
