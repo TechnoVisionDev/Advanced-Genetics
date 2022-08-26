@@ -58,7 +58,8 @@ public class GeneticsEvents {
 
         // Handles the "Milky" and "Meaty" genes
         UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-            if (world.isClient()) return ActionResult.PASS;
+            if (world.isClient() || hand != Hand.MAIN_HAND) return ActionResult.PASS;
+            player.sendMessage(Text.literal(""+world.isClient()));
             if (entity instanceof PlayerEntity clickedPlayer) {
                 // Milk player
                 PlayerGeneticsComponent component = player.getComponent(ComponentRegistry.PLAYER_GENETICS);
@@ -76,7 +77,8 @@ public class GeneticsEvents {
                     if (!component.isOnCooldown("meaty")) {
                         clickedPlayer.dropStack(new ItemStack(Items.PORKCHOP, 1));
                         player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
-                        component.addCooldown("meaty", 30);
+                        component.addCooldown("meaty", 15);
+                        player.playSound(SoundEvents.ENTITY_MOOSHROOM_SHEAR, 1.0f, 1.0f);
                     } else {
                         player.sendMessage(Text.translatable("message."+ AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.MEATY.getName()+"§f"));
                     }
@@ -86,7 +88,8 @@ public class GeneticsEvents {
                     if (!component.isOnCooldown("wooly")) {
                         clickedPlayer.dropStack(new ItemStack(Items.WHITE_WOOL, 1));
                         player.getMainHandStack().damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
-                        component.addCooldown("wooly", 30);
+                        component.addCooldown("wooly", 15);
+                        player.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0f, 1.0f);
                     } else {
                         player.sendMessage(Text.translatable("message."+ AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.WOOLY.getName()+"§f"));
                     }
