@@ -16,6 +16,7 @@ public enum Genes {
     FIREPROOF("Fireproof", "c821b0866"),
     FLIGHT("Flight", "8d39f0"),
     HASTE("Haste", "de3b4"),
+    BEELICIOUS("Beelicious", "f2d57d91ad"),
     INFINITY("Infinity", "d0067cad"),
     INVISIBILITY("Invisibility", "d53895c6eb78"),
     JUMP_BOOST("Jump Boost", "25f03ac91f"),

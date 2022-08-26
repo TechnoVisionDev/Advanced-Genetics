@@ -11,7 +11,7 @@ import static com.technovision.advancedgenetics.api.genetics.Genes.*;
 
 public enum Entities {
     BAT("bat", EntityType.BAT, "524020", List.of(NIGHT_VISION)),
-    BEE("bee", EntityType.BEE, "edc343", List.of()),
+    BEE("bee", EntityType.BEE, "edc343", List.of(BEELICIOUS)),
     BLAZE("blaze", EntityType.BLAZE, "ffd528", List.of(FIREPROOF, SHOOT_FIREBALLS)),
     CAT("cat", EntityType.CAT, "747474", List.of(SPEED, SCARE_CREEPERS)),
     COW("cow", EntityType.COW, "443626", List.of(MILKY, EAT_GRASS)),

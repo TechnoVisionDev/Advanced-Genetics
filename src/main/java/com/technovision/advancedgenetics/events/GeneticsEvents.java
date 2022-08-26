@@ -64,6 +64,11 @@ public class GeneticsEvents {
                 if (stack.getItem() == Items.BUCKET && component.hasGene(Genes.MILKY)) {
                     player.setStackInHand(Hand.MAIN_HAND, new ItemStack(Items.MILK_BUCKET));
                 }
+                // Get honey from player
+                if (stack.getItem() == Items.GLASS_BOTTLE && component.hasGene(Genes.BEELICIOUS)) {
+                    player.getStackInHand(Hand.MAIN_HAND).decrement(1);
+                    player.getInventory().insertStack(new ItemStack(Items.HONEY_BOTTLE));
+                }
                 // Shear porkchops off player
                 if (stack.getItem() == Items.SHEARS && component.hasGene(Genes.MEATY)) {
                     clickedPlayer.dropStack(new ItemStack(Items.PORKCHOP, 1));
