@@ -59,18 +59,29 @@ public class GeneticsEvents {
         // Handles the "Milky" and "Meaty" genes
         UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
             if (world.isClient() || hand != Hand.MAIN_HAND) return ActionResult.PASS;
-            player.sendMessage(Text.literal(""+world.isClient()));
             if (entity instanceof PlayerEntity clickedPlayer) {
                 // Milk player
-                PlayerGeneticsComponent component = player.getComponent(ComponentRegistry.PLAYER_GENETICS);
+                PlayerGeneticsComponent component = clickedPlayer.getComponent(ComponentRegistry.PLAYER_GENETICS);
                 ItemStack stack = player.getMainHandStack();
                 if (stack.getItem() == Items.BUCKET && component.hasGene(Genes.MILKY)) {
-                    player.setStackInHand(Hand.MAIN_HAND, new ItemStack(Items.MILK_BUCKET));
+                    if (!component.isOnCooldown("milky")) {
+                        player.setStackInHand(Hand.MAIN_HAND, new ItemStack(Items.MILK_BUCKET));
+                        component.addCooldown("milky", 15);
+                        player.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0f, 1.0f);
+                    } else {
+                        player.sendMessage(Text.translatable("message."+ AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.MILKY.getName()+"§f"));
+                    }
                 }
                 // Get honey from player
                 if (stack.getItem() == Items.GLASS_BOTTLE && component.hasGene(Genes.BEELICIOUS)) {
-                    player.getStackInHand(Hand.MAIN_HAND).decrement(1);
-                    player.getInventory().insertStack(new ItemStack(Items.HONEY_BOTTLE));
+                    if (!component.isOnCooldown("beelicious")) {
+                        player.getStackInHand(Hand.MAIN_HAND).decrement(1);
+                        player.getInventory().insertStack(new ItemStack(Items.HONEY_BOTTLE));
+                        component.addCooldown("beelicious", 300);
+                        player.playSound(SoundEvents.BLOCK_BEEHIVE_DRIP, 1.0f, 1.0f);
+                    } else {
+                        player.sendMessage(Text.translatable("message."+ AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.BEELICIOUS.getName()+"§f"));
+                    }
                 }
                 // Shear porkchops off player
                 if (stack.getItem() == Items.SHEARS && component.hasGene(Genes.MEATY)) {
