@@ -15,7 +15,7 @@ public class ClientEvents {
     public static void propertyOverrideRegistry() {
         ClientLifecycleEvents.CLIENT_STARTED.register((client) -> {
             ModelPredicateProviderRegistry.register(
-                    ItemRegistry.GLASS_SYRINGE,
+                    ItemRegistry.SYRINGE,
                     new Identifier(AdvancedGenetics.MOD_ID, "filled"),
                     (itemStack, clientWorld, livingEntity, num) -> SyringeItem.isFilled(itemStack) ? 1 : 0
             );

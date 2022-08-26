@@ -25,7 +25,7 @@ public class ItemRegistry {
     public static final ScalpelItem METAL_SCALPEL = new ScalpelItem(25);
     public static final ScalpelItem DIAMOND_SCALPEL = new ScalpelItem(150);
     public static final ScalpelItem NETHERITE_SCALPEL = new ScalpelItem(300);
-    public static final SyringeItem GLASS_SYRINGE = new SyringeItem();
+    public static final SyringeItem SYRINGE = new SyringeItem();
     public static final Item OVERCLOCKER = new Item(ITEM_SETTINGS);
 
     // Block Items
@@ -55,7 +55,7 @@ public class ItemRegistry {
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "metal_scalpel"), METAL_SCALPEL);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "diamond_scalpel"), DIAMOND_SCALPEL);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "netherite_scalpel"), NETHERITE_SCALPEL);
-        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "glass_syringe"), GLASS_SYRINGE);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "syringe"), SYRINGE);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "overclocker"), OVERCLOCKER);
 
         // Items
