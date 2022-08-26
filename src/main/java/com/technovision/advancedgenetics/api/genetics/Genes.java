@@ -3,11 +3,13 @@ package com.technovision.advancedgenetics.api.genetics;
 import com.technovision.advancedgenetics.Config;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 public enum Genes {
     BASIC("Basic Gene", "9707bf0fd3"),
     CLIMB_WALLS("Climb Walls", "055de4bedf7"),
-    DRAGONS_HEALTH("Dragons Health", "35a20972825af"),
+    DRAGONS_BREATH("Dragon's Breath", "4a3f341dc64aa0b"),
+    DRAGONS_HEALTH("Dragon's Health", "35a2097282f5af1"),
     EAT_GRASS("Eat Grass", "73f73be68"),
     EMERALD_HEART("Emerald Heart", "85f608e331505"),
     EXPLOSIVE_EXIT("Explosive Exit", "fdcdf662a4360f"),
@@ -61,7 +63,9 @@ public enum Genes {
 
     public boolean isEnabled() {
         if (this == Genes.BASIC) return false;
-        Boolean result = Config.Common.genes.get(this.toString().toLowerCase()).get();
+        ForgeConfigSpec.BooleanValue value = Config.Common.genes.get(this.toString().toLowerCase());
+        if (value == null) return false;
+        Boolean result = value.get();
         if (result == null) return false;
         return result;
     }

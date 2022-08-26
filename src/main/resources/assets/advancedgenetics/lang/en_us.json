@@ -103,5 +103,6 @@
   "message.advancedgenetics.command.gene_remove": "Removed the %s gene from %s.",
   "message.advancedgenetics.command.gene_clear": "Cleared all genes from %s.",
   "key.advancedgenetics.category": "Advanced Genetics",
-  "key.advancedgenetics.teleport": "Teleport"
+  "key.advancedgenetics.teleport": "Teleport",
+  "key.advancedgenetics.dragons_breath": "Dragon's Breath"
 }

@@ -19,7 +19,7 @@ public enum Entities {
     CREEPER("creeper", EntityType.CREEPER, "65d152", List.of(EXPLOSIVE_EXIT)),
     DROWNED("drowned", EntityType.DROWNED, "4d9280", List.of(RESISTANCE, WATER_BREATHING)),
     ENDERMAN("enderman", EntityType.ENDERMAN, "e079fa", List.of(TELEPORT)),
-    ENDER_DRAGON("ender_dragon", EntityType.ENDER_DRAGON, "e079fa", List.of(KEEP_INVENTORY, FLIGHT, DRAGONS_HEALTH)),
+    ENDER_DRAGON("ender_dragon", EntityType.ENDER_DRAGON, "e079fa", List.of(FLIGHT, DRAGONS_BREATH, DRAGONS_HEALTH)),
     FROG("frog", EntityType.FROG, "7fa058", List.of(POISON_IMMUNITY)),
     GUARDIAN("guardian", EntityType.GUARDIAN, "83a59c", List.of(WATER_BREATHING, MOB_SIGHT)),
     GHAST("ghast", EntityType.GHAST, "f6f6f6", List.of(SHOOT_FIREBALLS)),
