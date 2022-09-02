@@ -1,6 +1,5 @@
 package com.technovision.advancedgenetics;
 
-import com.technovision.advancedgenetics.client.ClientEvents;
 import com.technovision.advancedgenetics.commands.AddGeneCommand;
 import com.technovision.advancedgenetics.commands.ClearGeneCommand;
 import com.technovision.advancedgenetics.commands.GeneArgumentType;
@@ -39,7 +38,6 @@ public class AdvancedGenetics implements ModInitializer {
         BlockEntityRegistry.registerBlockEntities();
         ScreenRegistry.registerScreens();
         RecipeRegistry.registerRecipes();
-        ClientEvents.propertyOverrideRegistry();
 
         // Register events
         GeneticsEvents.registerEvents();
