@@ -1,6 +1,6 @@
 ![lol](https://i.imgur.com/ElQpqvH.png)
 
-[![](https://cf.way2muchnoise.eu/full_advanced-genetics-fabric_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/advanced-genetics-fabric) [![](https://cf.way2muchnoise.eu/packs/advanced-genetics-fabric.svg)](https://www.curseforge.com/minecraft/mc-mods/advanced-genetics-fabric) [![](https://cf.way2muchnoise.eu/versions/advanced-genetics-fabric.svg)](https://www.curseforge.com/minecraft/mc-mods/advanced-genetics-fabric) [![](https://img.shields.io/badge/Discord-TechnoVision-738bd7.svg)](https://discord.gg/m5fjByfrKP)
+[![](https://cf.way2muchnoise.eu/full_advanced-genetics_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/advanced-genetics) [![](https://cf.way2muchnoise.eu/packs/advanced-genetics.svg)](https://www.curseforge.com/minecraft/mc-mods/advanced-genetics) [![](https://cf.way2muchnoise.eu/versions/advanced-genetics.svg)](https://www.curseforge.com/minecraft/mc-mods/advanced-genetics) [![](https://img.shields.io/badge/Discord-TechnoVision-738bd7.svg)](https://discord.gg/m5fjByfrKP)
 
 # Advanced Genetics - Fabric Mod
 _Play god by collecting, analyzing, and modifying your genetics! Advanced Genetics allows you to splice your genome with the mobs in your Minecraft world to gain their unique abilities, like shooting fireballs or climbing walls. There are dozens of abilities to discover!_
@@ -9,7 +9,7 @@ _Play god by collecting, analyzing, and modifying your genetics! Advanced Geneti
 
 ### Recommended Releases
 
-The latest stable releases can always be found on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/advanced-genetics-fabric).<br/>
+The latest stable releases can always be found on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/advanced-genetics).<br/>
 The top file in the list is the latest recommended release!
 
 ### Development Builds
