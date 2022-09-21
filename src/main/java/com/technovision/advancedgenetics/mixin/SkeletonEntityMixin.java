@@ -24,6 +24,6 @@ public class SkeletonEntityMixin extends MobEntity {
      */
     @Inject(method = "initGoals", at = @At("HEAD"), cancellable = true)
     protected void initGoals(CallbackInfo ci) {
-        this.goalSelector.add(3, new FleePlayerGoal(((SkeletonEntity)(Object)this), Genes.SCARE_SKELETONS, 10.0F, 1.0, 1.2));
+        this.goalSelector.add(3, new FleePlayerGoal(((AbstractSkeletonEntity)(Object)this), Genes.SCARE_SKELETONS, 10.0F, 1.0, 1.2));
     }
 }

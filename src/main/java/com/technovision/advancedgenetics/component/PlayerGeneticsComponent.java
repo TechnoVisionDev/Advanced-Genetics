@@ -53,6 +53,7 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
         tickCounter++;
         if (tickCounter < 20) return;
         totalSeconds++;
+
         tickCounter = 0;
         if (totalSeconds == Long.MAX_VALUE) totalSeconds = 0;
 
@@ -64,8 +65,10 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
         }
 
         // Lay egg gene (every 5 min)
-        if (totalSeconds % 300 == 0) {
-            player.dropStack(new ItemStack(Items.EGG));
+        if (hasGene(Genes.LAY_EGG)) {
+            if (totalSeconds % 300 == 0) {
+                player.dropStack(new ItemStack(Items.EGG));
+            }
         }
     }
 
