@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.sound.SoundEvents;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,9 +66,10 @@ public class PlayerGeneticsComponent implements EntityGeneticsComponent {
         }
 
         // Lay egg gene (every 5 min)
-        if (hasGene(Genes.LAY_EGG)) {
-            if (totalSeconds % 300 == 0) {
+        if (totalSeconds % 300 == 0) {
+            if (hasGene(Genes.LAY_EGG)) {
                 player.dropStack(new ItemStack(Items.EGG));
+                player.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0f, 1.0f);
             }
         }
     }
