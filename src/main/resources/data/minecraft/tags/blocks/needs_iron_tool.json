@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "advancedgenetics:cell_analyzer",
+    "advancedgenetics:dna_extractor",
+    "advancedgenetics:dna_decrypter",
+    "advancedgenetics:plasmid_infuser",
+    "advancedgenetics:blood_purifier",
+    "advancedgenetics:plasmid_injector"
+  ]
+}
