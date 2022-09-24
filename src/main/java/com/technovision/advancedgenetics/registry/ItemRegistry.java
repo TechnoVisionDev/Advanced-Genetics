@@ -27,6 +27,7 @@ public class ItemRegistry {
     public static final ScalpelItem NETHERITE_SCALPEL = new ScalpelItem(300);
     public static final SyringeItem SYRINGE = new SyringeItem();
     public static final Item OVERCLOCKER = new Item(ITEM_SETTINGS);
+    public static final Item CROWBAR = new Item(new FabricItemSettings().group(AdvancedGenetics.TAB).maxCount(1).maxDamage(100));
 
     // Block Items
     public static final BlockItem CELL_ANALYZER = new BlockItem(BlockRegistry.CELL_ANALYZER, ITEM_SETTINGS);
@@ -57,6 +58,7 @@ public class ItemRegistry {
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "netherite_scalpel"), NETHERITE_SCALPEL);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "syringe"), SYRINGE);
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "overclocker"), OVERCLOCKER);
+        Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "crowbar"), CROWBAR);
 
         // Items
         Registry.register(Registry.ITEM, new Identifier(AdvancedGenetics.MOD_ID, "dna_helix"), DNA_HELIX);

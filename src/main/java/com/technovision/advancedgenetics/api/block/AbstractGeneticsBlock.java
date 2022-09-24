@@ -2,22 +2,19 @@ package com.technovision.advancedgenetics.api.block;
 
 import com.technovision.advancedgenetics.api.blockentity.AbstractProcessingBlockEntity;
 import com.technovision.advancedgenetics.api.blockentity.ProcessingBlockEntity;
-import com.technovision.advancedgenetics.common.block.cellanalyzer.CellAnalyzerBlockEntity;
 import com.technovision.advancedgenetics.registry.ItemRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Hand;
+import net.minecraft.text.Text;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -81,11 +78,23 @@ public abstract class AbstractGeneticsBlock extends BlockWithEntity implements B
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient() && player.getStackInHand(hand).getItem() == ItemRegistry.OVERCLOCKER) {
-            if (world.getBlockEntity(pos) instanceof AbstractProcessingBlockEntity processingBlockEntity) {
+        if (world.isClient()) return ActionResult.PASS;
+        if (world.getBlockEntity(pos) instanceof AbstractProcessingBlockEntity processingBlockEntity) {
+            ItemStack stackInHand = player.getStackInHand(hand);
+            // Use overclocker on machine
+            if (stackInHand.getItem() == ItemRegistry.OVERCLOCKER) {
                 if (processingBlockEntity.canOverclock()) {
                     processingBlockEntity.incrementOverclock();
-                    if (!player.isCreative()) player.getStackInHand(hand).decrement(1);
+                    if (!player.isCreative()) stackInHand.decrement(1);
+                    return ActionResult.SUCCESS;
+                }
+            }
+            // Use crowbar on machine to remove overclock
+            else if (stackInHand.getItem() == ItemRegistry.CROWBAR) {
+                if (processingBlockEntity.getOverclock() > 0) {
+                    processingBlockEntity.decrementOverclock();
+                    ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemRegistry.OVERCLOCKER));
+                    stackInHand.damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
                     return ActionResult.SUCCESS;
                 }
             }

@@ -184,6 +184,10 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
         this.overclock++;
     }
 
+    public void decrementOverclock() {
+        this.overclock--;
+    }
+
     public int getOverclock() {
         return overclock;
     }
