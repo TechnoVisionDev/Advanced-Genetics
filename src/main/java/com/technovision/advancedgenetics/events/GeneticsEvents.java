@@ -71,6 +71,7 @@ public class GeneticsEvents {
                     } else {
                         player.sendMessage(Text.translatable("message."+ AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.MILKY.getName()+"§f"));
                     }
+                    return ActionResult.SUCCESS;
                 }
                 // Get honey from player
                 if (stack.getItem() == Items.GLASS_BOTTLE && component.hasGene(Genes.BEELICIOUS)) {
@@ -82,6 +83,7 @@ public class GeneticsEvents {
                     } else {
                         player.sendMessage(Text.translatable("message."+ AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.BEELICIOUS.getName()+"§f"));
                     }
+                    return ActionResult.SUCCESS;
                 }
                 // Shear porkchops off player
                 if (stack.getItem() == Items.SHEARS && component.hasGene(Genes.MEATY)) {
@@ -93,6 +95,7 @@ public class GeneticsEvents {
                     } else {
                         player.sendMessage(Text.translatable("message."+ AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.MEATY.getName()+"§f"));
                     }
+                    return ActionResult.SUCCESS;
                 }
                 // Shear wool off player
                 if (stack.getItem() == Items.SHEARS && component.hasGene(Genes.WOOLY)) {
@@ -104,9 +107,10 @@ public class GeneticsEvents {
                     } else {
                         player.sendMessage(Text.translatable("message."+ AdvancedGenetics.MOD_ID+".cooldown", "§7"+Genes.WOOLY.getName()+"§f"));
                     }
+                    return ActionResult.SUCCESS;
                 }
             }
-            return ActionResult.SUCCESS;
+            return ActionResult.PASS;
         });
 
         // Handles "Explosive Exit", "Emerald Heart", and "Slimy" gene
