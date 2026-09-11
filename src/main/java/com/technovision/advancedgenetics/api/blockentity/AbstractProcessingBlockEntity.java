@@ -2,49 +2,51 @@ package com.technovision.advancedgenetics.api.blockentity;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.Config;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.Nameable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.Nameable;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.core.registries.BuiltInRegistries;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 import java.util.Objects;
 
-public abstract class AbstractProcessingBlockEntity extends BlockEntity implements ProcessingBlockEntity, ExtendedScreenHandlerFactory, Nameable {
+public abstract class AbstractProcessingBlockEntity extends BlockEntity implements ProcessingBlockEntity, ExtendedMenuProvider<BlockPos>, Nameable {
 
-    private final Text name;
+    private final Component name;
     private int progress = 0;
     private int overclock = 0;
     private int maxOverclock;
     private final SimpleEnergyStorage energyStorage;
     private int maxProgress;
-    private final PropertyDelegate propertyDelegate;
+    private final ContainerData propertyDelegate;
 
     public AbstractProcessingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, long energyCapacity, int maxProgress, int maxOverclock) {
         super(type, pos, state);
-        String blockEntityName = Objects.requireNonNull(Registry.BLOCK_ENTITY_TYPE.getId(getType())).getPath();
-        this.name = Text.translatable(String.format("%s.container.%s", AdvancedGenetics.MOD_ID, blockEntityName));
+        String blockEntityName = Objects.requireNonNull(BuiltInRegistries.BLOCK_ENTITY_TYPE.getKey(getType())).getPath();
+        this.name = Component.translatable(String.format("%s.container.%s", AdvancedGenetics.MOD_ID, blockEntityName));
         energyStorage = new SimpleEnergyStorage(energyCapacity, energyCapacity, energyCapacity) {
             @Override
             protected void onFinalCommit() {
-                markDirty();
+                setChanged();
             }
         };
         this.maxOverclock = maxOverclock;
         this.maxProgress = maxProgress;
-        this.propertyDelegate = new PropertyDelegate() {
+        this.propertyDelegate = new ContainerData() {
             public int get(int index) {
                 return switch (index) {
                     case 0 -> getProgress();
@@ -62,36 +64,34 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
                     case 4 -> setOverclock(value);
                 }
             }
-            public int size() {
+            public int getCount() {
                 return 5;
             }
         };
     }
 
     @Override
-    public Text getName() {
+    public Component getName() {
         return name != null ? name : this.getDefaultName();
     }
 
     @Override
-    public Text getDisplayName() {
+    public Component getDisplayName() {
         return getName();
     }
 
-    protected Text getDefaultName() {
+    protected Component getDefaultName() {
         return name;
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        NbtCompound tag = super.toInitialChunkDataNbt();
-        writeNbt(tag);
-        return tag;
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveWithoutMetadata(registries);
     }
 
     @Override
     public void tick() {
-        if (world != null && !world.isClient()) {
+        if (level != null && !level.isClientSide()) {
             updateRecipe();
             if (canProcessRecipe()) {
                 processRecipe();
@@ -118,31 +118,31 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     }
 
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
+    protected void saveAdditional(ValueOutput nbt) {
         nbt.putInt("progress", progress);
         nbt.putLong("energy", energyStorage.amount);
         nbt.putInt("overclock", overclock);
-        super.writeNbt(nbt);
+        super.saveAdditional(nbt);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-        setProgress(nbt.getInt("progress"));
-        insertEnergy(nbt.getLong("energy"));
-        int oc = nbt.getInt("overclock");
+    protected void loadAdditional(ValueInput nbt) {
+        super.loadAdditional(nbt);
+        setProgress(nbt.getIntOr("progress", 0));
+        energyStorage.amount = Math.max(0, Math.min(energyStorage.capacity, nbt.getLongOr("energy", 0)));
+        int oc = nbt.getIntOr("overclock", 0);
         if (oc > maxOverclock) oc = maxOverclock;
         setOverclock(oc);
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(pos);
+    public BlockPos getScreenOpeningData(ServerPlayer player) {
+        return worldPosition;
     }
 
     public SimpleEnergyStorage getEnergyStorage() {
@@ -168,8 +168,8 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     }
 
     public void forceSync() {
-        this.markDirty();
-        world.updateListeners(this.pos, this.getCachedState(), this.getCachedState(), 3);
+        this.setChanged();
+        if (level != null) level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
     }
 
     public boolean canOverclock() {
@@ -199,7 +199,7 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
         return realMaxProgress;
     }
 
-    public PropertyDelegate getPropertyDelegate() {
+    public ContainerData getPropertyDelegate() {
         return propertyDelegate;
     }
 }

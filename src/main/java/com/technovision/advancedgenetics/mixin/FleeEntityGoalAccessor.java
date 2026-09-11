@@ -1,13 +1,13 @@
 package com.technovision.advancedgenetics.mixin;
 
-import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.ai.goal.FleeEntityGoal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(FleeEntityGoal.class)
+@Mixin(AvoidEntityGoal.class)
 public interface FleeEntityGoalAccessor {
 
     @Accessor
-    TargetPredicate getWithinRangePredicate();
+    TargetingConditions getAvoidEntityTargeting();
 }

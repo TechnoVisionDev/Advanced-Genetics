@@ -1,104 +1,95 @@
 package com.technovision.advancedgenetics.api.block;
 
 import com.technovision.advancedgenetics.api.blockentity.AbstractProcessingBlockEntity;
-import com.technovision.advancedgenetics.api.blockentity.ProcessingBlockEntity;
 import com.technovision.advancedgenetics.registry.ItemRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.text.Text;
-import net.minecraft.util.*;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.function.BiFunction;
 
-public abstract class AbstractGeneticsBlock extends BlockWithEntity implements BlockEntityProvider {
-
+public abstract class AbstractGeneticsBlock extends BaseEntityBlock {
     private final BiFunction<BlockPos, BlockState, BlockEntity> blockEntityFunction;
-    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    protected AbstractGeneticsBlock(BiFunction<BlockPos, BlockState, BlockEntity> blockEntity) {
-        super(FabricBlockSettings.of(Material.METAL).requiresTool().strength(5.0f, 6.0f).sounds(BlockSoundGroup.METAL));
+    protected AbstractGeneticsBlock(BlockBehaviour.Properties properties, BiFunction<BlockPos, BlockState, BlockEntity> blockEntity) {
+        super(properties);
         blockEntityFunction = blockEntity;
     }
 
-    @Nullable
+    public abstract int getEnergyRequirement();
+
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
+    protected BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
-
-    @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof ProcessingBlockEntity processingBlockEntity) {
-                processingBlockEntity.dropContents();
-                world.updateComparators(pos, this);
-            }
-        }
-        super.onStateReplaced(state, world, pos, newState, moved);
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 
     @Nullable
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return blockEntityFunction.apply(pos, state);
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient()) return ActionResult.PASS;
-        if (world.getBlockEntity(pos) instanceof AbstractProcessingBlockEntity processingBlockEntity) {
-            ItemStack stackInHand = player.getStackInHand(hand);
-            // Use overclocker on machine
-            if (stackInHand.getItem() == ItemRegistry.OVERCLOCKER) {
-                if (processingBlockEntity.canOverclock()) {
-                    processingBlockEntity.incrementOverclock();
-                    if (!player.isCreative()) stackInHand.decrement(1);
-                    return ActionResult.SUCCESS;
-                }
-            }
-            // Use crowbar on machine to remove overclock
-            else if (stackInHand.getItem() == ItemRegistry.CROWBAR) {
-                if (processingBlockEntity.getOverclock() > 0) {
-                    processingBlockEntity.decrementOverclock();
-                    ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemRegistry.OVERCLOCKER));
-                    stackInHand.damage(1, player, (e) -> player.sendToolBreakStatus(player.getActiveHand()));
-                    return ActionResult.SUCCESS;
-                }
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof AbstractProcessingBlockEntity machine) {
+            if (stack.getItem() == ItemRegistry.OVERCLOCKER && machine.canOverclock()) {
+                machine.incrementOverclock();
+                if (!player.isCreative()) stack.shrink(1);
+                machine.setChanged();
+                return InteractionResult.SUCCESS;
+            } else if (stack.getItem() == ItemRegistry.CROWBAR && machine.getOverclock() > 0) {
+                machine.decrementOverclock();
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemRegistry.OVERCLOCKER));
+                stack.hurtAndBreak(1, player, hand);
+                machine.setChanged();
+                return InteractionResult.SUCCESS;
             }
         }
-        return ActionResult.PASS;
+        return useWithoutItem(state, level, pos, player, hit);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        if (!level.isClientSide()) {
+            MenuProvider provider = state.getMenuProvider(level, pos);
+            if (provider != null) player.openMenu(provider);
+        }
+        return InteractionResult.SUCCESS;
     }
 }

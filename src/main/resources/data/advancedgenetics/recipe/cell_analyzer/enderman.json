@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:enderman_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:enderman_cell"
+  }
+}

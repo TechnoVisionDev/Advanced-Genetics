@@ -1,8 +1,9 @@
 package com.technovision.advancedgenetics.api.genetics;
 
 import com.technovision.advancedgenetics.Config;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
+import com.technovision.advancedgenetics.util.ItemData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public enum Genes {
@@ -72,8 +73,8 @@ public enum Genes {
     }
 
     public static Genes getGeneByItem(ItemStack stack) {
-        final NbtCompound tag = stack.getOrCreateNbt();
-        String geneName = tag.getString("gene");
+        final CompoundTag tag = ItemData.read(stack);
+        String geneName = tag.getStringOr("gene", "");
         return Genes.valueOf(geneName);
     }
 }

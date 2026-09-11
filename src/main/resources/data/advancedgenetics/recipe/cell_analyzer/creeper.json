@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:creeper_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:creeper_cell"
+  }
+}

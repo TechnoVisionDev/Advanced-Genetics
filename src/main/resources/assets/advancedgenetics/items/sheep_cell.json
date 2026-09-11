@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "advancedgenetics:item/sheep_cell",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -1250068
+      }
+    ]
+  }
+}

@@ -1,15 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "advancedgenetics:items/syringe"
-    },
-    "overrides": [
-        {
-            "predicate": {
-                "advancedgenetics:filled": 1
-            },
-            "model": "advancedgenetics:item/syringe_full"
-        }
-    ]
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "advancedgenetics:items/syringe"
+  }
 }
-

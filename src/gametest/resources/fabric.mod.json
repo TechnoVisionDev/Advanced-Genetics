@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "advancedgenetics_test",
+  "version": "1.0.0",
+  "name": "Advanced Genetics Compatibility Tests",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-gametest": [
+      "com.technovision.advancedgenetics.GeneticsGameTests",
+      "com.technovision.advancedgenetics.MachineTimingGameTests",
+      "com.technovision.advancedgenetics.GeneAbilityGameTests",
+      "com.technovision.advancedgenetics.ScalpelGameTests"
+    ],
+    "fabric-client-gametest": [
+      "com.technovision.advancedgenetics.GeneticsClientTest",
+      "com.technovision.advancedgenetics.GeneNetworkingClientTest",
+      "com.technovision.advancedgenetics.ScalpelClientTest"
+    ]
+  },
+  "depends": {
+    "advancedgenetics": "*"
+  }
+}

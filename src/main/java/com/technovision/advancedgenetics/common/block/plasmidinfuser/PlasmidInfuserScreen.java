@@ -1,63 +1,56 @@
 package com.technovision.advancedgenetics.common.block.plasmidinfuser;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.api.screen.*;
-import com.technovision.advancedgenetics.common.block.dnadecrypter.DnaDecrypterScreenHandler;
 import com.technovision.advancedgenetics.common.item.PlasmidItem;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-
+import com.technovision.advancedgenetics.util.ItemData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlasmidInfuserScreen extends AbstractGeneticsScreen<PlasmidInfuserScreenHandler> {
-
-    private static final Identifier TEXTURE = new Identifier(AdvancedGenetics.MOD_ID, "textures/gui/plasmid_infuser_gui.png");
-
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(AdvancedGenetics.MOD_ID, "textures/gui/plasmid_infuser_gui.png");
     protected final List<DisplayData> displayData = new ArrayList<>();
 
-    public PlasmidInfuserScreen(PlasmidInfuserScreenHandler handler, PlayerInventory inventory, Text title) {
+    public PlasmidInfuserScreen(PlasmidInfuserScreenHandler handler, Inventory inventory, Component title) {
         super(handler, inventory, title);
-        this.backgroundWidth = 176;
-        this.backgroundHeight = 166;
         displayData.add(new ProgressDisplayData(handler.getPropertyDelegate(), 0, 1, 83, 37, 60, 9, Direction2D.RIGHT));
         displayData.add(new EnergyDisplayData(handler.getPropertyDelegate(), 2, 3, 10, 23, 12, 40));
     }
 
     @Override
-    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        drawTexture(matrices, this.x, this.y, 0, 0, backgroundWidth, backgroundHeight);
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+        super.extractBackground(graphics, mouseX, mouseY, delta);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        super.render(matrices, mouseX, mouseY, delta);
-        renderDisplayData(displayData, matrices, this.x, this.y);
-        renderDisplayTooltip(displayData, matrices, this.x, this.y, mouseX, mouseY);
-        drawMouseoverTooltip(matrices, mouseX, mouseY);
+    public void extractContents(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+        super.extractContents(graphics, mouseX, mouseY, delta);
+        renderDisplayData(displayData, graphics, leftPos, topPos);
+        renderDisplayTooltip(displayData, graphics, leftPos, topPos, mouseX, mouseY);
     }
 
     @Override
-    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
-        super.drawForeground(matrices, mouseX, mouseY);
-        int overclock = handler.getPropertyDelegate().get(4);
+    protected void extractLabels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+        super.extractLabels(graphics, mouseX, mouseY);
+        int overclock = menu.getPropertyDelegate().get(4);
         if (overclock > 0) {
-            String text = "x"+overclock;
-            textRenderer.draw(matrices, text, backgroundWidth - textRenderer.getWidth(text) - 8, 6, 0x3f3f3f);
+            String text = "x" + overclock;
+            graphics.text(font, text, imageWidth - font.width(text) - 8, 6, 0xff3f3f3f, false);
         }
-        ItemStack plasmid = handler.getClientInventory().getStack(PlasmidInfuserBlockEntity.OUTPUT_SLOT_INDEX);
-        if (!plasmid.isEmpty() && plasmid.hasNbt()) {
-            String text = String.format("%d/%d", plasmid.getNbt().getInt("count"), PlasmidItem.MAX_GENES);
-            textRenderer.draw(matrices, text, backgroundWidth - textRenderer.getWidth(text) - 12, (backgroundHeight/4.0f)-1, 0x3f3f3f);
+        ItemStack plasmid = menu.getClientInventory().getItem(PlasmidInfuserBlockEntity.OUTPUT_SLOT_INDEX);
+        if (!plasmid.isEmpty() && ItemData.has(plasmid)) {
+            String text = String.format("%d/%d", ItemData.read(plasmid).getIntOr("count", 0), PlasmidItem.MAX_GENES);
+            graphics.pose().pushMatrix();
+            graphics.pose().translate(0, 0.5f);
+            graphics.text(font, text, imageWidth - font.width(text) - 12, imageHeight / 4 - 1, 0xff3f3f3f, false);
+            graphics.pose().popMatrix();
         }
     }
-
 }

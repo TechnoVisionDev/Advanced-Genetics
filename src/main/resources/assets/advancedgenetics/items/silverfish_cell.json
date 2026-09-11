@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "advancedgenetics:item/silverfish_cell",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -6508884
+      }
+    ]
+  }
+}

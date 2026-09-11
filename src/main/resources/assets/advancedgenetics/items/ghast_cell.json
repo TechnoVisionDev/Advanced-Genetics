@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "advancedgenetics:item/ghast_cell",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -592138
+      }
+    ]
+  }
+}

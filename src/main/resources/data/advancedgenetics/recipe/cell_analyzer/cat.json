@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:cat_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:cat_cell"
+  }
+}

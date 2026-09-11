@@ -1,56 +1,41 @@
 package com.technovision.advancedgenetics.common.item;
 
-import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.api.genetics.Entities;
 import com.technovision.advancedgenetics.api.genetics.Genes;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
+import com.technovision.advancedgenetics.util.ItemData;
+import java.util.function.Consumer;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 
 public class DnaItem extends Item {
-
-    public DnaItem() {
-        super(new FabricItemSettings().group(AdvancedGenetics.TAB));
-    }
+    public DnaItem(Properties properties) { super(properties); }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if (!stack.hasNbt()) return;
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display,
+                                Consumer<Component> tooltip, TooltipFlag flag) {
+        if (!ItemData.read(stack).contains("gene")) return;
         Genes gene = Genes.getGeneByItem(stack);
-        MutableText geneName;
-        if (isDecoded(stack)) {
-            geneName = Text.literal(gene.getName());
-        } else {
-            geneName = Text.literal(gene.getEncryptedName());
-        }
-        tooltip.add(geneName.formatted(Formatting.GRAY));
+        tooltip.accept(Component.literal(isDecoded(stack) ? gene.getName() : gene.getEncryptedName())
+                .withStyle(ChatFormatting.GRAY));
     }
 
     public static boolean isDecoded(ItemStack stack) {
-        final NbtCompound tag = stack.getOrCreateNbt();
-        return tag.getBoolean("decoded");
+        return ItemData.read(stack).getBooleanOr("decoded", false);
     }
 
     public static void setGene(ItemStack cellStack, ItemStack dnaStack) {
-        EntityType entityType = ((CellItem)(cellStack.getItem())).getEntityType();
-        Genes gene = Entities.findEntityByType(entityType).getRandomGene();
-        final NbtCompound tag = dnaStack.getOrCreateNbt();
-        tag.putString("gene", gene.toString());
-        tag.putBoolean("decoded", false);
+        Genes gene = Entities.findEntityByType(((CellItem) cellStack.getItem()).getEntityType()).getRandomGene();
+        ItemData.update(dnaStack, tag -> {
+            tag.putString("gene", gene.toString());
+            tag.putBoolean("decoded", false);
+        });
     }
 
     public static void decode(ItemStack stack) {
-        final NbtCompound tag = stack.getOrCreateNbt();
-        tag.putBoolean("decoded", true);
+        ItemData.update(stack, tag -> tag.putBoolean("decoded", true));
     }
 }

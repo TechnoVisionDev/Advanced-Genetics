@@ -8,9 +8,10 @@ import com.technovision.advancedgenetics.common.block.dnaextractor.DnaExtractorB
 import com.technovision.advancedgenetics.common.block.plasmidinfuser.PlasmidInfuserBlockEntity;
 import com.technovision.advancedgenetics.common.block.plasmidinjector.PlasmidInjectorBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.resources.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import team.reborn.energy.api.EnergyStorage;
 
 public class BlockEntityRegistry {
@@ -24,12 +25,12 @@ public class BlockEntityRegistry {
 
     public static void registerBlockEntities() {
         // Register block entity
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AdvancedGenetics.MOD_ID, "cell_analyzer_block_entity"), CELL_ANALYZER_BLOCK_ENTITY);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AdvancedGenetics.MOD_ID, "dna_extractor_block_entity"), DNA_EXTRACTOR_BLOCK_ENTITY);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AdvancedGenetics.MOD_ID, "dna_decrypter_block_entity"), DNA_DECRYPTER_BLOCK_ENTITY);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AdvancedGenetics.MOD_ID, "plasmid_infuser_block_entity"), PLASMID_INFUSER_BLOCK_ENTITY);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AdvancedGenetics.MOD_ID, "blood_purifier_block_entity"), BLOOD_PURIFIER_BLOCK_ENTITY);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AdvancedGenetics.MOD_ID, "plasmid_injector_block_entity"), PLASMID_INJECTOR_BLOCK_ENTITY);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(AdvancedGenetics.MOD_ID, "cell_analyzer_block_entity"), CELL_ANALYZER_BLOCK_ENTITY);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(AdvancedGenetics.MOD_ID, "dna_extractor_block_entity"), DNA_EXTRACTOR_BLOCK_ENTITY);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(AdvancedGenetics.MOD_ID, "dna_decrypter_block_entity"), DNA_DECRYPTER_BLOCK_ENTITY);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(AdvancedGenetics.MOD_ID, "plasmid_infuser_block_entity"), PLASMID_INFUSER_BLOCK_ENTITY);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(AdvancedGenetics.MOD_ID, "blood_purifier_block_entity"), BLOOD_PURIFIER_BLOCK_ENTITY);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(AdvancedGenetics.MOD_ID, "plasmid_injector_block_entity"), PLASMID_INJECTOR_BLOCK_ENTITY);
 
         // Register energy storage for block entity
         EnergyStorage.SIDED.registerForBlockEntity((myBlockEntity, direction) -> myBlockEntity.getEnergyStorage(), CELL_ANALYZER_BLOCK_ENTITY);

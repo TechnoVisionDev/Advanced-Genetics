@@ -110,5 +110,8 @@
   "message.advancedgenetics.cooldown": "The %s gene is on cooldown.",
   "key.advancedgenetics.category": "Advanced Genetics",
   "key.advancedgenetics.teleport": "Teleport",
-  "key.advancedgenetics.dragons_breath": "Dragon's Breath"
+  "key.advancedgenetics.dragons_breath": "Dragon's Breath",
+  "key.category.advancedgenetics.genetics": "Advanced Genetics",
+  "tag.item.advancedgenetics.cells": "Cells",
+  "tag.item.advancedgenetics.matter": "Organic Matter"
 }

@@ -4,10 +4,11 @@ import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.component.PlayerGeneticsComponent;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
 import com.technovision.advancedgenetics.registry.ItemRegistry;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.server.level.ServerPlayer;
 
 /**
  * Stores data to be passed to DamageReceivedEvent.
@@ -16,17 +17,17 @@ import net.minecraft.server.network.ServerPlayerEntity;
  */
 public class DamageReceivedEvent {
 
-    private final ServerPlayerEntity player;
+    private final ServerPlayer player;
     private final DamageSource source;
     private final float amount;
 
-    public DamageReceivedEvent(ServerPlayerEntity player, DamageSource source, float amount) {
+    public DamageReceivedEvent(ServerPlayer player, DamageSource source, float amount) {
         this.player = player;
         this.source = source;
         this.amount = amount;
     }
 
-    public ServerPlayerEntity getPlayer() {
+    public ServerPlayer getPlayer() {
         return player;
     }
 
@@ -45,30 +46,30 @@ public class DamageReceivedEvent {
      * @return true if event is canceled and player takes no damage, otherwise false.
      */
     public static boolean onDamageReceivedEvent(DamageReceivedEvent event) {
-        ServerPlayerEntity player = event.getPlayer();
+        ServerPlayer player = event.getPlayer();
         DamageSource source = event.getSource();
-        PlayerGeneticsComponent component = player.getComponent(ComponentRegistry.PLAYER_GENETICS);
+        PlayerGeneticsComponent component = ComponentRegistry.PLAYER_GENETICS.get(player);
 
         // Handles "No Fall Damage" gene
-        if (source.isFromFalling() && component.hasGene(Genes.NO_FALL_DAMAGE)) {
+        if (source.is(DamageTypeTags.IS_FALL) && component.hasGene(Genes.NO_FALL_DAMAGE)) {
             return true;
         }
         // Handles "Poison Immunity" gene
-        if (player.hasStatusEffect(StatusEffects.POISON) && component.hasGene(Genes.POISON_IMMUNITY)) {
-            player.removeStatusEffect(StatusEffects.POISON);
+        if (player.hasEffect(MobEffects.POISON) && component.hasGene(Genes.POISON_IMMUNITY)) {
+            player.removeEffect(MobEffects.POISON);
             return true;
         }
         // Handles "Wither Resistance" gene
-        if (player.hasStatusEffect(StatusEffects.WITHER) && component.hasGene(Genes.WITHER_RESISTANCE)) {
-            player.removeStatusEffect(StatusEffects.WITHER);
+        if (player.hasEffect(MobEffects.WITHER) && component.hasGene(Genes.WITHER_RESISTANCE)) {
+            player.removeEffect(MobEffects.WITHER);
             return true;
         }
         // Handles "Dragons Health" gene
         if (component.hasGene(Genes.DRAGONS_HEALTH)) {
-            for(int j = 0; j < player.getInventory().size(); ++j) {
-                ItemStack itemStack = player.getInventory().getStack(j);
+            for(int j = 0; j < player.getInventory().getContainerSize(); ++j) {
+                ItemStack itemStack = player.getInventory().getItem(j);
                 if (itemStack.getItem().equals(ItemRegistry.DRAGON_HEALTH_CRYSTAL)) {
-                    itemStack.damage((int)event.getAmount(), player, (e) -> { });
+                    itemStack.hurtAndBreak((int)event.getAmount(), player.level(), player, brokenItem -> { });
                     return true;
                 }
             }

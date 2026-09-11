@@ -1,72 +1,39 @@
 package com.technovision.advancedgenetics.util;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
-public class SpiderClimbUtil {
+public final class SpiderClimbUtil {
+    private SpiderClimbUtil() { }
 
-    public static boolean canStartClimb(PlayerEntity player, BlockPos blockPos) {
-        World world = player.getWorld();
+    /** The original replaceable_plants tag was removed; retain its climbing exclusions. */
+    public static boolean isReplaceablePlant(BlockState state) {
+        return state.is(Blocks.SHORT_GRASS) || state.is(Blocks.FERN) || state.is(Blocks.DEAD_BUSH)
+                || state.is(Blocks.VINE) || state.is(Blocks.GLOW_LICHEN) || state.is(Blocks.SUNFLOWER)
+                || state.is(Blocks.LILAC) || state.is(Blocks.ROSE_BUSH) || state.is(Blocks.PEONY)
+                || state.is(Blocks.TALL_GRASS) || state.is(Blocks.LARGE_FERN) || state.is(Blocks.HANGING_ROOTS);
+    }
 
-        BlockPos north = blockPos.offset(Direction.NORTH, 1);
-        BlockPos east = blockPos.offset(Direction.EAST, 1);
-        BlockPos south = blockPos.offset(Direction.SOUTH, 1);
-        BlockPos west = blockPos.offset(Direction.WEST, 1);
-
-        BlockState northBS = world.getBlockState(north);
-        BlockState eastBS = world.getBlockState(east);
-        BlockState southBS = world.getBlockState(south);
-        BlockState westBS = world.getBlockState(west);
-
-        BlockState northUp = world.getBlockState(north.offset(Direction.UP, 1));
-        BlockState eastUp = world.getBlockState(east.offset(Direction.UP, 1));
-        BlockState southUp = world.getBlockState(south.offset(Direction.UP, 1));
-        BlockState westUp = world.getBlockState(west.offset(Direction.UP, 1));
-
-        if (northBS.getBlock() != Blocks.AIR && northUp.getBlock() != Blocks.AIR && !northBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !northUp.isIn(BlockTags.REPLACEABLE_PLANTS)) {
-            return true;
-        }
-        else if (eastBS.getBlock() != Blocks.AIR && eastUp.getBlock() != Blocks.AIR && !eastBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !eastUp.isIn(BlockTags.REPLACEABLE_PLANTS)) {
-            return true;
-        }
-        else if (southBS.getBlock() != Blocks.AIR && southUp.getBlock() != Blocks.AIR && !southBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !southUp.isIn(BlockTags.REPLACEABLE_PLANTS)) {
-            return true;
-        }
-        else if (westBS.getBlock() != Blocks.AIR && westUp.getBlock() != Blocks.AIR && !westBS.isIn(BlockTags.REPLACEABLE_PLANTS) && !westUp.isIn(BlockTags.REPLACEABLE_PLANTS)) {
-            return true;
+    public static boolean canStartClimb(Player player, BlockPos blockPos) {
+        Level level = player.level();
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            BlockPos adjacent = blockPos.relative(direction);
+            BlockState lower = level.getBlockState(adjacent);
+            BlockState upper = level.getBlockState(adjacent.above());
+            if (!lower.is(Blocks.AIR) && !upper.is(Blocks.AIR)
+                    && !isReplaceablePlant(lower) && !isReplaceablePlant(upper)) return true;
         }
         return false;
     }
 
-    public static boolean canContinueClimb(PlayerEntity player, BlockPos blockPos) {
-        World world = player.getWorld();
-
-        BlockPos north = blockPos.offset(Direction.NORTH, 1);
-        BlockPos east = blockPos.offset(Direction.EAST, 1);
-        BlockPos south = blockPos.offset(Direction.SOUTH, 1);
-        BlockPos west = blockPos.offset(Direction.WEST, 1);
-
-        BlockState northBS = world.getBlockState(north);
-        BlockState eastBS = world.getBlockState(east);
-        BlockState southBS = world.getBlockState(south);
-        BlockState westBS = world.getBlockState(west);
-
-        if (northBS.getBlock() != Blocks.AIR && !northBS.isIn(BlockTags.REPLACEABLE_PLANTS)) {
-            return true;
-        }
-        else if (eastBS.getBlock() != Blocks.AIR && !eastBS.isIn(BlockTags.REPLACEABLE_PLANTS)) {
-            return true;
-        }
-        else if (southBS.getBlock() != Blocks.AIR && !southBS.isIn(BlockTags.REPLACEABLE_PLANTS)) {
-            return true;
-        }
-        else if (westBS.getBlock() != Blocks.AIR && !westBS.isIn(BlockTags.REPLACEABLE_PLANTS)) {
-            return true;
+    public static boolean canContinueClimb(Player player, BlockPos blockPos) {
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            BlockState state = player.level().getBlockState(blockPos.relative(direction));
+            if (!state.is(Blocks.AIR) && !isReplaceablePlant(state)) return true;
         }
         return false;
     }

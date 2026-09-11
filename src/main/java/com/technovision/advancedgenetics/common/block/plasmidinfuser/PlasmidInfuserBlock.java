@@ -1,61 +1,39 @@
 package com.technovision.advancedgenetics.common.block.plasmidinfuser;
 
+import com.mojang.serialization.MapCodec;
 import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.api.block.AbstractGeneticsBlock;
-import com.technovision.advancedgenetics.common.block.dnadecrypter.DnaDecrypterBlockEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
-import java.util.List;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class PlasmidInfuserBlock extends AbstractGeneticsBlock {
+    public static final MapCodec<PlasmidInfuserBlock> CODEC = simpleCodec(PlasmidInfuserBlock::new);
 
-    public PlasmidInfuserBlock() {
-        super(PlasmidInfuserBlockEntity::new);
+    public PlasmidInfuserBlock(BlockBehaviour.Properties properties) {
+        super(properties, PlasmidInfuserBlockEntity::new);
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
-        tooltip.add(Text.translatable("tooltip.advancedgenetics.energy_requirement",  Config.Common.plasmidInfuserEnergyPerTick.get()).formatted(Formatting.GRAY));
+    protected MapCodec<PlasmidInfuserBlock> codec() {
+        return CODEC;
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient()) {
-            if (super.onUse(state, world, pos, player, hand, hit) == ActionResult.SUCCESS) return ActionResult.SUCCESS;
-            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
-            }
-        }
-        return ActionResult.SUCCESS;
+    public int getEnergyRequirement() {
+        return Config.Common.plasmidInfuserEnergyPerTick.get();
     }
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        if (!world.isClient()) {
-            return (level, pos, blockState, blockEntity) -> {
-                if (blockEntity instanceof PlasmidInfuserBlockEntity infuserBlockEntity) {
-                    infuserBlockEntity.tick();
-                }
-            };
-        }
-        return null;
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        if (level.isClientSide()) return null;
+        return (world, pos, blockState, blockEntity) -> {
+            if (blockEntity instanceof PlasmidInfuserBlockEntity machine) machine.tick();
+        };
     }
 }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iRi",
+    "RCR",
+    "iRi"
+  ],
+  "key": {
+    "i": "minecraft:iron_ingot",
+    "R": "minecraft:redstone",
+    "C": "minecraft:clock"
+  },
+  "result": {
+    "id": "advancedgenetics:overclocker"
+  }
+}

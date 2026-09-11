@@ -1,34 +1,23 @@
 package com.technovision.advancedgenetics.common.recipe.cellanalyzer;
 
-import com.google.gson.JsonObject;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.ShapedRecipe;
-import net.minecraft.util.Identifier;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 
-public class CellAnalyzerRecipeSerializer implements RecipeSerializer<CellAnalyzerRecipe> {
-
-    public static final CellAnalyzerRecipeSerializer INSTANCE = new CellAnalyzerRecipeSerializer();
+public final class CellAnalyzerRecipeSerializer {
     public static final String ID = CellAnalyzerRecipe.Type.ID;
-
-    @Override
-    public CellAnalyzerRecipe read(Identifier id, JsonObject json) {
-        ItemStack input = ShapedRecipe.outputFromJson(json.getAsJsonObject("input"));
-        ItemStack output = ShapedRecipe.outputFromJson(json.getAsJsonObject("result"));
-        return new CellAnalyzerRecipe(id, input, output);
-    }
-
-    @Override
-    public CellAnalyzerRecipe read(Identifier id, PacketByteBuf buf) {
-        ItemStack input = buf.readItemStack();
-        ItemStack output = buf.readItemStack();
-        return new CellAnalyzerRecipe(id, output, input);
-    }
-
-    @Override
-    public void write(PacketByteBuf buf, CellAnalyzerRecipe recipe) {
-        buf.writeItemStack(recipe.getInput());
-        buf.writeItemStack(recipe.getOutput());
-    }
+    public static final MapCodec<CellAnalyzerRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            ItemStackTemplate.CODEC.fieldOf("input").forGetter(CellAnalyzerRecipe::getInputTemplate),
+            ItemStackTemplate.CODEC.fieldOf("result").forGetter(CellAnalyzerRecipe::getOutputTemplate)
+    ).apply(instance, CellAnalyzerRecipe::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, CellAnalyzerRecipe> STREAM_CODEC = StreamCodec.composite(
+            ItemStackTemplate.STREAM_CODEC, CellAnalyzerRecipe::getInputTemplate,
+            ItemStackTemplate.STREAM_CODEC, CellAnalyzerRecipe::getOutputTemplate,
+            CellAnalyzerRecipe::new
+    );
+    public static final RecipeSerializer<CellAnalyzerRecipe> INSTANCE = new RecipeSerializer<>(CODEC, STREAM_CODEC);
+    private CellAnalyzerRecipeSerializer() { }
 }

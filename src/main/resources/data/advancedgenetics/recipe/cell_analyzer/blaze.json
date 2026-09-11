@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:blaze_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:blaze_cell"
+  }
+}

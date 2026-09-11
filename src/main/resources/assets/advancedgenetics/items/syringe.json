@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:component",
+    "predicate": "minecraft:custom_data",
+    "value": "{filled:1b}",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "advancedgenetics:item/syringe_full"
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "advancedgenetics:item/syringe"
+    }
+  }
+}

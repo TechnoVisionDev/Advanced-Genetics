@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:husk_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:husk_cell"
+  }
+}

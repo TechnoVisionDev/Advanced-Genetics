@@ -4,30 +4,30 @@ import com.technovision.advancedgenetics.api.screen.AbstractGeneticsScreenHandle
 import com.technovision.advancedgenetics.api.screen.slot.DnaSlot;
 import com.technovision.advancedgenetics.api.screen.slot.PlasmidSlot;
 import com.technovision.advancedgenetics.registry.ScreenRegistry;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ArrayPropertyDelegate;
-import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.ContainerData;
 
 import java.util.Objects;
 
 public class PlasmidInfuserScreenHandler extends AbstractGeneticsScreenHandler {
 
-    protected final PropertyDelegate propertyDelegate;
+    protected final ContainerData propertyDelegate;
 
-    public PlasmidInfuserScreenHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buffer) {
-        this(syncId, playerInventory, Objects.requireNonNull(playerInventory.player.getWorld().getBlockEntity(buffer.readBlockPos())), new SimpleInventory(PlasmidInfuserBlockEntity.SLOT_COUNT), new ArrayPropertyDelegate(5));
+    public PlasmidInfuserScreenHandler(int syncId, Inventory playerInventory, BlockPos pos) {
+        this(syncId, playerInventory, Objects.requireNonNull(playerInventory.player.level().getBlockEntity(pos)), new SimpleContainer(PlasmidInfuserBlockEntity.SLOT_COUNT), new SimpleContainerData(5));
     }
 
-    protected PlasmidInfuserScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, Inventory inventory, PropertyDelegate delegate) {
+    protected PlasmidInfuserScreenHandler(int syncId, Inventory playerInventory, BlockEntity blockEntity, Container inventory, ContainerData delegate) {
         super(ScreenRegistry.PLASMID_INFUSER_SCREEN_HANDLER, syncId, playerInventory, blockEntity, inventory, delegate, 1, 1);
         addSlots(DnaSlot::new, inventory, 0, 1, 63, 36);
         addSlots(PlasmidSlot::new, inventory, 1, 1, 110, 36);
 
         this.propertyDelegate = delegate;
-        addProperties(delegate);
+        addDataSlots(delegate);
     }
 }

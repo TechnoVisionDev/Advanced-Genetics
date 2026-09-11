@@ -1,55 +1,65 @@
 package com.technovision.advancedgenetics.api.blockentity;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.Containers;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractInventoryBlockEntity extends AbstractProcessingBlockEntity implements ImplementedInventory {
 
-    private final DefaultedList<ItemStack> inventory;
+    private final NonNullList<ItemStack> inventory;
 
-    public AbstractInventoryBlockEntity(DefaultedList<ItemStack> inventory, BlockEntityType<?> type, BlockPos pos, BlockState state, long energyCapacity, int maxProgress, int maxOverclock) {
+    public AbstractInventoryBlockEntity(NonNullList<ItemStack> inventory, BlockEntityType<?> type, BlockPos pos, BlockState state, long energyCapacity, int maxProgress, int maxOverclock) {
         super(type, pos, state, energyCapacity, maxProgress, maxOverclock);
         this.inventory = inventory;
     }
 
     @Override
-    public DefaultedList<ItemStack> getItems() {
+    public NonNullList<ItemStack> getItems() {
         return inventory;
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
+    protected void saveAdditional(ValueOutput nbt) {
+        super.saveAdditional(nbt);
+        ContainerHelper.saveAllItems(nbt, inventory);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt, inventory);
+    protected void loadAdditional(ValueInput nbt) {
+        super.loadAdditional(nbt);
+        ContainerHelper.loadAllItems(nbt, inventory);
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState newState) {
+        if (level != null && !level.isClientSide()) {
+            dropContents();
+            level.updateNeighbourForOutputSignal(worldPosition, getBlockState().getBlock());
+        }
+        super.preRemoveSideEffects(pos, newState);
     }
 
     @Override
     public void dropContents() {
-        ItemScatterer.spawn(world, pos, this);
+        Containers.dropContents(level, worldPosition, this);
     }
 
     @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction side) {
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
         return slot == 1;
     }
 
     @Override
-    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction side) {
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction side) {
         return slot == 0;
     }
 
@@ -63,7 +73,7 @@ public abstract class AbstractInventoryBlockEntity extends AbstractProcessingBlo
 
     public void incrementSlot(int pSlot, int pAmount) {
         ItemStack temp = this.getStackInSlot(pSlot);
-        if (temp.getCount() + pAmount <= temp.getMaxCount()) {
+        if (temp.getCount() + pAmount <= temp.getMaxStackSize()) {
             temp.setCount(temp.getCount() + pAmount);
         }
         this.setStackInSlot(pSlot, temp);
@@ -84,7 +94,7 @@ public abstract class AbstractInventoryBlockEntity extends AbstractProcessingBlo
         if (temp.isEmpty()) return;
         if (temp.getCount() - pAmount < 0) return;
 
-        temp.decrement(pAmount);
+        temp.shrink(pAmount);
         if (temp.getCount() <= 0) {
             this.setStackInSlot(slot, ItemStack.EMPTY);
         } else {

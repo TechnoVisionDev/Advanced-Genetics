@@ -1,43 +1,44 @@
 package com.technovision.advancedgenetics.common.entity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.SmallFireballEntity;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.hurtingprojectile.SmallFireball;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gamerules.GameRules;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
-public class FireballEntity extends SmallFireballEntity {
-
-    public FireballEntity(World world, PlayerEntity player, Vec3d v3) {
-        super(world, player.getX(), player.getY() + player.getStandingEyeHeight(), player.getZ(), v3.getX(), v3.getY(), v3.getZ());
+public class FireballEntity extends SmallFireball {
+    public FireballEntity(Level level, Player player, Vec3 direction) {
+        super(level, player.getX(), player.getY() + player.getEyeHeight(), player.getZ(), direction);
     }
 
-    protected void onCollision(HitResult hitResult) {
-        super.onCollision(hitResult);
-        if (!this.world.isClient) {
-            boolean bl = this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-            this.world.createExplosion((Entity)null, this.getX(), this.getY(), this.getZ(), 1, bl, bl ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE);
-            this.discard();
+    @Override
+    protected void onHit(HitResult hitResult) {
+        super.onHit(hitResult);
+        if (level() instanceof ServerLevel serverLevel) {
+            boolean griefing = serverLevel.getGameRules().get(GameRules.MOB_GRIEFING);
+            serverLevel.explode(null, getX(), getY(), getZ(), 1, griefing,
+                    griefing ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
+            discard();
         }
-
     }
 
-    protected void onEntityHit(EntityHitResult entityHitResult) {
-        super.onEntityHit(entityHitResult);
-        if (!this.world.isClient) {
-            Entity entity = entityHitResult.getEntity();
-            Entity entity2 = this.getOwner();
-            entity.damage(DamageSource.fireball(this, entity2), 5.0F);
-            if (entity2 instanceof LivingEntity) {
-                this.applyDamageEffects((LivingEntity)entity2, entity);
+    @Override
+    protected void onHitEntity(EntityHitResult entityHitResult) {
+        super.onHitEntity(entityHitResult);
+        if (level() instanceof ServerLevel serverLevel) {
+            Entity target = entityHitResult.getEntity();
+            Entity owner = getOwner();
+            var source = damageSources().fireball(this, owner);
+            target.hurtServer(serverLevel, source, 5.0F);
+            if (owner instanceof LivingEntity) {
+                EnchantmentHelper.doPostAttackEffects(serverLevel, target, source);
             }
-
         }
     }
 }

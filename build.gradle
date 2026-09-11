@@ -1,95 +1,89 @@
 plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
-	id 'maven-publish'
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+    id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
+base.archivesName = project.archives_base_name
 
 repositories {
-	mavenCentral()
-	maven { url 'https://jitpack.io' }
-	maven { url 'https://maven.blamejared.com' }
-	maven { url "https://maven.shedaniel.me" }
-	maven {
-		name = 'Curse Maven'
-		url = 'https://cursemaven.com'
-	}
-	maven {
-		name = 'Ladysnake Mods'
-		url = 'https://ladysnake.jfrog.io/artifactory/mods'
-	}
+    mavenCentral()
+    exclusiveContent {
+        forRepository { maven { url = 'https://api.modrinth.com/maven' } }
+        filter { includeGroup 'maven.modrinth' }
+    }
+}
+
+// Modrinth distributes CCA as an aggregate containing its module JARs.
+// Extract and bundle only the base and entity modules used by this mod.
+configurations { cardinalComponents }
+def unpackCardinalComponents = tasks.register('unpackCardinalComponents', Sync) {
+    from({ zipTree(configurations.cardinalComponents.singleFile) }) {
+        include 'META-INF/jars/cardinal-components-base-*.jar'
+        include 'META-INF/jars/cardinal-components-entity-*.jar'
+        eachFile { path = name }
+        includeEmptyDirs = false
+    }
+    into layout.buildDirectory.dir('dependencies/cardinal-components')
 }
 
 dependencies {
-	// To change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-	// Fabric API
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-	// Tech Reborn Energy API
-	include modApi('teamreborn:energy:2.2.0') {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-
-	// Forge Config API
-	include implementation('com.electronwill.night-config:core:3.6.5')
-	include implementation('com.electronwill.night-config:toml:3.6.5')
-	include modImplementation("curse.maven:forgeconfigapiport-547434:3904745") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-
-	// Cardinal Components API
-	include modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.0.1")
-	include modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.0.1")
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    include implementation("teamreborn:energy:${project.energy_version}") { transitive = false }
+    include implementation("maven.modrinth:forge-config-api-port:${project.config_modrinth_version}")
+    // Night Config is already nested in Forge Config API Port.
+    compileOnly 'com.electronwill.night-config:core:3.8.4'
+    cardinalComponents "maven.modrinth:cardinal-components-api:${project.cca_version}"
+    implementation files(unpackCardinalComponents.map { fileTree(it.destinationDir) { include '*.jar' } })
+    testImplementation "net.fabricmc:fabric-loader-junit:${project.loader_version}"
+    testImplementation 'com.electronwill.night-config:core:3.8.4'
 }
 
 processResources {
-	inputs.property "version", project.version
-
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
+    def properties = [version: project.version, minecraft_version: project.minecraft_version,
+        loader_version: project.loader_version, fabric_version: project.fabric_version, cca_version: project.cca_version]
+    inputs.properties(properties)
+    filesMatching('fabric.mod.json') { expand(properties) }
 }
 
 tasks.withType(JavaCompile).configureEach {
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release = 17
+    options.release = 25
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xmaxerrs', '1000']
 }
-
 java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
-	withSourcesJar()
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
-
+test { useJUnitPlatform() }
 jar {
-	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
-	}
+    // These nested modules already carry Fabric metadata; retain their original JARs.
+    from(unpackCardinalComponents) { into 'META-INF/jars' }
+    from('LICENSE') { rename { "${it}_${project.archives_base_name}" } }
+}
+publishing {
+    publications { mavenJava(MavenPublication) { from components.java } }
 }
 
-// configure the maven publication
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			from components.java
-		}
-	}
+// Writes a classpath for API inspection and focused port validation.
+tasks.register('writeCompileClasspath') {
+    dependsOn unpackCardinalComponents
+    doLast { layout.buildDirectory.file('compile-classpath.txt').get().asFile.text = sourceSets.main.compileClasspath.asPath }
+}
 
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
-	}
+fabricApi {
+    configureTests {
+        createSourceSet = true
+        modId = 'advancedgenetics_test'
+        enableGameTests = true
+        enableClientGameTests = true
+    }
+}
+dependencies {
+    gametestImplementation 'com.electronwill.night-config:core:3.8.4'
 }

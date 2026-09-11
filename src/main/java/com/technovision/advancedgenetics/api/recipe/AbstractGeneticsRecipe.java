@@ -1,54 +1,22 @@
 package com.technovision.advancedgenetics.api.recipe;
 
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.Level;
 
-public abstract class AbstractGeneticsRecipe implements Recipe<SimpleInventory> {
-
-    private final Identifier recipeId;
-
-    public AbstractGeneticsRecipe(Identifier recipeId) {
-        this.recipeId = recipeId;
-    }
-
+public abstract class AbstractGeneticsRecipe implements Recipe<SingleRecipeInput> {
     @Override
-    public boolean matches(SimpleInventory inventory, World world) {
-        return false;
-    }
-
+    public boolean matches(SingleRecipeInput input, Level level) { return false; }
     @Override
-    public ItemStack craft(SimpleInventory inventory) {
-        return ItemStack.EMPTY;
-    }
-
+    public ItemStack assemble(SingleRecipeInput input) { return ItemStack.EMPTY; }
     @Override
-    public boolean fits(int width, int height) {
-        return false;
-    }
-
+    public boolean isSpecial() { return true; }
     @Override
-    public ItemStack getOutput() {
-        return ItemStack.EMPTY;
-    }
-
+    public boolean showNotification() { return false; }
     @Override
-    public Identifier getId() {
-        return recipeId;
-    }
-
+    public String group() { return ""; }
     @Override
-    public abstract RecipeSerializer<?> getSerializer();
-
+    public PlacementInfo placementInfo() { return PlacementInfo.NOT_PLACEABLE; }
     @Override
-    public abstract RecipeType<?> getType();
-
-    @Override
-    public boolean isIgnoredInRecipeBook() {
-        return true;
-    }
+    public RecipeBookCategory recipeBookCategory() { return RecipeBookCategories.CRAFTING_MISC; }
 }

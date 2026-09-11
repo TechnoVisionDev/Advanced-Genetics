@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "advancedgenetics",
   "version": "${version}",
-
   "name": "Advanced Genetics",
   "description": "Explore genetics by splicing your DNA with the mobs in your Minecraft world to gain their unique abilities, like shooting fireballs, eating grass, or climbing walls. There are dozens of abilities to discover!",
   "authors": [
@@ -13,10 +12,8 @@
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/advanced-genetics",
     "sources": "https://github.com/TechnoVisionDev/Advanced-Genetics"
   },
-
   "license": "MIT",
   "icon": "assets/advancedgenetics/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -37,11 +34,22 @@
       "advancedgenetics:player_genetics"
     ]
   },
-
   "depends": {
-    "fabricloader": ">=0.14.6",
-    "fabric": "*",
-    "minecraft": "~1.19",
-    "java": ">=17"
-  }
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": ">=${fabric_version}",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=25",
+    "team_reborn_energy": ">=5.0.0",
+    "forgeconfigapiport": ">=26.2.1",
+    "cardinal-components-base": ">=8.0.1",
+    "cardinal-components-entity": ">=8.0.1"
+  },
+  "jars": [
+    {
+      "file": "META-INF/jars/cardinal-components-base-${cca_version}.jar"
+    },
+    {
+      "file": "META-INF/jars/cardinal-components-entity-${cca_version}.jar"
+    }
+  ]
 }

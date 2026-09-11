@@ -1,6 +1,6 @@
 package com.technovision.advancedgenetics.api.screen;
 
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public interface IDisplayData {
 
     int getMaxValue();
 
-    List<Text> toText();
+    List<Component> toText();
 }

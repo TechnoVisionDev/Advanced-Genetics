@@ -1,70 +1,38 @@
 package com.technovision.advancedgenetics.common.recipe.cellanalyzer;
 
 import com.technovision.advancedgenetics.api.recipe.AbstractGeneticsRecipe;
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.world.World;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.Level;
 
 public class CellAnalyzerRecipe extends AbstractGeneticsRecipe {
+    private final ItemStackTemplate input;
+    private final ItemStackTemplate output;
 
-    private final Identifier id;
-    private final ItemStack input;
-    private final ItemStack output;
-
-    public CellAnalyzerRecipe(Identifier id, ItemStack input, ItemStack output) {
-        super(id);
-        this.id = id;
+    public CellAnalyzerRecipe(ItemStackTemplate input, ItemStackTemplate output) {
         this.input = input;
         this.output = output;
     }
 
     @Override
-    public boolean matches(SimpleInventory inventory, World world) {
-        return !world.isClient();
+    public boolean matches(SingleRecipeInput inventory, Level level) {
+        return !level.isClientSide() && ItemStack.isSameItemSameComponents(inventory.item(), getInput());
     }
 
     @Override
-    public ItemStack craft(SimpleInventory inventory) {
-        return output;
-    }
-
-    public ItemStack getInput() {
-        return input;
-    }
-
-    public ItemStack getOutput() {
-        return output;
-    }
+    public ItemStack assemble(SingleRecipeInput inventory) { return output.create(); }
+    public ItemStack getInput() { return input.create(); }
+    public ItemStackTemplate getInputTemplate() { return input; }
+    public ItemStack getOutput() { return output.create(); }
+    public ItemStackTemplate getOutputTemplate() { return output; }
 
     @Override
-    public DefaultedList<Ingredient> getIngredients() {
-        return DefaultedList.ofSize(1, Ingredient.ofStacks(input));
-    }
-
+    public String toString() { return String.format("input=%s, outputs=%s", input, output); }
     @Override
-    public String toString(){
-        return String.format("input=%s, outputs=%s", input, output);
-    }
-
+    public RecipeSerializer<CellAnalyzerRecipe> getSerializer() { return CellAnalyzerRecipeSerializer.INSTANCE; }
     @Override
-    public Identifier getId() {
-        return id;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-        return CellAnalyzerRecipeSerializer.INSTANCE;
-    }
-
-    @Override
-    public RecipeType<?> getType() {
-        return Type.INSTANCE;
-    }
+    public RecipeType<CellAnalyzerRecipe> getType() { return Type.INSTANCE; }
 
     public static class Type implements RecipeType<CellAnalyzerRecipe> {
         private Type() { }

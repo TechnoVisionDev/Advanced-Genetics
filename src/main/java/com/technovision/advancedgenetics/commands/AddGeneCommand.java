@@ -5,13 +5,13 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
-import net.minecraft.command.CommandRegistryAccess;
-import net.minecraft.command.EntitySelector;
-import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Text;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.arguments.selector.EntitySelector;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
 
 /**
  * Adds a gene to a specified player.
@@ -20,23 +20,23 @@ import net.minecraft.text.Text;
  */
 public class AddGeneCommand {
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess access, CommandManager.RegistrationEnvironment environment) {
-        dispatcher.register(CommandManager.literal("gene")
-                .then(CommandManager.literal("add")
-                .then(CommandManager.argument("player", EntityArgumentType.player())
-                .then(CommandManager.argument("gene", GeneArgumentType.gene())
-                .requires(source -> source.hasPermissionLevel(2))
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext access, Commands.CommandSelection environment) {
+        dispatcher.register(Commands.literal("gene")
+                .then(Commands.literal("add")
+                .then(Commands.argument("player", EntityArgument.player())
+                .then(Commands.argument("gene", GeneArgumentType.gene())
+                .requires(source -> source.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER))
                 .executes(AddGeneCommand::run)
         ))));
     }
 
-    private static int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+    private static int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         try {
             EntitySelector selector = context.getArgument("player", EntitySelector.class);
             Genes gene = context.getArgument("gene", Genes.class);
-            PlayerEntity player = selector.getPlayer(context.getSource());
-            player.getComponent(ComponentRegistry.PLAYER_GENETICS).addGene(gene);
-            player.sendMessage(Text.translatable("message.advancedgenetics.command.gene_add", "§7"+gene.getName()+"§f", "§7"+player.getName().getString()+"§f"));
+            Player player = selector.findSinglePlayer(context.getSource());
+            ComponentRegistry.PLAYER_GENETICS.get(player).addGene(gene);
+            player.sendSystemMessage(Component.translatable("message.advancedgenetics.command.gene_add", "§7"+gene.getName()+"§f", "§7"+player.getName().getString()+"§f"));
             return 1;
         } catch (Exception e) {
             System.out.println(e.getMessage());

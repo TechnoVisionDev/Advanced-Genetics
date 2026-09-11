@@ -2,24 +2,24 @@ package com.technovision.advancedgenetics.mixin;
 
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public class PlayerEntityMixin {
 
     /**
      * Keep inventory if player has "Keep Inventory" gene
      */
-    @Inject(method = "dropInventory", at = @At("HEAD"), cancellable = true)
-    private void dropInventory(CallbackInfo ci) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
-        if (player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.KEEP_INVENTORY)) {
+    @Inject(method = "dropEquipment", at = @At("HEAD"), cancellable = true)
+    private void dropInventory(net.minecraft.server.level.ServerLevel level, CallbackInfo ci) {
+        Player player = (Player) (Object) this;
+        if (ComponentRegistry.PLAYER_GENETICS.get(player).hasGene(Genes.KEEP_INVENTORY)) {
             ci.cancel();
         }
     }
@@ -27,10 +27,10 @@ public class PlayerEntityMixin {
     /**
      * Allow walking through cobwebs if player has "Web Walking" gene
      */
-    @Inject(at = @At("HEAD"), method = "slowMovement", cancellable = true)
-    public void slowMovement(BlockState state, Vec3d multiplier, CallbackInfo info) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
-        if (player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.WEB_WALKING)) {
+    @Inject(at = @At("HEAD"), method = "makeStuckInBlock", cancellable = true)
+    public void slowMovement(BlockState state, Vec3 multiplier, CallbackInfo info) {
+        Player player = (Player) (Object) this;
+        if (ComponentRegistry.PLAYER_GENETICS.get(player).hasGene(Genes.WEB_WALKING)) {
             info.cancel();
         }
     }

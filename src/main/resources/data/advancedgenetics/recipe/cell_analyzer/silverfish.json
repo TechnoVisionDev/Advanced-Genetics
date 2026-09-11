@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:silverfish_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:silverfish_cell"
+  }
+}

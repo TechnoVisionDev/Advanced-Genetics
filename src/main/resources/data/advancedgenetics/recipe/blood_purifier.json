@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iai",
+    "yxy",
+    "iai"
+  ],
+  "key": {
+    "i": "minecraft:iron_ingot",
+    "a": "#minecraft:wool",
+    "y": "advancedgenetics:syringe",
+    "x": "minecraft:bucket"
+  },
+  "result": {
+    "id": "advancedgenetics:blood_purifier"
+  }
+}

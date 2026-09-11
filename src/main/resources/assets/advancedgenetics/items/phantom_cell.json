@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "advancedgenetics:item/phantom_cell",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -12496503
+      }
+    ]
+  }
+}

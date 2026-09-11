@@ -1,9 +1,9 @@
 package com.technovision.advancedgenetics.api.blockentity;
 
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.recipe.Recipe;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public interface ProcessingBlockEntity {
 
@@ -15,9 +15,9 @@ public interface ProcessingBlockEntity {
 
     void processRecipe();
 
-    <T extends Recipe<SimpleInventory>> void setRecipe(@Nullable T pRecipe);
+    <T extends Recipe<SingleRecipeInput>> void setRecipe(@Nullable T pRecipe);
 
-    Recipe<SimpleInventory> getRecipe();
+    Recipe<SingleRecipeInput> getRecipe();
 
     int getProgress();
 

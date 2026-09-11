@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "advancedgenetics:item/frog_cell",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -10252242
+      }
+    ]
+  }
+}

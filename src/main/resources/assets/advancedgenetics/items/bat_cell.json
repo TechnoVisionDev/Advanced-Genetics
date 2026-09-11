@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "advancedgenetics:item/bat_cell",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -11386848
+      }
+    ]
+  }
+}

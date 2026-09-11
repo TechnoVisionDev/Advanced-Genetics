@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "iIi",
+    "iRi"
+  ],
+  "key": {
+    "i": "minecraft:iron_ingot",
+    "I": "advancedgenetics:syringe",
+    "R": "minecraft:redstone"
+  },
+  "result": {
+    "id": "advancedgenetics:cell_analyzer"
+  }
+}

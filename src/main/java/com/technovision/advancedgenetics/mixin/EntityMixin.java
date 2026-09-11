@@ -4,10 +4,10 @@ import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,12 +20,12 @@ public class EntityMixin {
      * Makes all entities glow for a player if they have the "Mob Sight" gene.
      */
     @Environment(EnvType.CLIENT)
-    @Inject(method = "isGlowing", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isCurrentlyGlowing", at = @At("HEAD"), cancellable = true)
     private void makeEntitiesGlow(CallbackInfoReturnable<Boolean> cir) {
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        LocalPlayer player = Minecraft.getInstance().player;
         Entity thisEntity = (Entity)(Object)this;
         if (player != null && player != thisEntity && thisEntity instanceof LivingEntity) {
-            if (player.getComponent(ComponentRegistry.PLAYER_GENETICS).hasGene(Genes.MOB_SIGHT)) {
+            if (ComponentRegistry.PLAYER_GENETICS.get(player).hasGene(Genes.MOB_SIGHT)) {
                 cir.setReturnValue(true);
             }
         }
