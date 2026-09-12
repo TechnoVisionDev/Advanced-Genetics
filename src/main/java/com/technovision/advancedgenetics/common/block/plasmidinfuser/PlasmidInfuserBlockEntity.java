@@ -44,7 +44,7 @@ public class PlasmidInfuserBlockEntity extends AbstractInventoryBlockEntity {
         ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
         ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
         if (!input.isEmpty() && !output.isEmpty() && ItemData.has(input)
-                && getEnergyStorage().getAmount() >= getEnergyRequirement()
+                && getEnergyStorage().getAmountAsLong() >= getEnergyRequirement()
                 && ItemData.read(input).getBooleanOr("decoded", false)
                 && PlasmidItem.canCombine(input, output)) {
             if (Config.Common.hardMode.get()) {

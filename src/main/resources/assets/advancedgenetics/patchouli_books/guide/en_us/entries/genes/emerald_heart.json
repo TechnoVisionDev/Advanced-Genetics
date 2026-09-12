@@ -1,0 +1,17 @@
+{
+  "name": "Emerald Heart",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:villager_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Drop an emerald when you die. Cooldown: 5 minutes.",
+      "title": "Emerald Heart"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Villager.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 6
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Scare Creepers",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:cat_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Nearby creepers try to flee from you within 6 blocks.",
+      "title": "Scare Creepers"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Cat, Ocelot.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 26
+}

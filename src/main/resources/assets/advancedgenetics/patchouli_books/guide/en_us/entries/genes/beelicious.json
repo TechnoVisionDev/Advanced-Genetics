@@ -1,0 +1,17 @@
+{
+  "name": "Beelicious",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:bee_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Another player can right-click you with a glass bottle to collect honey. Consumes one bottle and yields one honey bottle. Cooldown: 5 minutes.",
+      "title": "Beelicious"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Bee.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 1
+}

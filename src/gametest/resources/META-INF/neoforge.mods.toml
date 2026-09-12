@@ -1,0 +1,13 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="MIT"
+[[mods]]
+modId="advancedgenetics_test"
+version="1"
+displayName="Advanced Genetics Game Tests"
+[[dependencies.advancedgenetics_test]]
+modId="advancedgenetics"
+type="required"
+versionRange="[1,)"
+ordering="AFTER"
+side="BOTH"

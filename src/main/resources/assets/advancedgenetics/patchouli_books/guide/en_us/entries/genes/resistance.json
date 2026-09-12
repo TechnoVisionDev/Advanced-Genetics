@@ -1,0 +1,17 @@
+{
+  "name": "Resistance",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:drowned_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Maintains Resistance I.",
+      "title": "Resistance"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Drowned, Husk, Iron Golem, Shulker, Zombie.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 25
+}

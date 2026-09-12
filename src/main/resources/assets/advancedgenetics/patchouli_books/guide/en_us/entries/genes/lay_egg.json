@@ -1,0 +1,17 @@
+{
+  "name": "Lay Egg",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:chicken_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Lay an egg every 5 minutes while the ability is active.",
+      "title": "Lay Egg"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Chicken.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 15
+}

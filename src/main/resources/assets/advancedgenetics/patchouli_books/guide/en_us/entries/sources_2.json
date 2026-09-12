@@ -1,0 +1,36 @@
+{
+  "name": "Mob Sources 3",
+  "category": "advancedgenetics:reference",
+  "icon": "advancedgenetics:horse_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Horse$()$(br)Jump Boost"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Husk$()$(br)Resistance"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Iron Golem$()$(br)Regeneration, Resistance"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Magma Cube$()$(br)Fireproof"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mooshroom$()$(br)Milky, Eat Grass"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Ocelot$()$(br)Speed, Scare Creepers"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Panda$()$(br)No Hunger, Meaty"
+    }
+  ],
+  "sortnum": 2
+}

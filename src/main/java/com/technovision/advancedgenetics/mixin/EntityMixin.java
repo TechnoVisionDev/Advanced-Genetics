@@ -2,8 +2,6 @@ package com.technovision.advancedgenetics.mixin;
 
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.Entity;
@@ -19,8 +17,7 @@ public class EntityMixin {
     /**
      * Makes all entities glow for a player if they have the "Mob Sight" gene.
      */
-    @Environment(EnvType.CLIENT)
-    @Inject(method = "isCurrentlyGlowing", at = @At("HEAD"), cancellable = true)
+        @Inject(method = "isCurrentlyGlowing", at = @At("HEAD"), cancellable = true)
     private void makeEntitiesGlow(CallbackInfoReturnable<Boolean> cir) {
         LocalPlayer player = Minecraft.getInstance().player;
         Entity thisEntity = (Entity)(Object)this;

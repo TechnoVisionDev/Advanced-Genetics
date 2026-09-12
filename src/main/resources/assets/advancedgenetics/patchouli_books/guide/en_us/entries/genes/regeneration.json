@@ -1,0 +1,17 @@
+{
+  "name": "Regeneration",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:iron_golem_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Maintains Regeneration I.",
+      "title": "Regeneration"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Iron Golem, Shulker.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 24
+}

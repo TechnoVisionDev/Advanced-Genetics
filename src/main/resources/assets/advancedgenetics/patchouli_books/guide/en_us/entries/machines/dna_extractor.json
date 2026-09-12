@@ -1,0 +1,20 @@
+{
+  "name": "DNA Extractor",
+  "category": "advancedgenetics:machines",
+  "icon": "advancedgenetics:dna_extractor",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Mob cell → encrypted DNA helix. By default, half of extracted DNA is Basic DNA; other results come from that mob's gene pool."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:dna_extractor"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Default storage: 20,000 energy.$(br)Base use: 20 energy/tick.$(br)Base timer: 200 ticks (10 seconds).$(br)Maximum overclockers: 5.$(br2)The completion tick also consumes energy, preserving the original machine timing. Progress resets if processing cannot continue."
+    }
+  ],
+  "sortnum": 1
+}

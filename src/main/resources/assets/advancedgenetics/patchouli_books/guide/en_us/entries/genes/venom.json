@@ -1,0 +1,17 @@
+{
+  "name": "Venom",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:cave_spider_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Attacks have a 5% chance to inflict Poison I for 30 seconds if the target is not already poisoned.",
+      "title": "Venom"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Cave Spider.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 33
+}

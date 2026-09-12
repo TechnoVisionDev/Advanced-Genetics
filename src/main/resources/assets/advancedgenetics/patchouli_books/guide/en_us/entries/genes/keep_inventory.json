@@ -1,0 +1,17 @@
+{
+  "name": "Keep Inventory",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:warden_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Retains your inventory through death and respawn.",
+      "title": "Keep Inventory"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Warden.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 14
+}

@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "advancedgenetics:item/skeleton_cell",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -4408132
+      }
+    ]
+  }
+}

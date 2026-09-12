@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "advancedgenetics:item/cave_spider_cell",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -11245456
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Meaty",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:panda_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Another player can shear a porkchop from you. Costs 1 shears durability. Cooldown: 15 seconds.",
+      "title": "Meaty"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Panda, Pig, Polar Bear.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 17
+}

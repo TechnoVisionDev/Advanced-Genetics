@@ -1,0 +1,17 @@
+{
+  "name": "Poison Immunity",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:frog_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Clears poison and cancels the incoming damage event while you are poisoned, preserving the original protection rule.",
+      "title": "Poison Immunity"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Frog.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 23
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Dragon's Breath",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:ender_dragon_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Press $(k:key.advancedgenetics.dragons_breath) (default H) to launch a dragon fireball. Cooldown: 15 seconds.",
+      "title": "Dragon's Breath"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Ender Dragon.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 3
+}

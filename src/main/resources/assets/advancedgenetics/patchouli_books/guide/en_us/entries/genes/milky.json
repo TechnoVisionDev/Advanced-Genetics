@@ -1,0 +1,17 @@
+{
+  "name": "Milky",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:cow_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Another player can right-click you with a bucket to obtain milk. Cooldown: 15 seconds.",
+      "title": "Milky"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Cow, Mooshroom.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 18
+}

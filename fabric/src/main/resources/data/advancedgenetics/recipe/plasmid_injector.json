@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iyi",
+    "yxy",
+    "iyi"
+  ],
+  "key": {
+    "i": "minecraft:iron_ingot",
+    "y": "advancedgenetics:syringe",
+    "x": "minecraft:bucket"
+  },
+  "result": {
+    "id": "advancedgenetics:plasmid_injector"
+  }
+}

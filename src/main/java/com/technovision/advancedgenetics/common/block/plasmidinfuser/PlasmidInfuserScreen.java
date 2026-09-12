@@ -46,7 +46,7 @@ public class PlasmidInfuserScreen extends AbstractGeneticsScreen<PlasmidInfuserS
         }
         ItemStack plasmid = menu.getClientInventory().getItem(PlasmidInfuserBlockEntity.OUTPUT_SLOT_INDEX);
         if (!plasmid.isEmpty() && ItemData.has(plasmid)) {
-            String text = String.format("%d/%d", ItemData.read(plasmid).getIntOr("count", 0), PlasmidItem.MAX_GENES);
+            String text = String.format("%d/%d", ItemData.read(plasmid).getIntOr("count", 0), PlasmidItem.maxGenes());
             graphics.pose().pushMatrix();
             graphics.pose().translate(0, 0.5f);
             graphics.text(font, text, imageWidth - font.width(text) - 12, imageHeight / 4 - 1, 0xff3f3f3f, false);

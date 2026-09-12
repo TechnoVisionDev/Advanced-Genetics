@@ -1,0 +1,36 @@
+{
+  "name": "Mob Sources 1",
+  "category": "advancedgenetics:reference",
+  "icon": "advancedgenetics:bat_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Bat$()$(br)Night Vision"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Bee$()$(br)Beelicious"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Blaze$()$(br)Fireproof, Shoot Fireballs"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Cat$()$(br)Speed, Scare Creepers"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Cow$()$(br)Milky, Eat Grass"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Chicken$()$(br)Lay Egg, No Fall Damage"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Cave Spider$()$(br)Night Vision, Venom, Web Walking"
+    }
+  ],
+  "sortnum": 0
+}

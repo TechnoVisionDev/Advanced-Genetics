@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:mooshroom_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:mooshroom_cell"
+  }
+}

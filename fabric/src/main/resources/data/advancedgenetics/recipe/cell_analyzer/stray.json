@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:stray_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:stray_cell"
+  }
+}

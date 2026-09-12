@@ -1,0 +1,17 @@
+{
+  "name": "Climb Walls",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:spider_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Climb adjacent solid walls with the original wall-climbing movement rules.",
+      "title": "Climb Walls"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Spider.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 2
+}

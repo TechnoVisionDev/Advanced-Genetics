@@ -1,0 +1,17 @@
+{
+  "name": "Infinity",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:skeleton_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Bow shots preserve normal arrows; the fired arrows cannot be picked up in survival. Normal bow durability still applies.",
+      "title": "Infinity"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Skeleton, Stray.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 11
+}

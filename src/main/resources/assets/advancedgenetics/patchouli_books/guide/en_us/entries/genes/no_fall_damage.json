@@ -1,0 +1,17 @@
+{
+  "name": "No Fall Damage",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:chicken_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Cancels fall damage.",
+      "title": "No Fall Damage"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Chicken.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 21
+}

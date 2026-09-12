@@ -41,7 +41,7 @@ public class DnaExtractorBlockEntity extends AbstractInventoryBlockEntity {
     public boolean canProcessRecipe() {
         return !getStackInSlot(INPUT_SLOT_INDEX).isEmpty()
                 && getStackInSlot(OUTPUT_SLOT_INDEX).isEmpty()
-                && getEnergyStorage().getAmount() >= getEnergyRequirement();
+                && getEnergyStorage().getAmountAsLong() >= getEnergyRequirement();
     }
 
     @Override

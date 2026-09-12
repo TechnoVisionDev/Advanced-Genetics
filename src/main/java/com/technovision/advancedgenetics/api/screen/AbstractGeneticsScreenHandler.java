@@ -20,6 +20,9 @@ public abstract class AbstractGeneticsScreenHandler extends AbstractContainerMen
     private final int inputSlots;
     private final int outputSlots;
     private final Level world;
+    // Menu packets can arrive before the client receives the block update.
+    // Client rendering uses the synchronized inventory and data slots.
+    @org.jetbrains.annotations.Nullable
     private final AbstractProcessingBlockEntity blockEntity;
 
     public AbstractGeneticsScreenHandler(MenuType<?> screenHandlerType, int syncId, Inventory playerInventory, BlockEntity blockEntity, Container inventory, ContainerData delegate, int inputSlots, int outputSlots) {
@@ -105,6 +108,7 @@ public abstract class AbstractGeneticsScreenHandler extends AbstractContainerMen
         return delegate;
     }
 
+    @org.jetbrains.annotations.Nullable
     public AbstractProcessingBlockEntity getBlockEntity() {
         return blockEntity;
     }

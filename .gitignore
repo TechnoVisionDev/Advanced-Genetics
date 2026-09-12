@@ -34,3 +34,9 @@ run/
 
 # Development/test runtime logs
 logs/
+
+# NeoForge development worlds
+run-neoforge/
+
+# Generated Fabric dependency processing
+.fabric/

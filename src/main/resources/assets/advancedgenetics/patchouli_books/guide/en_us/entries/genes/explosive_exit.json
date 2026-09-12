@@ -1,0 +1,17 @@
+{
+  "name": "Explosive Exit",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:creeper_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Explode on death when you carry at least 5 gunpowder. The explosion has strength 3 and can damage blocks.",
+      "title": "Explosive Exit"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Creeper.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 7
+}

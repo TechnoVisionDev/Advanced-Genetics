@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Checks resource formats with the target game's codecs and resolves packaged asset references. */
 class ResourceCompatibilityTest {
-    private static final Path RESOURCES = Path.of("src/main/resources");
+    private static final Path RESOURCES = Path.of(System.getProperty("advancedgenetics.resources", "src/main/resources"));
     private static final Path ASSETS = RESOURCES.resolve("assets/advancedgenetics");
 
     @BeforeAll
@@ -38,7 +38,7 @@ class ResourceCompatibilityTest {
     }
 
     @Test
-    void everyRegisteredItemHasAValidMinecraft26_2Definition() throws IOException {
+    void everyRegisteredItemHasAValidMinecraft26_1_2Definition() throws IOException {
         Set<String> expected = new HashSet<>(List.of("cell_analyzer", "dna_extractor", "dna_decrypter",
                 "plasmid_infuser", "blood_purifier", "plasmid_injector", "metal_scalpel", "diamond_scalpel",
                 "netherite_scalpel", "syringe", "overclocker", "crowbar", "dna_helix", "plasmid",
@@ -123,6 +123,28 @@ class ResourceCompatibilityTest {
         }
     }
 
+    @Test
+    void guideCoversEveryGeneAndReferencesExistingRecipes() throws IOException {
+        Path guide = ASSETS.resolve("patchouli_books/guide/en_us");
+        assertEquals(55, jsonFiles(guide.resolve("entries")).size());
+        for (var gene : com.technovision.advancedgenetics.api.genetics.Genes.values()) {
+            if (gene == com.technovision.advancedgenetics.api.genetics.Genes.BASIC) continue;
+            assertTrue(Files.isRegularFile(guide.resolve("entries/genes/" + gene.name().toLowerCase(java.util.Locale.ROOT) + ".json")));
+        }
+        for (Path entry : jsonFiles(guide.resolve("entries"))) {
+            var contents = readJson(entry).getAsJsonObject();
+            String category = contents.get("category").getAsString().split(":")[1];
+            assertTrue(Files.isRegularFile(guide.resolve("categories/" + category + ".json")), entry.toString());
+            for (var page : contents.getAsJsonArray("pages")) {
+                var object = page.getAsJsonObject();
+                if (object.has("recipe")) {
+                    String recipe = object.get("recipe").getAsString().split(":")[1];
+                    assertTrue(Files.isRegularFile(RESOURCES.resolve("data/advancedgenetics/recipe/" + recipe + ".json")), entry.toString());
+                }
+            }
+        }
+    }
+
     private static void checkModelReferences(JsonElement element, Path origin) {
         if (element.isJsonArray()) {
             for (JsonElement child : element.getAsJsonArray()) checkModelReferences(child, origin);
@@ -148,8 +170,16 @@ class ResourceCompatibilityTest {
         String[] parts = id.contains(":") ? id.split(":", 2) : new String[]{"minecraft", id};
         String resource = "assets/" + parts[0] + "/" + folder + "/" + parts[1] + suffix;
         boolean exists = Files.isRegularFile(RESOURCES.resolve(resource))
-                || ResourceCompatibilityTest.class.getClassLoader().getResource(resource) != null;
+                || net.minecraft.SharedConstants.class.getResource("/" + resource) != null
+                || ResourceCompatibilityTest.class.getClassLoader().getResource(resource) != null
+                || inMinecraftJar(resource);
         assertTrue(exists, origin + " refers to missing resource " + resource);
+    }
+
+    private static boolean inMinecraftJar(String resource) {
+        try (var jar = new java.util.zip.ZipFile(System.getProperty("advancedgenetics.minecraftJar"))) {
+            return jar.getEntry(resource) != null;
+        } catch (IOException failure) { throw new java.io.UncheckedIOException(failure); }
     }
 
     private static List<Path> jsonFiles(Path directory) throws IOException {

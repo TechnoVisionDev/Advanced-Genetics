@@ -1,0 +1,2 @@
+3b8617cbf31ebbe14f846c5d4a52e61ce5baf7b2c193b4288c845681b6bd4b25  AdvancedGenetics-1.0.2+neoforge-26.1.jar
+00f9e611930614eacd565916c906a4341363e4a43e271c1a01bda8227707dd49  patchouli-neoforge-26.1-94.jar

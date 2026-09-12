@@ -1,0 +1,24 @@
+{
+  "name": "Tools & Materials",
+  "category": "advancedgenetics:reference",
+  "icon": "advancedgenetics:diamond_scalpel",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:diamond_scraper"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:netherite_scraper"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:plasmid"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Some related mobs share samples: skeleton horses use skeleton matter; zombie horses, zombified piglins, and zombie villagers use zombie matter; mules use horse matter; piglins and piglin brutes use pig matter; witches use villager matter. Unsupported mobs yield no sample."
+    }
+  ],
+  "sortnum": 7
+}

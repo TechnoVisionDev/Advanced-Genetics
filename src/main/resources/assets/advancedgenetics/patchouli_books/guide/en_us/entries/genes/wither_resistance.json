@@ -1,0 +1,17 @@
+{
+  "name": "Wither Resistance",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:wither_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Clears wither and cancels incoming damage while withered, preserving the original protection rule.",
+      "title": "Wither Resistance"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Wither.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 36
+}

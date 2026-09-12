@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:magma_cube_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:magma_cube_cell"
+  }
+}

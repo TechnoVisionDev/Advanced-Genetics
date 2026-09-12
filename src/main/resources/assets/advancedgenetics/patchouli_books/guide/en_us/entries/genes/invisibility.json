@@ -1,0 +1,17 @@
+{
+  "name": "Invisibility",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:phantom_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Maintains Invisibility I.",
+      "title": "Invisibility"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Phantom.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 12
+}

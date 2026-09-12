@@ -1,0 +1,21 @@
+{
+  "name": "Dragon's Health",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:ender_dragon_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Carry a Dragon Health Crystal anywhere in your inventory. It absorbs incoming damage by spending crystal durability.",
+      "title": "Dragon's Health"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Ender Dragon.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:dragon_health_crystal"
+    }
+  ],
+  "sortnum": 4
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Night Vision",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:bat_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Maintains Night Vision I.",
+      "title": "Night Vision"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Bat, Cave Spider, Phantom, Spider, Warden.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 20
+}

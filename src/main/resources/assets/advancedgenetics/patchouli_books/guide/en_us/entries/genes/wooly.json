@@ -1,0 +1,17 @@
+{
+  "name": "Wooly",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:sheep_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Another player can shear white wool from you. Costs 1 shears durability. Cooldown: 15 seconds. Meaty and Wooly can both activate on one use.",
+      "title": "Wooly"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Sheep.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 38
+}

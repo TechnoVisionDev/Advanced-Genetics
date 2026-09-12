@@ -1,0 +1,17 @@
+{
+  "name": "Scare Skeletons",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:wolf_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Nearby skeletons try to flee from you within 10 blocks.",
+      "title": "Scare Skeletons"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Wolf.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 27
+}

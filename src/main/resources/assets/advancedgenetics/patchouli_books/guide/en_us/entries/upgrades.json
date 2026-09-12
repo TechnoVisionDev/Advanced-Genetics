@@ -1,0 +1,24 @@
+{
+  "name": "Power & Overclocking",
+  "category": "advancedgenetics:machines",
+  "icon": "advancedgenetics:overclocker",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Machines accept NeoForge energy and expose item automation connections. Use compatible energy providers and item pipes, or hoppers for items. Slot restrictions keep invalid inputs and output extraction consistent with manual use."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Right-click a machine with an Overclocker to install it. Each one subtracts 2 seconds from the timer and adds 5 energy/tick by default. The timer cannot go below 20 ticks. Right-click with a Crowbar to remove one overclocker; it drops beside the machine."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:overclocker"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:crowbar"
+    }
+  ],
+  "sortnum": 6
+}

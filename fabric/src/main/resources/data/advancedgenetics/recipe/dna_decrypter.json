@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iGi",
+    "DgD",
+    "iGi"
+  ],
+  "key": {
+    "i": "minecraft:iron_ingot",
+    "G": "minecraft:glass",
+    "D": "advancedgenetics:dna_helix",
+    "g": "minecraft:gold_ingot"
+  },
+  "result": {
+    "id": "advancedgenetics:dna_decrypter"
+  }
+}

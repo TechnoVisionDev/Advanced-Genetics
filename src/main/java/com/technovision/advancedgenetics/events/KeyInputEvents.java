@@ -4,8 +4,6 @@ import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.component.PlayerGeneticsComponent;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -29,9 +27,8 @@ public class KeyInputEvents {
         }
     }
 
-    public static void registerServerSide() {
-        PayloadTypeRegistry.serverboundPlay().register(KeyPressedPayload.TYPE, KeyPressedPayload.CODEC);
-        ServerPlayNetworking.registerGlobalReceiver(KeyPressedPayload.TYPE, (payload, context) -> {
+    public static void registerServerSide(net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent event) {
+        event.registrar("1").playToServer(KeyPressedPayload.TYPE, KeyPressedPayload.CODEC, (payload, context) -> {
             var player = context.player();
             String geneName = payload.geneName();
             PlayerGeneticsComponent component = ComponentRegistry.PLAYER_GENETICS.get(player);

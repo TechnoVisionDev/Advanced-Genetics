@@ -5,7 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -30,12 +30,12 @@ public class ScalpelItem extends Item {
         EntityType<?> type = entity.getType();
         OrganicMatterItem item = ItemRegistry.MATTER.get(type);
         if (item == null) {
-            if (type == EntityTypes.SKELETON_HORSE) item = ItemRegistry.MATTER.get(EntityTypes.SKELETON);
-            else if (type == EntityTypes.ZOMBIE_HORSE || type == EntityTypes.ZOMBIFIED_PIGLIN || type == EntityTypes.ZOMBIE_VILLAGER)
-                item = ItemRegistry.MATTER.get(EntityTypes.ZOMBIE);
-            else if (type == EntityTypes.MULE) item = ItemRegistry.MATTER.get(EntityTypes.HORSE);
-            else if (type == EntityTypes.PIGLIN || type == EntityTypes.PIGLIN_BRUTE) item = ItemRegistry.MATTER.get(EntityTypes.PIG);
-            else if (type == EntityTypes.WITCH) item = ItemRegistry.MATTER.get(EntityTypes.VILLAGER);
+            if (type == EntityType.SKELETON_HORSE) item = ItemRegistry.MATTER.get(EntityType.SKELETON);
+            else if (type == EntityType.ZOMBIE_HORSE || type == EntityType.ZOMBIFIED_PIGLIN || type == EntityType.ZOMBIE_VILLAGER)
+                item = ItemRegistry.MATTER.get(EntityType.ZOMBIE);
+            else if (type == EntityType.MULE) item = ItemRegistry.MATTER.get(EntityType.HORSE);
+            else if (type == EntityType.PIGLIN || type == EntityType.PIGLIN_BRUTE) item = ItemRegistry.MATTER.get(EntityType.PIG);
+            else if (type == EntityType.WITCH) item = ItemRegistry.MATTER.get(EntityType.VILLAGER);
         }
         if (item != null) {
             entity.spawnAtLocation(level, item);

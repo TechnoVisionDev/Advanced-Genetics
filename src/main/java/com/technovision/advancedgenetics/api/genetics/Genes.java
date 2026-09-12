@@ -4,7 +4,7 @@ import com.technovision.advancedgenetics.Config;
 import com.technovision.advancedgenetics.util.ItemData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public enum Genes {
     BASIC("Basic Gene", "9707bf0fd3"),
@@ -65,7 +65,7 @@ public enum Genes {
 
     public boolean isEnabled() {
         if (this == Genes.BASIC) return false;
-        ForgeConfigSpec.BooleanValue value = Config.Common.genes.get(this.toString().toLowerCase());
+        ModConfigSpec.BooleanValue value = Config.Common.genes.get(this.toString().toLowerCase());
         if (value == null) return false;
         Boolean result = value.get();
         if (result == null) return false;

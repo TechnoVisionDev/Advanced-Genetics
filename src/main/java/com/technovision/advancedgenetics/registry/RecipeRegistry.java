@@ -9,9 +9,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 
 public class RecipeRegistry {
 
-    public static void registerRecipes() {
+    public static void registerSerializers() {
         // Cell Analyzer
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Identifier.fromNamespaceAndPath(AdvancedGenetics.MOD_ID, CellAnalyzerRecipeSerializer.ID), CellAnalyzerRecipeSerializer.INSTANCE);
+    }
+
+    public static void registerTypes() {
         Registry.register(BuiltInRegistries.RECIPE_TYPE, Identifier.fromNamespaceAndPath(AdvancedGenetics.MOD_ID, CellAnalyzerRecipe.Type.ID), CellAnalyzerRecipe.Type.INSTANCE);
     }
 }

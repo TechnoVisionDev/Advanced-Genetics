@@ -1,0 +1,32 @@
+{
+  "name": "Your First Gene",
+  "category": "advancedgenetics:getting_started",
+  "icon": "advancedgenetics:metal_scalpel",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Right-click a supported living mob with a scalpel to collect organic matter. Metal, diamond, and netherite scalpels provide 25, 150, and 300 durability. Collect several samples from the mob that carries your desired gene."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:metal_scraper"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Supply NeoForge energy from a compatible generator or battery mod. Feed organic matter into the $(l:machines/cell_analyzer)Cell Analyzer$(), then process its cell in the $(l:machines/dna_extractor)DNA Extractor$(). Decode the helix in the $(l:machines/dna_decrypter)DNA Decrypter$()."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Place a plasmid in the $(l:machines/plasmid_infuser)Plasmid Infuser$(). Start it with decoded DNA carrying the desired gene. Matching DNA adds 2 points; Basic DNA adds 1 after the plasmid is assigned. Fill it to 24 points by default. Twelve matching helices are enough."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Hold use with an empty syringe to take your own blood. Purify it in the $(l:machines/blood_purifier)Blood Purifier$(). Put the full plasmid and syringe into the $(l:machines/plasmid_injector)Plasmid Injector$(). Adding a gene contaminates blood again: purify it a second time."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Hold use with your purified, gene-bearing syringe to inject it. Drawing and injecting each take 32 ticks and cause 1 damage; injection adds 10 seconds of nausea. The syringe becomes empty. Your genes survive death and respawning."
+    }
+  ],
+  "sortnum": 0
+}

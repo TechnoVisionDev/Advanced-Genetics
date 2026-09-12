@@ -1,0 +1,7 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="MIT"
+[[mods]]
+modId="advancedgenetics_clienttest"
+version="1"
+displayName="Advanced Genetics Client Validation"

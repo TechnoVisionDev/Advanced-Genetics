@@ -1,0 +1,17 @@
+{
+  "name": "Wither Hit",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:wither_skeleton_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Attacking a living target without wither applies Wither I for 1–5 seconds. The applying attack is consumed by this interaction.",
+      "title": "Wither Hit"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Wither Skeleton, Wither.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 37
+}

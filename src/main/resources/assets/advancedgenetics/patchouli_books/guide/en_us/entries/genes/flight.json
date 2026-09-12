@@ -1,0 +1,17 @@
+{
+  "name": "Flight",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:ender_dragon_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Grants flight using the normal flight controls. The ability is refreshed every 4 seconds.",
+      "title": "Flight"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Ender Dragon.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 9
+}

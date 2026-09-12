@@ -2,8 +2,8 @@ package com.technovision.advancedgenetics.api.blockentity;
 
 import com.technovision.advancedgenetics.AdvancedGenetics;
 import com.technovision.advancedgenetics.Config;
-import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
+import net.minecraft.world.MenuProvider;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -20,17 +20,17 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.core.registries.BuiltInRegistries;
-import team.reborn.energy.api.base.SimpleEnergyStorage;
+import net.neoforged.neoforge.transfer.energy.SimpleEnergyHandler;
 
 import java.util.Objects;
 
-public abstract class AbstractProcessingBlockEntity extends BlockEntity implements ProcessingBlockEntity, ExtendedMenuProvider<BlockPos>, Nameable {
+public abstract class AbstractProcessingBlockEntity extends BlockEntity implements ProcessingBlockEntity, MenuProvider, Nameable {
 
     private final Component name;
     private int progress = 0;
     private int overclock = 0;
     private int maxOverclock;
-    private final SimpleEnergyStorage energyStorage;
+    private final SimpleEnergyHandler energyStorage;
     private int maxProgress;
     private final ContainerData propertyDelegate;
 
@@ -38,9 +38,9 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
         super(type, pos, state);
         String blockEntityName = Objects.requireNonNull(BuiltInRegistries.BLOCK_ENTITY_TYPE.getKey(getType())).getPath();
         this.name = Component.translatable(String.format("%s.container.%s", AdvancedGenetics.MOD_ID, blockEntityName));
-        energyStorage = new SimpleEnergyStorage(energyCapacity, energyCapacity, energyCapacity) {
+        energyStorage = new SimpleEnergyHandler(Math.toIntExact(energyCapacity)) {
             @Override
-            protected void onFinalCommit() {
+            protected void onEnergyChanged(int previousAmount) {
                 setChanged();
             }
         };
@@ -51,8 +51,8 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
                 return switch (index) {
                     case 0 -> getProgress();
                     case 1 -> getMaxProgress();
-                    case 2 -> (int) getEnergyStorage().getAmount();
-                    case 3 -> (int) getEnergyStorage().getCapacity();
+                    case 2 -> (int) getEnergyStorage().getAmountAsLong();
+                    case 3 -> (int) getEnergyStorage().getCapacityAsLong();
                     case 4 -> getOverclock();
                     default -> 0;
                 };
@@ -60,7 +60,7 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
             public void set(int index, int value) {
                 switch (index) {
                     case 0 -> setProgress(value);
-                    case 2 -> insertEnergy(value);
+                    case 2 -> energyStorage.set(value);
                     case 4 -> setOverclock(value);
                 }
             }
@@ -125,7 +125,7 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     @Override
     protected void saveAdditional(ValueOutput nbt) {
         nbt.putInt("progress", progress);
-        nbt.putLong("energy", energyStorage.amount);
+        nbt.putLong("energy", energyStorage.getAmountAsLong());
         nbt.putInt("overclock", overclock);
         super.saveAdditional(nbt);
     }
@@ -134,24 +134,24 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     protected void loadAdditional(ValueInput nbt) {
         super.loadAdditional(nbt);
         setProgress(nbt.getIntOr("progress", 0));
-        energyStorage.amount = Math.max(0, Math.min(energyStorage.capacity, nbt.getLongOr("energy", 0)));
+        energyStorage.set((int) Math.max(0, Math.min(energyStorage.getCapacityAsLong(), nbt.getLongOr("energy", 0))));
         int oc = nbt.getIntOr("overclock", 0);
         if (oc > maxOverclock) oc = maxOverclock;
         setOverclock(oc);
     }
 
     @Override
-    public BlockPos getScreenOpeningData(ServerPlayer player) {
-        return worldPosition;
+    public void writeClientSideData(net.minecraft.world.inventory.AbstractContainerMenu menu, net.minecraft.network.RegistryFriendlyByteBuf buffer) {
+        buffer.writeBlockPos(worldPosition);
     }
 
-    public SimpleEnergyStorage getEnergyStorage() {
+    public SimpleEnergyHandler getEnergyStorage() {
         return energyStorage;
     }
 
     public void insertEnergy(long value) {
-        try (Transaction transaction = Transaction.openOuter()) {
-            long amountExtracted = getEnergyStorage().insert(value, transaction);
+        try (Transaction transaction = Transaction.openRoot()) {
+            long amountExtracted = getEnergyStorage().insert(Math.toIntExact(value), transaction);
             if (amountExtracted == value) {
                 transaction.commit();
             }
@@ -159,8 +159,8 @@ public abstract class AbstractProcessingBlockEntity extends BlockEntity implemen
     }
 
     public void extractEnergy(long value) {
-        try (Transaction transaction = Transaction.openOuter()) {
-            long amountExtracted = getEnergyStorage().extract(value, transaction);
+        try (Transaction transaction = Transaction.openRoot()) {
+            long amountExtracted = getEnergyStorage().extract(Math.toIntExact(value), transaction);
             if (amountExtracted == value) {
                 transaction.commit();
             }

@@ -7,21 +7,23 @@ import com.technovision.advancedgenetics.common.block.dnadecrypter.DnaDecrypterB
 import com.technovision.advancedgenetics.common.block.dnaextractor.DnaExtractorBlockEntity;
 import com.technovision.advancedgenetics.common.block.plasmidinfuser.PlasmidInfuserBlockEntity;
 import com.technovision.advancedgenetics.common.block.plasmidinjector.PlasmidInjectorBlockEntity;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.transfer.item.WorldlyContainerWrapper;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.resources.Identifier;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import team.reborn.energy.api.EnergyStorage;
+
 
 public class BlockEntityRegistry {
 
-    public static final BlockEntityType<CellAnalyzerBlockEntity> CELL_ANALYZER_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(CellAnalyzerBlockEntity::new, BlockRegistry.CELL_ANALYZER).build(null);
-    public static final BlockEntityType<DnaExtractorBlockEntity> DNA_EXTRACTOR_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(DnaExtractorBlockEntity::new, BlockRegistry.DNA_EXTRACTOR).build(null);
-    public static final BlockEntityType<DnaDecrypterBlockEntity> DNA_DECRYPTER_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(DnaDecrypterBlockEntity::new, BlockRegistry.DNA_DECRYPTER).build(null);
-    public static final BlockEntityType<PlasmidInfuserBlockEntity> PLASMID_INFUSER_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(PlasmidInfuserBlockEntity::new, BlockRegistry.PLASMID_INFUSER).build(null);
-    public static final BlockEntityType<BloodPurifierBlockEntity> BLOOD_PURIFIER_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(BloodPurifierBlockEntity::new, BlockRegistry.BLOOD_PURIFIER).build(null);
-    public static final BlockEntityType<PlasmidInjectorBlockEntity> PLASMID_INJECTOR_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(PlasmidInjectorBlockEntity::new, BlockRegistry.PLASMID_INJECTOR).build(null);
+    public static final BlockEntityType<CellAnalyzerBlockEntity> CELL_ANALYZER_BLOCK_ENTITY = new BlockEntityType<>(CellAnalyzerBlockEntity::new, BlockRegistry.CELL_ANALYZER);
+    public static final BlockEntityType<DnaExtractorBlockEntity> DNA_EXTRACTOR_BLOCK_ENTITY = new BlockEntityType<>(DnaExtractorBlockEntity::new, BlockRegistry.DNA_EXTRACTOR);
+    public static final BlockEntityType<DnaDecrypterBlockEntity> DNA_DECRYPTER_BLOCK_ENTITY = new BlockEntityType<>(DnaDecrypterBlockEntity::new, BlockRegistry.DNA_DECRYPTER);
+    public static final BlockEntityType<PlasmidInfuserBlockEntity> PLASMID_INFUSER_BLOCK_ENTITY = new BlockEntityType<>(PlasmidInfuserBlockEntity::new, BlockRegistry.PLASMID_INFUSER);
+    public static final BlockEntityType<BloodPurifierBlockEntity> BLOOD_PURIFIER_BLOCK_ENTITY = new BlockEntityType<>(BloodPurifierBlockEntity::new, BlockRegistry.BLOOD_PURIFIER);
+    public static final BlockEntityType<PlasmidInjectorBlockEntity> PLASMID_INJECTOR_BLOCK_ENTITY = new BlockEntityType<>(PlasmidInjectorBlockEntity::new, BlockRegistry.PLASMID_INJECTOR);
 
     public static void registerBlockEntities() {
         // Register block entity
@@ -32,12 +34,20 @@ public class BlockEntityRegistry {
         Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(AdvancedGenetics.MOD_ID, "blood_purifier_block_entity"), BLOOD_PURIFIER_BLOCK_ENTITY);
         Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(AdvancedGenetics.MOD_ID, "plasmid_injector_block_entity"), PLASMID_INJECTOR_BLOCK_ENTITY);
 
-        // Register energy storage for block entity
-        EnergyStorage.SIDED.registerForBlockEntity((myBlockEntity, direction) -> myBlockEntity.getEnergyStorage(), CELL_ANALYZER_BLOCK_ENTITY);
-        EnergyStorage.SIDED.registerForBlockEntity((myBlockEntity, direction) -> myBlockEntity.getEnergyStorage(), DNA_EXTRACTOR_BLOCK_ENTITY);
-        EnergyStorage.SIDED.registerForBlockEntity((myBlockEntity, direction) -> myBlockEntity.getEnergyStorage(), DNA_DECRYPTER_BLOCK_ENTITY);
-        EnergyStorage.SIDED.registerForBlockEntity((myBlockEntity, direction) -> myBlockEntity.getEnergyStorage(), PLASMID_INFUSER_BLOCK_ENTITY);
-        EnergyStorage.SIDED.registerForBlockEntity((myBlockEntity, direction) -> myBlockEntity.getEnergyStorage(), BLOOD_PURIFIER_BLOCK_ENTITY);
-        EnergyStorage.SIDED.registerForBlockEntity((myBlockEntity, direction) -> myBlockEntity.getEnergyStorage(), PLASMID_INJECTOR_BLOCK_ENTITY);
+    }
+
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(Capabilities.Energy.BLOCK, CELL_ANALYZER_BLOCK_ENTITY, (machine, side) -> machine.getEnergyStorage());
+        event.registerBlockEntity(Capabilities.Item.BLOCK, CELL_ANALYZER_BLOCK_ENTITY, (machine, side) -> new WorldlyContainerWrapper(machine, side));
+        event.registerBlockEntity(Capabilities.Energy.BLOCK, DNA_EXTRACTOR_BLOCK_ENTITY, (machine, side) -> machine.getEnergyStorage());
+        event.registerBlockEntity(Capabilities.Item.BLOCK, DNA_EXTRACTOR_BLOCK_ENTITY, (machine, side) -> new WorldlyContainerWrapper(machine, side));
+        event.registerBlockEntity(Capabilities.Energy.BLOCK, DNA_DECRYPTER_BLOCK_ENTITY, (machine, side) -> machine.getEnergyStorage());
+        event.registerBlockEntity(Capabilities.Item.BLOCK, DNA_DECRYPTER_BLOCK_ENTITY, (machine, side) -> new WorldlyContainerWrapper(machine, side));
+        event.registerBlockEntity(Capabilities.Energy.BLOCK, PLASMID_INFUSER_BLOCK_ENTITY, (machine, side) -> machine.getEnergyStorage());
+        event.registerBlockEntity(Capabilities.Item.BLOCK, PLASMID_INFUSER_BLOCK_ENTITY, (machine, side) -> new WorldlyContainerWrapper(machine, side));
+        event.registerBlockEntity(Capabilities.Energy.BLOCK, BLOOD_PURIFIER_BLOCK_ENTITY, (machine, side) -> machine.getEnergyStorage());
+        event.registerBlockEntity(Capabilities.Item.BLOCK, BLOOD_PURIFIER_BLOCK_ENTITY, (machine, side) -> new WorldlyContainerWrapper(machine, side));
+        event.registerBlockEntity(Capabilities.Energy.BLOCK, PLASMID_INJECTOR_BLOCK_ENTITY, (machine, side) -> machine.getEnergyStorage());
+        event.registerBlockEntity(Capabilities.Item.BLOCK, PLASMID_INJECTOR_BLOCK_ENTITY, (machine, side) -> new WorldlyContainerWrapper(machine, side));
     }
 }

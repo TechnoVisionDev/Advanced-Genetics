@@ -1,0 +1,24 @@
+{
+  "name": "Mob Sources 6",
+  "category": "advancedgenetics:reference",
+  "icon": "advancedgenetics:warden_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Warden$()$(br)Keep Inventory, Night Vision, Strength"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Wither Skeleton$()$(br)Wither Hit"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Wither$()$(br)Wither Resistance, Wither Hit"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Zombie$()$(br)Resistance"
+    }
+  ],
+  "sortnum": 5
+}

@@ -42,7 +42,7 @@ public class DnaDecrypterBlockEntity extends AbstractInventoryBlockEntity {
         ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
         ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
         return !input.isEmpty() && ItemData.has(input)
-                && getEnergyStorage().getAmount() >= getEnergyRequirement()
+                && getEnergyStorage().getAmountAsLong() >= getEnergyRequirement()
                 && !ItemData.read(input).getBooleanOr("decoded", false)
                 && 1 + output.getCount() <= output.getMaxStackSize()
                 && (output.isEmpty() || ItemData.read(output).getStringOr("gene", "").equals(ItemData.read(input).getStringOr("gene", "")));

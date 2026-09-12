@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:zombie_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:zombie_cell"
+  }
+}

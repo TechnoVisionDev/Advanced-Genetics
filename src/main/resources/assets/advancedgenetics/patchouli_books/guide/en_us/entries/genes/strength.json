@@ -1,0 +1,17 @@
+{
+  "name": "Strength",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:polar_bear_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Maintains Strength I.",
+      "title": "Strength"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Polar Bear, Warden.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 31
+}

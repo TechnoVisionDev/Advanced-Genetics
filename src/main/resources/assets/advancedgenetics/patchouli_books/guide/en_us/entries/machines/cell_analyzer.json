@@ -1,0 +1,20 @@
+{
+  "name": "Cell Analyzer",
+  "category": "advancedgenetics:machines",
+  "icon": "advancedgenetics:cell_analyzer",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Organic matter → matching mob cell. Each mob has its own analyzer recipe."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:cell_analyzer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Default storage: 20,000 energy.$(br)Base use: 20 energy/tick.$(br)Base timer: 400 ticks (20 seconds).$(br)Maximum overclockers: 10.$(br2)The completion tick also consumes energy, preserving the original machine timing. Progress resets if processing cannot continue."
+    }
+  ],
+  "sortnum": 0
+}

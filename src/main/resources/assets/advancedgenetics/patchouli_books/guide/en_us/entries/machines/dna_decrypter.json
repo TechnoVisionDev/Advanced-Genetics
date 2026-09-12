@@ -1,0 +1,20 @@
+{
+  "name": "DNA Decrypter",
+  "category": "advancedgenetics:machines",
+  "icon": "advancedgenetics:dna_decrypter",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Encrypted DNA → decoded DNA. Decoding reveals the helix's existing gene so it can be infused."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:dna_decrypter"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Default storage: 20,000 energy.$(br)Base use: 20 energy/tick.$(br)Base timer: 200 ticks (10 seconds).$(br)Maximum overclockers: 5.$(br2)The completion tick also consumes energy, preserving the original machine timing. Progress resets if processing cannot continue."
+    }
+  ],
+  "sortnum": 2
+}

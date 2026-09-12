@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:villager_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:villager_cell"
+  }
+}

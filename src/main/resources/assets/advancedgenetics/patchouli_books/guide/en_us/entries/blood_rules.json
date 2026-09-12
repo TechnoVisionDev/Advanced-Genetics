@@ -1,0 +1,24 @@
+{
+  "name": "Blood & Gene Removal",
+  "category": "advancedgenetics:getting_started",
+  "icon": "advancedgenetics:antiplasmid",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Blood belongs to the player who supplied it. By default, someone else cannot inject your blood. Server owners may enable geneSharing in AdvancedGenetics.toml. Drawing blood includes the donor's existing genes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "To remove an ability, fill an Anti-Plasmid with the gene you want removed. Process it with a syringe in the Plasmid Injector, purify the syringe, then inject. The marked gene is removed; other genes remain."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:antiplasmid"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:syringe"
+    }
+  ],
+  "sortnum": 1
+}

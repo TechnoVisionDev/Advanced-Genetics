@@ -1,0 +1,17 @@
+{
+  "name": "Teleport",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:enderman_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Press $(k:key.advancedgenetics.teleport) (default G) to attempt a teleport 6 blocks along your view direction from eye level. Unsafe destinations can fail. Cooldown: 1 second.",
+      "title": "Teleport"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Enderman.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 32
+}

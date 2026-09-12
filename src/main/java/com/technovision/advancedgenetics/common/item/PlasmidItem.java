@@ -13,7 +13,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 
 public class PlasmidItem extends Item {
-    public static final int MAX_GENES = Config.Common.plasmidRequirement.get();
+    public static int maxGenes() { return Config.Common.plasmidRequirement.get(); }
 
     public PlasmidItem(Properties properties) { super(properties.stacksTo(1)); }
 
@@ -25,7 +25,7 @@ public class PlasmidItem extends Item {
             Genes gene = Genes.getGeneByItem(stack);
             int count = tag.getIntOr("count", 0);
             String text = gene.getName();
-            if (count < MAX_GENES) text += " " + count + "/" + MAX_GENES;
+            if (count < maxGenes()) text += " " + count + "/" + maxGenes();
             tooltip.accept(Component.literal(text).withStyle(ChatFormatting.GRAY));
         }
     }
@@ -37,7 +37,7 @@ public class PlasmidItem extends Item {
         CompoundTag plasmid = ItemData.read(plasmidItem);
         if (!plasmid.contains("gene")) return !gene.equals(Genes.BASIC.toString());
         return (gene.equals(Genes.BASIC.toString()) || gene.equals(plasmid.getStringOr("gene", "")))
-                && plasmid.getIntOr("count", 0) < MAX_GENES;
+                && plasmid.getIntOr("count", 0) < maxGenes();
     }
 
     public static void combine(ItemStack dnaItem, ItemStack plasmidItem) {
@@ -48,7 +48,7 @@ public class PlasmidItem extends Item {
                 tag.putInt("count", 2);
             } else {
                 int increment = gene.equals(Genes.BASIC.toString()) ? 1 : 2;
-                tag.putInt("count", Math.min(MAX_GENES, tag.getIntOr("count", 0) + increment));
+                tag.putInt("count", Math.min(maxGenes(), tag.getIntOr("count", 0) + increment));
             }
         });
     }

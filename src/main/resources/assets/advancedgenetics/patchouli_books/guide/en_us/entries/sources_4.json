@@ -1,0 +1,36 @@
+{
+  "name": "Mob Sources 5",
+  "category": "advancedgenetics:reference",
+  "icon": "advancedgenetics:spider_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Spider$()$(br)Night Vision, Climb Walls"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Skeleton$()$(br)Infinity"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Stray$()$(br)Infinity"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Slime$()$(br)Slimy"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Silverfish$()$(br)Haste"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Villager$()$(br)Emerald Heart"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Wolf$()$(br)No Hunger, Scare Skeletons"
+    }
+  ],
+  "sortnum": 4
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xzx",
+    "zxz",
+    "xzx"
+  ],
+  "key": {
+    "z": "minecraft:end_crystal",
+    "x": "minecraft:diamond"
+  },
+  "result": {
+    "id": "advancedgenetics:dragon_health_crystal"
+  }
+}

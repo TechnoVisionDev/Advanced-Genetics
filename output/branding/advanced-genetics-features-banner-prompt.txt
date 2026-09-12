@@ -1,0 +1,16 @@
+Generated with the built-in image generation tool, using advanced-genetics-curseforge-banner.png as the visual reference.
+
+Use case: ads-marketing.
+Create a second, companion CurseForge banner for the Advanced Genetics Minecraft mod, using the supplied first banner as a visual style reference. This is a new feature-overview composition. Match its premium voxel Minecraft laboratory artwork, dark navy machinery, luminous cyan screens, pink and lavender DNA, crisp pixel textures, cinematic lighting, and chunky beveled white/cyan title typography.
+Output wide 3:1 landscape, ideally 2400 x 800 pixels.
+Layout: compact centered "ADVANCED GENETICS" brand title at the top, leaving most of the banner for three equally sized, beautifully composed feature columns. Each column has a clear voxel illustration above a short heading and one brief supporting sentence. Keep all text extremely legible, large enough to read at typical CurseForge page width, with clean dark areas behind copy and generous safe margins. Use less elaborate flatter lettering for feature headings and simple clean white type for sentences. Cohesive continuous lab backdrop, restrained vertical cyan separators. Avoid clutter.
+Left illustration: glass sample tubes glowing cyan and pink, with a Minecraft zombie and cow visible in distant laboratory sample chambers.
+Left exact heading: "COLLECT MOB DNA"
+Left exact sentence: "Discover genes from creatures across your world."
+Middle illustration: block-built DNA analyzer and extractor machines, glowing sample vials and pink/lavender helix on a cyan display.
+Middle exact heading: "BUILD YOUR LAB"
+Middle exact sentence: "Extract, analyze, and splice powerful genes."
+Right illustration: a Minecraft player with a small fireball hovering over their blocky hand, alongside a luminous pink and lavender DNA helix motif.
+Right exact heading: "UNLOCK ABILITIES"
+Right exact sentence: "Shoot fireballs, climb walls, and more."
+Render all quoted text exactly once with accurate spelling. The only top title is "ADVANCED GENETICS". No additional text, version numbers, badges, watermarks, logos, borders, or UI mockup framing. Finished edge-to-edge companion marketing banner, visually consistent with the supplied reference, with the feature overview as the main focus.

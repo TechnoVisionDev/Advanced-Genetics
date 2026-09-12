@@ -1,0 +1,20 @@
+{
+  "name": "Configuration & Commands",
+  "category": "advancedgenetics:reference",
+  "icon": "minecraft:command_block",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Settings are stored in config/AdvancedGenetics.toml. All 38 abilities have individual toggles. Machine capacities, costs, timings, success chances, and overclock limits remain configurable. Defaults preserve the original balance."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "hardMode defaults to false; enabling it rejects Basic DNA in the infuser. geneSharing defaults to false. basicGeneChance defaults to 0.5. plasmidRequirement defaults to 24. The legacy cloning_machine settings are retained, but the source mod has no playable cloning machine."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Operators can use:$(br2)/gene add <players> <gene>$(br)/gene remove <players> <gene>$(br)/gene clear <players>$(br2)Gene names use lowercase underscores, such as night_vision. Key bindings can be changed in Minecraft Controls."
+    }
+  ],
+  "sortnum": 8
+}

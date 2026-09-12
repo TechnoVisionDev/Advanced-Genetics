@@ -1,0 +1,17 @@
+{
+  "name": "Fireproof",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:blaze_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Maintains Fire Resistance I.",
+      "title": "Fireproof"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Blaze, Magma Cube.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 8
+}

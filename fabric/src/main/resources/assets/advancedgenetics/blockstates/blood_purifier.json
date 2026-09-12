@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "advancedgenetics:block/blood_purifier",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "advancedgenetics:block/blood_purifier"
+    },
+    "facing=south": {
+      "model": "advancedgenetics:block/blood_purifier",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "advancedgenetics:block/blood_purifier",
+      "y": 270
+    }
+  }
+}

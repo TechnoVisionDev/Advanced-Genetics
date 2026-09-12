@@ -1,0 +1,20 @@
+{
+  "name": "Blood Purifier",
+  "category": "advancedgenetics:machines",
+  "icon": "advancedgenetics:blood_purifier",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Filled, contaminated syringe → purified blood. Use this both before adding a plasmid and after each gene addition or removal."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:blood_purifier"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Default storage: 20,000 energy.$(br)Base use: 20 energy/tick.$(br)Base timer: 200 ticks (10 seconds).$(br)Maximum overclockers: 5.$(br2)The completion tick also consumes energy, preserving the original machine timing. Progress resets if processing cannot continue."
+    }
+  ],
+  "sortnum": 4
+}

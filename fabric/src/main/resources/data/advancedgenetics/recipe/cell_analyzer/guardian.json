@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:guardian_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:guardian_cell"
+  }
+}

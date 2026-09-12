@@ -1,0 +1,20 @@
+{
+  "name": "Plasmid Infuser",
+  "category": "advancedgenetics:machines",
+  "icon": "advancedgenetics:plasmid_infuser",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Decoded DNA + plasmid → filled plasmid. The first gene must be non-Basic. Matching DNA contributes 2 points and Basic DNA 1. Hard mode rejects Basic DNA."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:plasmid_infuser"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Default storage: 20,000 energy.$(br)Base use: 20 energy/tick.$(br)Base timer: 400 ticks (20 seconds).$(br)Maximum overclockers: 10.$(br2)The completion tick also consumes energy, preserving the original machine timing. Progress resets if processing cannot continue."
+    }
+  ],
+  "sortnum": 3
+}

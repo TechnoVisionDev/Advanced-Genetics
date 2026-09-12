@@ -1,0 +1,17 @@
+{
+  "name": "Eat Grass",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:cow_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Right-click a grass block with an empty main hand while hungry. Restores 1 food point and turns the block into dirt.",
+      "title": "Eat Grass"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Cow, Mooshroom, Sheep.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 5
+}

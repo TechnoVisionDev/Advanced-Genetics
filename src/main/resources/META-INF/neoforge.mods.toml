@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="MIT"
+[[mods]]
+modId="advancedgenetics"
+version="${version}"
+displayName="Advanced Genetics"
+authors="TechnoVision, KirboCabana, TheUnderTaker11"
+description="Collect, analyze, and splice mob genes to gain 38 abilities. Includes six genetics machines and a Patchouli field guide."
+[[mixins]]
+config="advancedgenetics.mixins.json"
+[[dependencies.advancedgenetics]]
+modId="neoforge"
+type="required"
+versionRange="[26.1.2.109,26.1.3)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.advancedgenetics]]
+modId="minecraft"
+type="required"
+versionRange="[26.1.2]"
+ordering="NONE"
+side="BOTH"
+[[dependencies.advancedgenetics]]
+modId="patchouli"
+type="required"
+versionRange="[26.1-94,)"
+ordering="AFTER"
+side="BOTH"

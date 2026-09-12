@@ -1,0 +1,17 @@
+{
+  "name": "Mob Sight",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:guardian_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Living entities glow for you, making nearby mobs visible through obstructions.",
+      "title": "Mob Sight"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Guardian, Phantom.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 19
+}

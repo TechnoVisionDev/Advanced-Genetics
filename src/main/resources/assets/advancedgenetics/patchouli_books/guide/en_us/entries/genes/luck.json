@@ -1,0 +1,17 @@
+{
+  "name": "Luck",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:rabbit_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Maintains Luck I.",
+      "title": "Luck"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Rabbit.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 16
+}

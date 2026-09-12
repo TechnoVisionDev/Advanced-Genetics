@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:phantom_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:phantom_cell"
+  }
+}

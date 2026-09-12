@@ -1,0 +1,17 @@
+{
+  "name": "Haste",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:silverfish_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Maintains Haste I.",
+      "title": "Haste"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Silverfish.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 10
+}

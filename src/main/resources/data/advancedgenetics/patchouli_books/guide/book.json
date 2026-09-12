@@ -1,0 +1,11 @@
+{
+  "name": "Advanced Genetics Field Guide",
+  "landing_text": "Collect cells. Decode DNA. Build a new genome.$(br2)A practical guide to every machine, mob source, and gene in Advanced Genetics.",
+  "version": "1",
+  "subtitle": "Genetics • NeoForge 26.1.2",
+  "use_resource_pack": true,
+  "show_progress": false,
+  "model": "patchouli:book_purple",
+  "book_texture": "patchouli:textures/gui/book_purple.png",
+  "creative_tab": "advancedgenetics:tab"
+}

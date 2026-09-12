@@ -1,0 +1,20 @@
+{
+  "name": "Plasmid Injector",
+  "category": "advancedgenetics:machines",
+  "icon": "advancedgenetics:plasmid_injector",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Full plasmid or Anti-Plasmid + purified syringe → contaminated syringe carrying that gene action. Purify the resulting blood before injection."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "advancedgenetics:plasmid_injector"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Default storage: 20,000 energy.$(br)Base use: 20 energy/tick.$(br)Base timer: 400 ticks (20 seconds).$(br)Maximum overclockers: 10.$(br2)The completion tick also consumes energy, preserving the original machine timing. Progress resets if processing cannot continue."
+    }
+  ],
+  "sortnum": 5
+}

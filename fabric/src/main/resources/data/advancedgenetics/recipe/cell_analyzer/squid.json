@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:squid_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:squid_cell"
+  }
+}

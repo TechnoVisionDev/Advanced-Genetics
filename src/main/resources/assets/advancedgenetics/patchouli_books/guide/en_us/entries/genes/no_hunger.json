@@ -1,0 +1,17 @@
+{
+  "name": "No Hunger",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:panda_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "When food reaches 10 points or fewer, restores 1 food point during the 4-second passive update.",
+      "title": "No Hunger"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Panda, Wolf.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 22
+}

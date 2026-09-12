@@ -1,0 +1,13 @@
+Advanced Genetics 1.0.2 for Minecraft 26.1.2 / NeoForge 26.1.2.109
+
+Put BOTH of these files in the mods folder on the server and every client:
+  AdvancedGenetics-1.0.2+neoforge-26.1.jar
+  patchouli-neoforge-26.1-94.jar
+
+Requires Java 25.
+Craft the Advanced Genetics Field Guide with one book and one iron ingot.
+The guide also appears in the Advanced Genetics creative tab.
+Machines require a compatible NeoForge energy source from another mod.
+
+The filename ends in 26.1 as requested; the Minecraft target is 26.1.2.
+See README.md for feature parity, inherited gameplay quirks, and development instructions.

@@ -5,17 +5,12 @@ import com.technovision.advancedgenetics.api.genetics.Genes;
 import com.technovision.advancedgenetics.common.entity.FireballEntity;
 import com.technovision.advancedgenetics.component.PlayerGeneticsComponent;
 import com.technovision.advancedgenetics.registry.ComponentRegistry;
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.monster.cubemob.Slime;
+import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,6 +25,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.concurrent.ThreadLocalRandom;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.*;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.BlockHitResult;
+
 
 /**
  * Handles genes that trigger on rick clicking an item or block.
@@ -39,8 +41,35 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GeneticsEvents {
 
     public static void registerEvents() {
-        // Handles the "Eat Grass" gene
-        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+        NeoForge.EVENT_BUS.addListener((PlayerInteractEvent.RightClickBlock event) -> {
+            var result = useBlock(event.getEntity(), event.getLevel(), event.getHand(), event.getHitVec());
+            if (result != InteractionResult.PASS) { event.setCancellationResult(result); event.setCanceled(true); }
+        });
+        NeoForge.EVENT_BUS.addListener((PlayerInteractEvent.EntityInteract event) -> {
+            var result = useEntity(event.getEntity(), event.getLevel(), event.getHand(), event.getTarget());
+            if (result != InteractionResult.PASS) { event.setCancellationResult(result); event.setCanceled(true); }
+        });
+        NeoForge.EVENT_BUS.addListener((PlayerInteractEvent.RightClickItem event) -> {
+            var result = useItem(event.getEntity(), event.getLevel(), event.getHand());
+            if (result != InteractionResult.PASS) { event.setCancellationResult(result); event.setCanceled(true); }
+        });
+        NeoForge.EVENT_BUS.addListener((AttackEntityEvent event) -> {
+            if (attack(event.getEntity(), event.getEntity().level(), event.getTarget()) != InteractionResult.PASS) event.setCanceled(true);
+        });
+        NeoForge.EVENT_BUS.addListener((LivingDeathEvent event) -> {
+            if (event.getEntity() instanceof ServerPlayer player) onDeath(player);
+        });
+        NeoForge.EVENT_BUS.addListener((PlayerEvent.Clone event) -> {
+            if (ComponentRegistry.PLAYER_GENETICS.get(event.getOriginal()).hasGene(Genes.KEEP_INVENTORY)) {
+                event.getEntity().getInventory().replaceWith(event.getOriginal().getInventory());
+            }
+        });
+        NeoForge.EVENT_BUS.addListener((PlayerTickEvent.Post event) -> {
+            if (!event.getEntity().level().isClientSide()) ComponentRegistry.PLAYER_GENETICS.get(event.getEntity()).serverTick();
+        });
+    }
+
+    public static InteractionResult useBlock(Player player, Level world, InteractionHand hand, BlockHitResult hitResult) {
             if (world.isClientSide() || !player.getMainHandItem().isEmpty()) return InteractionResult.PASS;
             BlockPos pos = hitResult.getBlockPos();
             if (world.getBlockState(pos).getBlock() != Blocks.GRASS_BLOCK) return InteractionResult.PASS;
@@ -50,10 +79,9 @@ public class GeneticsEvents {
                 world.setBlockAndUpdate(pos, Blocks.DIRT.defaultBlockState());
             }
             return InteractionResult.SUCCESS;
-        });
+    }
 
-        // Handles the "Milky" and "Meaty" genes
-        UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+    public static InteractionResult useEntity(Player player, Level world, InteractionHand hand, Entity entity) {
             if (world.isClientSide() || hand != InteractionHand.MAIN_HAND) return InteractionResult.PASS;
             boolean handled = false;
             if (entity instanceof Player clickedPlayer) {
@@ -98,7 +126,7 @@ public class GeneticsEvents {
                 if (stack.getItem() == Items.SHEARS && component.hasGene(Genes.WOOLY)) {
                     handled = true;
                     if (!component.isOnCooldown("wooly")) {
-                        clickedPlayer.spawnAtLocation((ServerLevel) world, new ItemStack(Items.WOOL.white(), 1));
+                        clickedPlayer.spawnAtLocation((ServerLevel) world, new ItemStack(Items.WHITE_WOOL, 1));
                         player.getMainHandItem().hurtAndBreak(1, player, player.getUsedItemHand());
                         component.addCooldown("wooly", 15);
                         player.playSound(SoundEvents.SHEEP_SHEAR, 1.0f, 1.0f);
@@ -109,10 +137,9 @@ public class GeneticsEvents {
             }
             // Leave unrelated entity clicks available to scalpels and vanilla interactions.
             return handled ? InteractionResult.SUCCESS : InteractionResult.PASS;
-        });
+    }
 
-        // Handles "Explosive Exit", "Emerald Heart", and "Slimy" gene
-        ServerPlayerEvents.ALLOW_DEATH.register((player, damageSource, damageAmount) -> {
+    public static void onDeath(ServerPlayer player) {
             PlayerGeneticsComponent component = ComponentRegistry.PLAYER_GENETICS.get(player);
             if (component.hasGene(Genes.EXPLOSIVE_EXIT)) {
                 // Explode on death
@@ -129,16 +156,15 @@ public class GeneticsEvents {
             }
             if (component.hasGene(Genes.SLIMY)) {
                 // Spawn slime
-                Slime slime = new Slime(EntityTypes.SLIME, player.level());
+                Slime slime = new Slime(EntityType.SLIME, player.level());
                 slime.setPos(player.position());
                 slime.setSize(ThreadLocalRandom.current().nextInt(3), false);
                 player.level().addFreshEntity(slime);
             }
-            return true;
-        });
+    }
 
-        // Handles "Wither Hit" and "Venom" gene
-        AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+    public static InteractionResult attack(Player player, Level world, Entity entity) {
+            if (world.isClientSide()) return InteractionResult.PASS;
             if (ComponentRegistry.PLAYER_GENETICS.get(player).hasGene(Genes.WITHER_HIT)) {
                 // Apply wither affect for 1-5 seconds
                 if (entity instanceof LivingEntity livingEntity) {
@@ -166,10 +192,10 @@ public class GeneticsEvents {
                 }
             }
             return InteractionResult.PASS;
-        });
+    }
 
-        // Handles "Shoot Fireball" gene
-        UseItemCallback.EVENT.register((player, world, hand) -> {
+    public static InteractionResult useItem(Player player, Level world, InteractionHand hand) {
+            if (world.isClientSide() || hand != InteractionHand.MAIN_HAND) return InteractionResult.PASS;
             if (!ComponentRegistry.PLAYER_GENETICS.get(player).hasGene(Genes.SHOOT_FIREBALLS)) {
                 // Shoots a fire charge if holding blaze rod
                 if (player.getMainHandItem().getItem() == Items.FIRE_CHARGE) {
@@ -182,13 +208,5 @@ public class GeneticsEvents {
                 }
             }
             return InteractionResult.PASS;
-        });
-
-        // Handles "Keep Inventory" gene
-        ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
-            if (ComponentRegistry.PLAYER_GENETICS.get(newPlayer).hasGene(Genes.KEEP_INVENTORY)) {
-                newPlayer.getInventory().replaceWith(oldPlayer.getInventory());
-            }
-        });
     }
 }

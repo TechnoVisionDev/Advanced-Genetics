@@ -42,7 +42,7 @@ public class BloodPurifierBlockEntity extends AbstractInventoryBlockEntity {
         ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
         ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
         return !input.isEmpty() && output.isEmpty() && ItemData.has(input)
-                && getEnergyStorage().getAmount() >= getEnergyRequirement()
+                && getEnergyStorage().getAmountAsLong() >= getEnergyRequirement()
                 && ItemData.read(input).getBooleanOr("filled", false)
                 && !ItemData.read(input).getBooleanOr("purified", false);
     }

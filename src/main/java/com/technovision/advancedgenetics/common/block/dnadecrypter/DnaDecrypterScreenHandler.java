@@ -14,14 +14,13 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.Slot;
 
-import java.util.Objects;
 
 public class DnaDecrypterScreenHandler extends AbstractGeneticsScreenHandler {
 
     protected final ContainerData propertyDelegate;
 
     public DnaDecrypterScreenHandler(int syncId, Inventory playerInventory, BlockPos pos) {
-        this(syncId, playerInventory, Objects.requireNonNull(playerInventory.player.level().getBlockEntity(pos)), new SimpleContainer(DnaDecrypterBlockEntity.SLOT_COUNT), new SimpleContainerData(5));
+        this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(pos), new SimpleContainer(DnaDecrypterBlockEntity.SLOT_COUNT), new SimpleContainerData(5));
     }
 
     protected DnaDecrypterScreenHandler(int syncId, Inventory playerInventory, BlockEntity blockEntity, Container inventory, ContainerData delegate) {

@@ -1,0 +1,17 @@
+{
+  "name": "Water Breathing",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:drowned_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Maintains Water Breathing I.",
+      "title": "Water Breathing"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Drowned, Guardian, Squid.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 34
+}

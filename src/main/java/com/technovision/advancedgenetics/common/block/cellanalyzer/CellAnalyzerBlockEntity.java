@@ -50,7 +50,7 @@ public class CellAnalyzerBlockEntity extends AbstractInventoryBlockEntity {
         if (recipe != null) {
             ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
             ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
-            return getEnergyStorage().getAmount() >= getEnergyRequirement()
+            return getEnergyStorage().getAmountAsLong() >= getEnergyRequirement()
                     && (ItemStack.isSameItemSameComponents(input, recipe.getInput()) && input.getCount() >= recipe.getInput().getCount())
                     && (recipe.getOutput().getCount() + output.getCount()) <= recipe.getOutput().getMaxStackSize()
                     && (ItemStack.isSameItemSameComponents(output, recipe.getOutput()) || output.isEmpty());

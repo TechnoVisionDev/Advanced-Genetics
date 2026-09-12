@@ -1,14 +1,17 @@
 package com.technovision.advancedgenetics.api.component;
 
 import com.technovision.advancedgenetics.api.genetics.Genes;
-import org.ladysnake.cca.api.v3.component.Component;
-import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
-import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
 import java.util.List;
 import java.util.Map;
 
-public interface EntityGeneticsComponent extends Component, ServerTickingComponent, AutoSyncedComponent {
+public interface EntityGeneticsComponent extends net.neoforged.neoforge.common.util.ValueIOSerializable {
+
+    void readData(net.minecraft.world.level.storage.ValueInput input);
+    void writeData(net.minecraft.world.level.storage.ValueOutput output);
+    void serverTick();
+    default void serialize(net.minecraft.world.level.storage.ValueOutput output) { writeData(output); }
+    default void deserialize(net.minecraft.world.level.storage.ValueInput input) { readData(input); }
 
     int geneCount();
 

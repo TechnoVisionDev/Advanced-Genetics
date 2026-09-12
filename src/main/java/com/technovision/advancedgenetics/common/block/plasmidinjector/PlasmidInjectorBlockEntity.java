@@ -44,8 +44,8 @@ public class PlasmidInjectorBlockEntity extends AbstractInventoryBlockEntity {
         ItemStack input = getStackInSlot(INPUT_SLOT_INDEX);
         ItemStack output = getStackInSlot(OUTPUT_SLOT_INDEX);
         return !input.isEmpty() && !output.isEmpty() && ItemData.has(input) && ItemData.has(output)
-                && getEnergyStorage().getAmount() >= getEnergyRequirement()
-                && ItemData.read(input).getIntOr("count", 0) >= PlasmidItem.MAX_GENES
+                && getEnergyStorage().getAmountAsLong() >= getEnergyRequirement()
+                && ItemData.read(input).getIntOr("count", 0) >= PlasmidItem.maxGenes()
                 && ItemData.read(output).getBooleanOr("filled", false)
                 && ItemData.read(output).getBooleanOr("purified", false);
     }

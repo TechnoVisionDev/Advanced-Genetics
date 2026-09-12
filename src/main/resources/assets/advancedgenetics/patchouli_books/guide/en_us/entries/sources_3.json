@@ -1,0 +1,36 @@
+{
+  "name": "Mob Sources 4",
+  "category": "advancedgenetics:reference",
+  "icon": "advancedgenetics:phantom_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Phantom$()$(br)Invisibility, Night Vision, Mob Sight"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Pig$()$(br)Meaty"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Polar Bear$()$(br)Strength, Meaty"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Rabbit$()$(br)Jump Boost, Speed, Luck"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Sheep$()$(br)Eat Grass, Wooly"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Shulker$()$(br)Resistance, Regeneration"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Squid$()$(br)Water Breathing"
+    }
+  ],
+  "sortnum": 3
+}

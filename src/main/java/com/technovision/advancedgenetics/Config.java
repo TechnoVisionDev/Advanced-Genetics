@@ -1,6 +1,6 @@
 package com.technovision.advancedgenetics;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
@@ -8,10 +8,10 @@ import java.util.HashMap;
 public class Config {
 
     public static final Common COMMON;
-    public static final ForgeConfigSpec COMMON_SPEC;
+    public static final ModConfigSpec COMMON_SPEC;
 
     static {
-        final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
+        final Pair<Common, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Common::new);
         COMMON = specPair.getLeft();
         COMMON_SPEC = specPair.getRight();
     }
@@ -28,58 +28,58 @@ public class Config {
         private static final String categoryPlasmidInjector = "plasmid_injector";
         private static final String categoryCloningMachine = "cloning_machine";
 
-        public static ForgeConfigSpec.BooleanValue hardMode;
-        public static ForgeConfigSpec.BooleanValue geneSharing;
-        public static ForgeConfigSpec.DoubleValue basicGeneChance;
-        public static ForgeConfigSpec.IntValue plasmidRequirement;
-        public static ForgeConfigSpec.IntValue overclockSpeed;
-        public static ForgeConfigSpec.IntValue overclockEnergy;
+        public static ModConfigSpec.BooleanValue hardMode;
+        public static ModConfigSpec.BooleanValue geneSharing;
+        public static ModConfigSpec.DoubleValue basicGeneChance;
+        public static ModConfigSpec.IntValue plasmidRequirement;
+        public static ModConfigSpec.IntValue overclockSpeed;
+        public static ModConfigSpec.IntValue overclockEnergy;
 
-        public static ForgeConfigSpec.IntValue cellAnalyzerEnergyCapacity;
-        public static ForgeConfigSpec.IntValue cellAnalyzerEnergyPerTick;
-        public static ForgeConfigSpec.IntValue cellAnalyzerTicksPerOperation;
-        public static ForgeConfigSpec.IntValue cellAnalyzerMaxOverclock;
-        public static ForgeConfigSpec.DoubleValue cellAnalyzerSuccessRate;
+        public static ModConfigSpec.IntValue cellAnalyzerEnergyCapacity;
+        public static ModConfigSpec.IntValue cellAnalyzerEnergyPerTick;
+        public static ModConfigSpec.IntValue cellAnalyzerTicksPerOperation;
+        public static ModConfigSpec.IntValue cellAnalyzerMaxOverclock;
+        public static ModConfigSpec.DoubleValue cellAnalyzerSuccessRate;
 
-        public static ForgeConfigSpec.IntValue dnaExtractorEnergyCapacity;
-        public static ForgeConfigSpec.IntValue dnaExtractorEnergyPerTick;
-        public static ForgeConfigSpec.IntValue dnaExtractorTicksPerOperation;
-        public static ForgeConfigSpec.IntValue dnaExtractorMaxOverclock;
-        public static ForgeConfigSpec.DoubleValue dnaExtractorSuccessRate;
+        public static ModConfigSpec.IntValue dnaExtractorEnergyCapacity;
+        public static ModConfigSpec.IntValue dnaExtractorEnergyPerTick;
+        public static ModConfigSpec.IntValue dnaExtractorTicksPerOperation;
+        public static ModConfigSpec.IntValue dnaExtractorMaxOverclock;
+        public static ModConfigSpec.DoubleValue dnaExtractorSuccessRate;
 
-        public static ForgeConfigSpec.IntValue dnaDecrypterEnergyCapacity;
-        public static ForgeConfigSpec.IntValue dnaDecrypterEnergyPerTick;
-        public static ForgeConfigSpec.IntValue dnaDecrypterTicksPerOperation;
-        public static ForgeConfigSpec.IntValue dnaDecrypterMaxOverclock;
-        public static ForgeConfigSpec.DoubleValue dnaDecrypterSuccessRate;
+        public static ModConfigSpec.IntValue dnaDecrypterEnergyCapacity;
+        public static ModConfigSpec.IntValue dnaDecrypterEnergyPerTick;
+        public static ModConfigSpec.IntValue dnaDecrypterTicksPerOperation;
+        public static ModConfigSpec.IntValue dnaDecrypterMaxOverclock;
+        public static ModConfigSpec.DoubleValue dnaDecrypterSuccessRate;
 
-        public static ForgeConfigSpec.IntValue plasmidInfuserEnergyCapacity;
-        public static ForgeConfigSpec.IntValue plasmidInfuserEnergyPerTick;
-        public static ForgeConfigSpec.IntValue plasmidInfuserTicksPerOperation;
-        public static ForgeConfigSpec.IntValue plasmidInfuserMaxOverclock;
-        public static ForgeConfigSpec.DoubleValue plasmidInfuserSuccessRate;
+        public static ModConfigSpec.IntValue plasmidInfuserEnergyCapacity;
+        public static ModConfigSpec.IntValue plasmidInfuserEnergyPerTick;
+        public static ModConfigSpec.IntValue plasmidInfuserTicksPerOperation;
+        public static ModConfigSpec.IntValue plasmidInfuserMaxOverclock;
+        public static ModConfigSpec.DoubleValue plasmidInfuserSuccessRate;
 
-        public static ForgeConfigSpec.IntValue bloodPurifierEnergyCapacity;
-        public static ForgeConfigSpec.IntValue bloodPurifierEnergyPerTick;
-        public static ForgeConfigSpec.IntValue bloodPurifierTicksPerOperation;
-        public static ForgeConfigSpec.IntValue bloodPurifierMaxOverclock;
-        public static ForgeConfigSpec.DoubleValue bloodPurifierSuccessRate;
+        public static ModConfigSpec.IntValue bloodPurifierEnergyCapacity;
+        public static ModConfigSpec.IntValue bloodPurifierEnergyPerTick;
+        public static ModConfigSpec.IntValue bloodPurifierTicksPerOperation;
+        public static ModConfigSpec.IntValue bloodPurifierMaxOverclock;
+        public static ModConfigSpec.DoubleValue bloodPurifierSuccessRate;
 
-        public static ForgeConfigSpec.IntValue plasmidInjectorEnergyCapacity;
-        public static ForgeConfigSpec.IntValue plasmidInjectorEnergyPerTick;
-        public static ForgeConfigSpec.IntValue plasmidInjectorTicksPerOperation;
-        public static ForgeConfigSpec.IntValue plasmidInjectorMaxOverclock;
-        public static ForgeConfigSpec.DoubleValue plasmidInjectorSuccessRate;
+        public static ModConfigSpec.IntValue plasmidInjectorEnergyCapacity;
+        public static ModConfigSpec.IntValue plasmidInjectorEnergyPerTick;
+        public static ModConfigSpec.IntValue plasmidInjectorTicksPerOperation;
+        public static ModConfigSpec.IntValue plasmidInjectorMaxOverclock;
+        public static ModConfigSpec.DoubleValue plasmidInjectorSuccessRate;
 
-        public static ForgeConfigSpec.IntValue cloningMachineEnergyCapacity;
-        public static ForgeConfigSpec.IntValue cloningMachineEnergyPerTick;
-        public static ForgeConfigSpec.IntValue cloningMachineTicksPerOperation;
-        public static ForgeConfigSpec.IntValue cloningMachineMaxOverclock;
-        public static ForgeConfigSpec.DoubleValue cloningMachineSuccessRate;
+        public static ModConfigSpec.IntValue cloningMachineEnergyCapacity;
+        public static ModConfigSpec.IntValue cloningMachineEnergyPerTick;
+        public static ModConfigSpec.IntValue cloningMachineTicksPerOperation;
+        public static ModConfigSpec.IntValue cloningMachineMaxOverclock;
+        public static ModConfigSpec.DoubleValue cloningMachineSuccessRate;
 
-        public static HashMap<String, ForgeConfigSpec.BooleanValue> genes = new HashMap<>();
+        public static HashMap<String, ModConfigSpec.BooleanValue> genes = new HashMap<>();
 
-        public Common(ForgeConfigSpec.Builder builder) {
+        public Common(ModConfigSpec.Builder builder) {
 
             // General Settings
             builder.comment("General Settings").push(categoryGeneralSettings);

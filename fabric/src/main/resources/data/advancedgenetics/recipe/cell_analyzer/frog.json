@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:frog_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:frog_cell"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "advancedgenetics:cell_analyzer",
+  "input": {
+    "id": "advancedgenetics:ender_dragon_matter"
+  },
+  "result": {
+    "id": "advancedgenetics:ender_dragon_cell"
+  }
+}

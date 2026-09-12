@@ -1,0 +1,36 @@
+{
+  "name": "Mob Sources 2",
+  "category": "advancedgenetics:reference",
+  "icon": "advancedgenetics:creeper_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Creeper$()$(br)Explosive Exit"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Drowned$()$(br)Resistance, Water Breathing"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Enderman$()$(br)Teleport"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Ender Dragon$()$(br)Flight, Dragon's Breath, Dragon's Health"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Frog$()$(br)Poison Immunity"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Guardian$()$(br)Water Breathing, Mob Sight"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Ghast$()$(br)Shoot Fireballs"
+    }
+  ],
+  "sortnum": 1
+}

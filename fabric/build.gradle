@@ -1,0 +1,89 @@
+plugins {
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+base.archivesName = project.archives_base_name
+
+repositories {
+    mavenCentral()
+    exclusiveContent {
+        forRepository { maven { url = 'https://api.modrinth.com/maven' } }
+        filter { includeGroup 'maven.modrinth' }
+    }
+}
+
+// Modrinth distributes CCA as an aggregate containing its module JARs.
+// Extract and bundle only the base and entity modules used by this mod.
+configurations { cardinalComponents }
+def unpackCardinalComponents = tasks.register('unpackCardinalComponents', Sync) {
+    from({ zipTree(configurations.cardinalComponents.singleFile) }) {
+        include 'META-INF/jars/cardinal-components-base-*.jar'
+        include 'META-INF/jars/cardinal-components-entity-*.jar'
+        eachFile { path = name }
+        includeEmptyDirs = false
+    }
+    into layout.buildDirectory.dir('dependencies/cardinal-components')
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    include implementation("teamreborn:energy:${project.energy_version}") { transitive = false }
+    include implementation("maven.modrinth:forge-config-api-port:${project.config_modrinth_version}")
+    // Night Config is already nested in Forge Config API Port.
+    compileOnly 'com.electronwill.night-config:core:3.8.4'
+    cardinalComponents "maven.modrinth:cardinal-components-api:${project.cca_version}"
+    implementation files(unpackCardinalComponents.map { fileTree(it.destinationDir) { include '*.jar' } })
+    testImplementation "net.fabricmc:fabric-loader-junit:${project.loader_version}"
+    testImplementation 'com.electronwill.night-config:core:3.8.4'
+}
+
+processResources {
+    def properties = [version: project.version, minecraft_version: project.minecraft_version,
+        loader_version: project.loader_version, fabric_version: project.fabric_version, cca_version: project.cca_version]
+    inputs.properties(properties)
+    filesMatching('fabric.mod.json') { expand(properties) }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 25
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xmaxerrs', '1000']
+}
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}
+test { useJUnitPlatform() }
+jar {
+    // These nested modules already carry Fabric metadata; retain their original JARs.
+    from(unpackCardinalComponents) { into 'META-INF/jars' }
+    from('LICENSE') { rename { "${it}_${project.archives_base_name}" } }
+}
+publishing {
+    publications { mavenJava(MavenPublication) { from components.java } }
+}
+
+// Writes a classpath for API inspection and focused port validation.
+tasks.register('writeCompileClasspath') {
+    dependsOn unpackCardinalComponents
+    doLast { layout.buildDirectory.file('compile-classpath.txt').get().asFile.text = sourceSets.main.compileClasspath.asPath }
+}
+
+fabricApi {
+    configureTests {
+        createSourceSet = true
+        modId = 'advancedgenetics_test'
+        enableGameTests = true
+        enableClientGameTests = true
+    }
+}
+dependencies {
+    gametestImplementation 'com.electronwill.night-config:core:3.8.4'
+}

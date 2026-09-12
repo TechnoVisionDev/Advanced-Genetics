@@ -1,0 +1,17 @@
+{
+  "name": "Shoot Fireballs",
+  "category": "advancedgenetics:genes",
+  "icon": "advancedgenetics:blaze_cell",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Fire charges can be launched by right-clicking with one in the main hand. The inherited implementation activates this interaction when the Shoot Fireballs gene is absent or disabled; this port preserves that existing behavior.",
+      "title": "Shoot Fireballs"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(bold)Mob sources$()$(br)Blaze, Ghast.$(br2)Collect their organic matter, then analyze, extract, decode, and infuse the gene. Server configuration can disable individual genes."
+    }
+  ],
+  "sortnum": 28
+}
