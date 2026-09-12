@@ -2,7 +2,7 @@
 
 A native NeoForge port of Advanced Genetics. Collect organic matter from mobs, analyze cells, decode DNA, and inject genes to gain their abilities.
 
-Targets **Minecraft Java 26.1.2**, **NeoForge 26.1.2.109**, and **Java 25**. The release filename is **AdvancedGenetics-1.0.2+neoforge-26.1.jar**; its Minecraft dependency is explicitly 26.1.2.
+Targets **Minecraft Java 26.1.2**, **NeoForge 26.1.2.109**, and **Java 25**. The release filename is **AdvancedGenetics-1.0.4+neoforge-26.1.jar**; its Minecraft dependency is explicitly 26.1.2.
 
 ## Project layout
 
@@ -24,7 +24,7 @@ Fabric builds go to `fabric/build/libs/`. See `fabric/README.md` for Fabric depe
 
 Install NeoForge 26.1.2.109 for Minecraft 26.1.2. Put these two files in the `mods` folder on both clients and servers:
 
-- `AdvancedGenetics-1.0.2+neoforge-26.1.jar`
+- `AdvancedGenetics-1.0.4+neoforge-26.1.jar`
 - `patchouli-neoforge-26.1-94.jar`
 
 Patchouli is a required, separate dependency. The guidebook's content and crafting recipe are included in Advanced Genetics. Craft the **Advanced Genetics Field Guide** with a book and an iron ingot, or find it in the Advanced Genetics creative tab.
@@ -57,7 +57,7 @@ Use a Java 25 JDK and the included Gradle wrapper:
 ./gradlew runClientSmoke
 ```
 
-The playable artifact is written to `build/libs/AdvancedGenetics-1.0.2+neoforge-26.1.jar`. The sources JAR is for development.
+The playable artifact is written to `build/libs/AdvancedGenetics-1.0.4+neoforge-26.1.jar`. The sources JAR is for development.
 
 Seven resource tests validate the guidebook links and coverage, plus the original 94 item definitions, syringe model states, cell tints, model and texture references, texture atlases, and tag names. Nineteen Advanced Genetics GameTests (plus one vanilla sanity test) exercise the complete machine workflow, timings, energy, transactions, automation, save/load, plasmids, syringes, passive abilities, damage protection, combat, death/respawn, movement, commands, and guidebook crafting.
 
